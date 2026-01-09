@@ -1,0 +1,80 @@
+// Demo content types
+export interface DemoFrontmatter {
+  title: string;
+  description: string;
+  tags: string[];
+  difficulty: 'beginner' | 'intermediate' | 'advanced';
+  timeMinutes: number;
+  relatedPlaygrounds: string[];
+  updatedAt: string;
+}
+
+export interface Demo extends DemoFrontmatter {
+  slug: string;
+  content: string;
+}
+
+// Playground content types
+export interface PlaygroundConfig {
+  slug: string;
+  title: string;
+  description: string;
+  tags: string[];
+  stack: 'js' | 'ts' | 'react';
+  relatedDemos: string[];
+  files: PlaygroundFile[];
+  remixIdeas?: string[];
+}
+
+export interface PlaygroundFile {
+  path: string;
+  code: string;
+}
+
+// Chat types
+export interface ChatMessage {
+  id: string;
+  role: 'user' | 'assistant';
+  content: string;
+  sources?: ChatSource[];
+  createdAt: Date;
+}
+
+export interface ChatSource {
+  type: 'demo' | 'playground';
+  slug: string;
+  title: string;
+  relevance: number;
+}
+
+// Content chunk for RAG
+export interface ContentChunk {
+  id: string;
+  content: string;
+  sourceType: 'demo' | 'playground';
+  sourceSlug: string;
+  sourceTitle: string;
+  metadata: Record<string, unknown>;
+}
+
+// Room types for house map
+export type RoomId = 'entryway' | 'workshop' | 'maker';
+
+export interface Room {
+  id: RoomId;
+  name: string;
+  description: string;
+  icon: string;
+  route: string;
+  color: string;
+}
+
+// Filter and search types
+export interface FilterState {
+  search: string;
+  tags: string[];
+  difficulty?: DemoFrontmatter['difficulty'];
+  stack?: PlaygroundConfig['stack'];
+  sortBy: 'updatedAt' | 'timeMinutes' | 'title';
+  sortOrder: 'asc' | 'desc';
+}

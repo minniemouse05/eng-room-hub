@@ -1,0 +1,327 @@
+---
+title: Animation Fundamentals
+description: Learn CSS and JavaScript animation techniques including transitions, keyframes, and using Framer Motion for React animations.
+tags:
+  - animation
+  - css
+  - framer-motion
+  - performance
+difficulty: intermediate
+timeMinutes: 35
+relatedPlaygrounds:
+  - button-playground
+updatedAt: "2024-01-03"
+---
+
+# Animation Fundamentals
+
+Well-crafted animations enhance user experience by providing feedback, guiding attention, and adding delight. This guide covers the essentials of web animation.
+
+## CSS Transitions
+
+Transitions are perfect for simple state changes:
+
+```css
+.button {
+  background-color: #3b82f6;
+  transform: scale(1);
+  transition: all 0.2s ease-out;
+}
+
+.button:hover {
+  background-color: #2563eb;
+  transform: scale(1.05);
+}
+```
+
+### Transition Properties
+
+- `transition-property` - What to animate (`all`, `transform`, `opacity`)
+- `transition-duration` - How long (`0.2s`, `200ms`)
+- `transition-timing-function` - Easing (`ease`, `ease-in-out`, `cubic-bezier()`)
+- `transition-delay` - Wait before starting
+
+### Performance-Friendly Properties
+
+Animate these for smooth 60fps animations:
+
+```css
+/* Good - GPU accelerated */
+transform: translateX(100px);
+transform: scale(1.1);
+transform: rotate(45deg);
+opacity: 0.5;
+
+/* Avoid - triggers layout */
+width: 200px;
+height: 100px;
+margin: 20px;
+padding: 10px;
+```
+
+## CSS Keyframes
+
+For multi-step animations:
+
+```css
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeInUp 0.5s ease-out;
+}
+```
+
+### Complex Keyframes
+
+```css
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.loading {
+  animation: bounce 1s ease-in-out infinite, pulse 2s ease-in-out infinite;
+}
+```
+
+## Framer Motion in React
+
+Framer Motion provides a powerful animation API for React:
+
+### Basic Animation
+
+```tsx
+import { motion } from 'framer-motion';
+
+function AnimatedCard() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      Card content
+    </motion.div>
+  );
+}
+```
+
+### Hover and Tap Animations
+
+```tsx
+<motion.button
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+>
+  Click me
+</motion.button>
+```
+
+### Exit Animations with AnimatePresence
+
+```tsx
+import { motion, AnimatePresence } from 'framer-motion';
+
+function Modal({ isOpen, onClose, children }) {
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="modal-overlay"
+          onClick={onClose}
+        >
+          <motion.div
+            initial={{ scale: 0.9, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.9, opacity: 0 }}
+            className="modal-content"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {children}
+          </motion.div>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  );
+}
+```
+
+### Layout Animations
+
+```tsx
+function ExpandableCard() {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  return (
+    <motion.div
+      layout
+      onClick={() => setIsExpanded(!isExpanded)}
+      style={{ height: isExpanded ? 200 : 100 }}
+    >
+      <motion.h2 layout="position">Title</motion.h2>
+      {isExpanded && (
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          Additional content
+        </motion.p>
+      )}
+    </motion.div>
+  );
+}
+```
+
+### Stagger Children
+
+```tsx
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0 }
+};
+
+function List() {
+  return (
+    <motion.ul variants={container} initial="hidden" animate="show">
+      {items.map((item) => (
+        <motion.li key={item.id} variants={item}>
+          {item.name}
+        </motion.li>
+      ))}
+    </motion.ul>
+  );
+}
+```
+
+## Respecting User Preferences
+
+Always respect `prefers-reduced-motion`:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+```
+
+In React:
+
+```tsx
+function useReducedMotion() {
+  const [prefersReduced, setPrefersReduced] = useState(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setPrefersReduced(mediaQuery.matches);
+
+    const handler = (e: MediaQueryListEvent) => setPrefersReduced(e.matches);
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  return prefersReduced;
+}
+
+// Usage
+function AnimatedComponent() {
+  const reducedMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      animate={{ opacity: 1, y: 0 }}
+      transition={reducedMotion ? { duration: 0 } : { duration: 0.5 }}
+    >
+      Content
+    </motion.div>
+  );
+}
+```
+
+## Animation Best Practices
+
+1. **Purpose over decoration** - Every animation should serve a purpose
+2. **Keep it short** - Most animations should be 200-500ms
+3. **Use easing** - Linear animations feel robotic
+4. **Don't block interaction** - Users shouldn't wait for animations
+5. **Test performance** - Use browser dev tools to check for jank
+6. **Consider mobile** - Less powerful devices need simpler animations
+
+## Common Patterns
+
+### Page Transitions
+
+```tsx
+<motion.main
+  initial={{ opacity: 0, x: -20 }}
+  animate={{ opacity: 1, x: 0 }}
+  exit={{ opacity: 0, x: 20 }}
+  transition={{ duration: 0.3 }}
+>
+  {children}
+</motion.main>
+```
+
+### Skeleton Loading
+
+```css
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--muted) 25%,
+    var(--muted-foreground) 50%,
+    var(--muted) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+```
+
+## Practice
+
+Experiment with animations in the [Button Playground](/maker/button-playground) to see how different easing and timing affect the feel of interactions.

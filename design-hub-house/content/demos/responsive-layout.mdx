@@ -1,0 +1,183 @@
+---
+title: Responsive Layout Patterns
+description: Master responsive design with CSS Grid and Flexbox. Learn common layout patterns that work across all screen sizes.
+tags:
+  - layout
+  - responsive
+  - css-grid
+  - flexbox
+difficulty: intermediate
+timeMinutes: 25
+relatedPlaygrounds:
+  - grid-layout
+updatedAt: "2024-01-12"
+---
+
+# Responsive Layout Patterns
+
+Modern web applications need to work seamlessly across devices of all sizes. This guide covers the most effective responsive layout patterns using CSS Grid and Flexbox.
+
+## The Mobile-First Approach
+
+Start with mobile styles and progressively enhance for larger screens:
+
+```css
+/* Mobile first */
+.container {
+  padding: 1rem;
+}
+
+/* Tablet and up */
+@media (min-width: 768px) {
+  .container {
+    padding: 2rem;
+  }
+}
+
+/* Desktop and up */
+@media (min-width: 1024px) {
+  .container {
+    padding: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+```
+
+## Common Layout Patterns
+
+### 1. The Holy Grail Layout
+
+A classic three-column layout with header and footer:
+
+```css
+.layout {
+  display: grid;
+  grid-template-areas:
+    "header header header"
+    "nav main aside"
+    "footer footer footer";
+  grid-template-columns: 200px 1fr 200px;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+@media (max-width: 768px) {
+  .layout {
+    grid-template-areas:
+      "header"
+      "nav"
+      "main"
+      "aside"
+      "footer";
+    grid-template-columns: 1fr;
+  }
+}
+```
+
+### 2. Card Grid
+
+A responsive grid of cards that automatically adjusts columns:
+
+```css
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+```
+
+This pattern is powerful because:
+- Cards maintain a minimum width of 300px
+- Columns automatically adjust based on available space
+- No media queries needed for basic responsiveness
+
+### 3. Sidebar Layout
+
+A main content area with a collapsible sidebar:
+
+```css
+.sidebar-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 1024px) {
+  .sidebar-layout {
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+  }
+}
+```
+
+### 4. Split Screen
+
+Equal halves that stack on mobile:
+
+```css
+.split-screen {
+  display: flex;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  .split-screen {
+    flex-direction: row;
+  }
+
+  .split-screen > * {
+    flex: 1;
+  }
+}
+```
+
+## Tailwind CSS Responsive Utilities
+
+With Tailwind, responsive design becomes declarative:
+
+```tsx
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+  {items.map(item => (
+    <Card key={item.id}>{item.content}</Card>
+  ))}
+</div>
+```
+
+### Breakpoint Reference
+
+| Prefix | Min Width | CSS |
+|--------|-----------|-----|
+| `sm`   | 640px     | `@media (min-width: 640px)` |
+| `md`   | 768px     | `@media (min-width: 768px)` |
+| `lg`   | 1024px    | `@media (min-width: 1024px)` |
+| `xl`   | 1280px    | `@media (min-width: 1280px)` |
+| `2xl`  | 1536px    | `@media (min-width: 1536px)` |
+
+## Container Queries
+
+For component-level responsiveness, use container queries:
+
+```css
+.card-container {
+  container-type: inline-size;
+}
+
+@container (min-width: 400px) {
+  .card {
+    display: flex;
+    flex-direction: row;
+  }
+}
+```
+
+## Best Practices
+
+1. **Use relative units** - `rem`, `em`, `%`, `vw/vh` over fixed `px`
+2. **Set max-widths** - Prevent content from becoming too wide on large screens
+3. **Test on real devices** - Emulators don't capture touch behavior
+4. **Consider touch targets** - Minimum 44x44px for touch interactions
+5. **Prioritize content** - What's most important on smaller screens?
+
+## Practice
+
+Try building these layouts in the [Grid Layout Playground](/maker/grid-layout) to see how they respond to different viewport sizes.

@@ -1,0 +1,215 @@
+---
+title: Implementing Dark Mode
+description: Build a robust dark mode system with CSS variables, system preference detection, and persistent user preference storage.
+tags:
+  - theming
+  - dark-mode
+  - css-variables
+  - accessibility
+difficulty: beginner
+timeMinutes: 20
+relatedPlaygrounds:
+  - theme-toggle
+updatedAt: "2024-01-08"
+---
+
+# Implementing Dark Mode
+
+Dark mode has become an essential feature for modern web applications. It reduces eye strain in low-light conditions and can save battery on OLED screens.
+
+## The Foundation: CSS Variables
+
+CSS custom properties (variables) make theme switching elegant:
+
+```css
+:root {
+  /* Light mode colors */
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --muted: #f4f4f5;
+  --muted-foreground: #71717a;
+  --border: #e4e4e7;
+  --primary: #0a0a0a;
+  --primary-foreground: #fafafa;
+}
+
+.dark {
+  /* Dark mode colors */
+  --background: #0a0a0a;
+  --foreground: #fafafa;
+  --card: #1a1a1a;
+  --card-foreground: #fafafa;
+  --muted: #27272a;
+  --muted-foreground: #a1a1aa;
+  --border: #27272a;
+  --primary: #fafafa;
+  --primary-foreground: #0a0a0a;
+}
+```
+
+## Using the Variables
+
+Apply variables throughout your styles:
+
+```css
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+.card {
+  background-color: var(--card);
+  color: var(--card-foreground);
+  border: 1px solid var(--border);
+}
+
+button {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+```
+
+## Detecting System Preference
+
+Respect the user's operating system preference:
+
+```tsx
+function useSystemTheme() {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Check initial preference
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    setIsDark(mediaQuery.matches);
+
+    // Listen for changes
+    const handler = (e: MediaQueryListEvent) => setIsDark(e.matches);
+    mediaQuery.addEventListener('change', handler);
+
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  return isDark;
+}
+```
+
+## The Theme Provider
+
+Create a context to manage theme state:
+
+```tsx
+type Theme = 'light' | 'dark' | 'system';
+
+interface ThemeContextValue {
+  theme: Theme;
+  setTheme: (theme: Theme) => void;
+  resolvedTheme: 'light' | 'dark';
+}
+
+const ThemeContext = createContext<ThemeContextValue | null>(null);
+
+export function ThemeProvider({ children }: { children: React.ReactNode }) {
+  const [theme, setTheme] = useState<Theme>('system');
+  const systemIsDark = useSystemTheme();
+
+  const resolvedTheme = theme === 'system'
+    ? (systemIsDark ? 'dark' : 'light')
+    : theme;
+
+  useEffect(() => {
+    const root = document.documentElement;
+    root.classList.remove('light', 'dark');
+    root.classList.add(resolvedTheme);
+  }, [resolvedTheme]);
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme, resolvedTheme }}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+```
+
+## Persisting User Preference
+
+Save the user's choice to localStorage:
+
+```tsx
+function usePersistedTheme() {
+  const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === 'undefined') return 'system';
+    return (localStorage.getItem('theme') as Theme) || 'system';
+  });
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  return [theme, setTheme] as const;
+}
+```
+
+## The Theme Toggle Component
+
+```tsx
+function ThemeToggle() {
+  const { theme, setTheme, resolvedTheme } = useTheme();
+
+  return (
+    <button
+      onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
+      aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
+    >
+      {resolvedTheme === 'dark' ? <Sun /> : <Moon />}
+    </button>
+  );
+}
+```
+
+## Preventing Flash of Wrong Theme
+
+Add a script to `<head>` to set theme before page renders:
+
+```html
+<script>
+  (function() {
+    const theme = localStorage.getItem('theme') || 'system';
+    const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const resolved = theme === 'system' ? (systemDark ? 'dark' : 'light') : theme;
+    document.documentElement.classList.add(resolved);
+  })();
+</script>
+```
+
+## Accessibility Considerations
+
+1. **Don't rely solely on color** - Use icons, labels, or patterns
+2. **Ensure sufficient contrast** - Test both themes with contrast checkers
+3. **Respect motion preferences** - Use `prefers-reduced-motion`
+4. **Provide a visible toggle** - Don't hide it in settings
+
+## Tailwind CSS Dark Mode
+
+Tailwind makes dark mode straightforward:
+
+```tsx
+<div className="bg-white dark:bg-gray-900">
+  <p className="text-gray-900 dark:text-gray-100">
+    This text adapts to the theme
+  </p>
+</div>
+```
+
+Configure in `tailwind.config.js`:
+
+```js
+module.exports = {
+  darkMode: 'class', // or 'media' for system-only
+};
+```
+
+## Practice
+
+Try building a theme toggle in the [Theme Toggle Playground](/maker/theme-toggle).

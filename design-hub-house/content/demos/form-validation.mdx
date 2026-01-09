@@ -1,0 +1,254 @@
+---
+title: Form Validation Patterns
+description: Implement robust client-side form validation with clear error messages, real-time feedback, and accessible error handling.
+tags:
+  - forms
+  - validation
+  - accessibility
+  - react
+difficulty: intermediate
+timeMinutes: 30
+relatedPlaygrounds:
+  - form-playground
+updatedAt: "2024-01-10"
+---
+
+# Form Validation Patterns
+
+Good form validation improves user experience by catching errors early and providing clear guidance on how to fix them.
+
+## Validation Strategies
+
+### 1. On Submit Validation
+
+Validate the entire form when the user submits:
+
+```tsx
+function ContactForm() {
+  const [errors, setErrors] = useState<Record<string, string>>({});
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    const formData = new FormData(e.target as HTMLFormElement);
+    const newErrors: Record<string, string> = {};
+
+    // Validate email
+    const email = formData.get('email') as string;
+    if (!email) {
+      newErrors.email = 'Email is required';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      newErrors.email = 'Please enter a valid email address';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    // Submit form...
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      {/* ... */}
+    </form>
+  );
+}
+```
+
+### 2. On Blur Validation
+
+Validate fields as the user moves away from them:
+
+```tsx
+function EmailInput() {
+  const [error, setError] = useState<string | null>(null);
+  const [touched, setTouched] = useState(false);
+
+  const validate = (value: string) => {
+    if (!value) return 'Email is required';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
+      return 'Please enter a valid email address';
+    }
+    return null;
+  };
+
+  return (
+    <div>
+      <Input
+        type="email"
+        onBlur={(e) => {
+          setTouched(true);
+          setError(validate(e.target.value));
+        }}
+        aria-invalid={touched && !!error}
+        aria-describedby={error ? 'email-error' : undefined}
+      />
+      {touched && error && (
+        <p id="email-error" className="text-destructive text-sm mt-1">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+```
+
+### 3. Real-time Validation
+
+Validate as the user types (use sparingly):
+
+```tsx
+function PasswordInput() {
+  const [password, setPassword] = useState('');
+
+  const requirements = [
+    { test: (p: string) => p.length >= 8, label: 'At least 8 characters' },
+    { test: (p: string) => /[A-Z]/.test(p), label: 'One uppercase letter' },
+    { test: (p: string) => /[a-z]/.test(p), label: 'One lowercase letter' },
+    { test: (p: string) => /[0-9]/.test(p), label: 'One number' },
+  ];
+
+  return (
+    <div>
+      <Input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <ul className="mt-2 space-y-1">
+        {requirements.map((req, i) => (
+          <li
+            key={i}
+            className={req.test(password) ? 'text-green-600' : 'text-muted-foreground'}
+          >
+            {req.test(password) ? '✓' : '○'} {req.label}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+```
+
+## Error Message Best Practices
+
+### Be Specific
+
+```tsx
+// Bad
+<p>Invalid input</p>
+
+// Good
+<p>Please enter a date in MM/DD/YYYY format</p>
+```
+
+### Be Helpful
+
+```tsx
+// Bad
+<p>Password too weak</p>
+
+// Good
+<p>Password needs at least one uppercase letter</p>
+```
+
+### Be Polite
+
+```tsx
+// Bad
+<p>Wrong email format!</p>
+
+// Good
+<p>Please check your email address format</p>
+```
+
+## Accessible Error Handling
+
+### Associate Errors with Inputs
+
+```tsx
+<div>
+  <Label htmlFor="email">Email</Label>
+  <Input
+    id="email"
+    aria-invalid={!!error}
+    aria-describedby={error ? 'email-error' : 'email-hint'}
+  />
+  <p id="email-hint" className="text-muted-foreground text-sm">
+    We'll never share your email
+  </p>
+  {error && (
+    <p id="email-error" role="alert" className="text-destructive text-sm">
+      {error}
+    </p>
+  )}
+</div>
+```
+
+### Announce Errors to Screen Readers
+
+```tsx
+<div aria-live="polite" aria-atomic="true">
+  {submitError && (
+    <p role="alert" className="text-destructive">
+      {submitError}
+    </p>
+  )}
+</div>
+```
+
+### Focus Management
+
+After form submission with errors, focus the first invalid field:
+
+```tsx
+const handleSubmit = async (e: FormEvent) => {
+  e.preventDefault();
+  const errors = validate(formData);
+
+  if (Object.keys(errors).length > 0) {
+    // Focus first invalid field
+    const firstErrorField = document.querySelector('[aria-invalid="true"]');
+    (firstErrorField as HTMLElement)?.focus();
+    return;
+  }
+  // Submit...
+};
+```
+
+## Form Libraries
+
+For complex forms, consider using a library:
+
+### React Hook Form
+
+```tsx
+import { useForm } from 'react-hook-form';
+
+function MyForm() {
+  const { register, handleSubmit, formState: { errors } } = useForm();
+
+  return (
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Input {...register('email', { required: 'Email is required' })} />
+      {errors.email && <p>{errors.email.message}</p>}
+    </form>
+  );
+}
+```
+
+### Zod Schema Validation
+
+```tsx
+import { z } from 'zod';
+
+const schema = z.object({
+  email: z.string().email('Invalid email address'),
+  password: z.string().min(8, 'Password must be at least 8 characters'),
+});
+```
+
+## Practice
+
+Build a complete form with validation in the [Form Playground](/maker/form-playground).

@@ -1,0 +1,117 @@
+---
+title: Button Variants and States
+description: Learn how to create accessible, reusable button components with multiple variants, sizes, and states using Tailwind CSS and React.
+tags:
+  - components
+  - buttons
+  - accessibility
+  - tailwind
+difficulty: beginner
+timeMinutes: 15
+relatedPlaygrounds:
+  - button-playground
+updatedAt: "2024-01-15"
+---
+
+# Button Variants and States
+
+Buttons are one of the most fundamental UI components. A well-designed button system provides consistency across your application while offering flexibility for different contexts.
+
+## Core Principles
+
+When designing buttons, consider these key principles:
+
+1. **Visual Hierarchy** - Primary actions should stand out, secondary actions should be visible but less prominent
+2. **Accessibility** - Buttons must be keyboard accessible and have proper focus states
+3. **Feedback** - Users should receive visual feedback on hover, focus, and active states
+4. **Consistency** - All buttons should follow the same design language
+
+## Button Variants
+
+### Primary Button
+
+Use primary buttons for the main action on a page or in a form.
+
+```tsx
+<Button variant="default">Save Changes</Button>
+```
+
+Primary buttons should:
+- Have the highest visual prominence
+- Be used sparingly (typically one per section)
+- Represent the most important action
+
+### Secondary Button
+
+Secondary buttons are for less important actions.
+
+```tsx
+<Button variant="secondary">Cancel</Button>
+```
+
+### Outline Button
+
+Outline buttons work well for tertiary actions or in contexts where you need less visual weight.
+
+```tsx
+<Button variant="outline">Learn More</Button>
+```
+
+### Ghost Button
+
+Ghost buttons are minimal and work well in toolbars or alongside other interactive elements.
+
+```tsx
+<Button variant="ghost">Edit</Button>
+```
+
+### Destructive Button
+
+Use destructive buttons for actions that delete data or have significant consequences.
+
+```tsx
+<Button variant="destructive">Delete Account</Button>
+```
+
+## Button Sizes
+
+Provide multiple sizes to accommodate different contexts:
+
+```tsx
+<Button size="sm">Small</Button>
+<Button size="default">Default</Button>
+<Button size="lg">Large</Button>
+```
+
+## States
+
+### Loading State
+
+Show loading state during async operations:
+
+```tsx
+<Button disabled>
+  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+  Please wait
+</Button>
+```
+
+### Disabled State
+
+Disabled buttons should clearly indicate they cannot be interacted with:
+
+```tsx
+<Button disabled>Unavailable</Button>
+```
+
+## Accessibility Checklist
+
+- [ ] Buttons have descriptive text or aria-label
+- [ ] Focus states are visible with keyboard navigation
+- [ ] Color contrast meets WCAG AA standards
+- [ ] Disabled buttons are not focusable or clearly marked
+- [ ] Loading states communicate status to screen readers
+
+## Try It Yourself
+
+Head to the [Button Playground](/maker/button-playground) to experiment with these variants in an interactive environment.
