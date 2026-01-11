@@ -35,7 +35,7 @@ export default function EntrywayPage() {
           </div>
           <p className="text-lg text-muted-foreground max-w-2xl">
             Welcome to the Design Hub House! I&apos;m here to help you navigate our collection
-            of demos and playgrounds. Ask me anything about what&apos;s available or where to start.
+            of demos and playgrounds. Ask me anything about the Engine Room, what&apos;s available, or where to start.
           </p>
         </header>
 
