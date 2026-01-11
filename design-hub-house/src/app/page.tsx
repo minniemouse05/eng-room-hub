@@ -29,7 +29,7 @@ export default function HomePage() {
             <div className="relative bg-background/80 backdrop-blur-sm rounded-3xl border p-8 shadow-xl">
               <HouseMap onRoomHover={setHoveredRoom} hoveredRoom={hoveredRoom} />
               <p className="text-center text-sm text-muted-foreground mt-6">
-                Click on a room or use keyboard to navigate
+                Click on a room to navigate
               </p>
             </div>
           </div>
@@ -54,7 +54,7 @@ export default function HomePage() {
         {/* Footer hint */}
         <footer className="text-center mt-16 text-sm text-muted-foreground">
           <p>
-            Built with Next.js, Tailwind CSS, and shadcn/ui
+          ❤️ The Engine Room
           </p>
         </footer>
       </div>

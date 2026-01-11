@@ -1,13 +1,20 @@
-import { Metadata } from 'next';
-import Link from 'next/link';
-import { BackToHouse, Breadcrumbs } from '@/components/shared';
-import { ChatInterface } from '@/components/entryway';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowRight, Wrench, Code2 } from 'lucide-react';
+import { Metadata } from "next";
+import Link from "next/link";
+import { BackToHouse, Breadcrumbs } from "@/components/shared";
+import { ChatInterface } from "@/components/entryway";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { ArrowRight, Wrench, Code2 } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: 'Entryway',
-  description: 'Your AI guide to the Design Hub House. Ask questions and get personalized recommendations.',
+  title: "Entryway",
+  description:
+    "Your AI guide to the Design Hub House. Ask questions and get personalized recommendations.",
 };
 
 export default function EntrywayPage() {
@@ -20,7 +27,7 @@ export default function EntrywayPage() {
         </div>
 
         {/* Breadcrumbs */}
-        <Breadcrumbs items={[{ label: 'Entryway' }]} />
+        <Breadcrumbs items={[{ label: "Entryway" }]} />
 
         {/* Header */}
         <header className="my-8">
@@ -34,8 +41,9 @@ export default function EntrywayPage() {
             </div>
           </div>
           <p className="text-lg text-muted-foreground max-w-2xl">
-            Welcome to the Design Hub House! I&apos;m here to help you navigate our collection
-            of demos and playgrounds. Ask me anything about the Engine Room, what&apos;s available, or where to start.
+            Welcome to the Design Hub House! I&apos;m here to help you navigate
+            our collection of demos and playgrounds. Ask me anything about The
+            Engine Room, what&apos;s available, or where to start.
           </p>
         </header>
 
@@ -48,9 +56,7 @@ export default function EntrywayPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">Quick Navigation</CardTitle>
-                <CardDescription>
-                  Jump directly to other rooms
-                </CardDescription>
+                <CardDescription>Jump directly to other rooms</CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
                 <Link href="/workshop" className="block">
@@ -58,7 +64,9 @@ export default function EntrywayPage() {
                     <Wrench className="h-5 w-5 text-amber-600" />
                     <div className="flex-1">
                       <p className="font-medium text-sm">Workshop</p>
-                      <p className="text-xs text-muted-foreground">Tool demos & tutorials</p>
+                      <p className="text-xs text-muted-foreground">
+                        Tool demos & tutorials
+                      </p>
                     </div>
                     <ArrowRight className="h-4 w-4 text-muted-foreground" />
                   </div>
@@ -68,7 +76,9 @@ export default function EntrywayPage() {
                     <Code2 className="h-5 w-5 text-emerald-600" />
                     <div className="flex-1">
                       <p className="font-medium text-sm">Maker Studio</p>
-                      <p className="text-xs text-muted-foreground">Coding playgrounds</p>
+                      <p className="text-xs text-muted-foreground">
+                        Coding playgrounds
+                      </p>
                     </div>
                     <ArrowRight className="h-4 w-4 text-muted-foreground" />
                   </div>
@@ -82,15 +92,18 @@ export default function EntrywayPage() {
               </CardHeader>
               <CardContent className="space-y-3 text-sm text-muted-foreground">
                 <p>
-                  The House Guide uses AI to help you explore our content. It knows about
-                  all the demos and playgrounds available in the Design Hub.
+                  The House Guide uses AI to help you explore our content. It
+                  knows about The Engine Room and all the demos and playgrounds
+                  available in the Design Hub.
                 </p>
                 <p>
-                  Try asking about specific topics like &ldquo;buttons&rdquo;, &ldquo;forms&rdquo;,
-                  or &ldquo;animations&rdquo;, or ask for recommendations based on your skill level.
+                  Try asking about specific topics like &ldquo;buttons&rdquo;,
+                  &ldquo;forms&rdquo;, or &ldquo;animations&rdquo;, or ask for
+                  recommendations based on your skill level.
                 </p>
                 <p className="text-xs">
-                  Note: AI responses may not always be accurate. Always verify important information.
+                  Note: AI responses may not always be accurate. Always verify
+                  important information.
                 </p>
               </CardContent>
             </Card>
