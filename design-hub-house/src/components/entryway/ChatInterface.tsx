@@ -26,13 +26,17 @@ export function ChatInterface() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    if (scrollAreaRef.current) {
+      // Find the viewport element inside ScrollArea
+      const viewport = scrollAreaRef.current.querySelector('[data-slot="scroll-area-viewport"]');
+      if (viewport) {
+        viewport.scrollTop = viewport.scrollHeight;
+      }
     }
   }, [messages]);
 
@@ -140,7 +144,8 @@ export function ChatInterface() {
   return (
     <div className="flex flex-col h-[600px] max-h-[80vh] border rounded-2xl bg-background overflow-hidden">
       {/* Chat Messages */}
-      <ScrollArea className="flex-1 p-4" ref={scrollRef}>
+      <div ref={scrollAreaRef} className="flex-1 min-h-0">
+        <ScrollArea className="h-full p-4">
         {messages.length === 0 ? (
           <div className="h-full flex flex-col items-center justify-center text-center p-8">
             <div className="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center mb-4">
@@ -180,7 +185,8 @@ export function ChatInterface() {
             )}
           </div>
         )}
-      </ScrollArea>
+        </ScrollArea>
+      </div>
 
       {/* Error Display */}
       {error && (

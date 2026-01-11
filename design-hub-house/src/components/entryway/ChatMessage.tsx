@@ -38,12 +38,13 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
       lastIndex = match.index + match[0].length;
     }
 
-    // Add remaining text
-    if (lastIndex < text.length) {
+    // Add remaining text after last link (only if we found at least one link)
+    if (lastIndex > 0 && lastIndex < text.length) {
       parts.push(text.slice(lastIndex));
     }
 
-    return parts.length > 0 ? parts : text;
+    // Return original string if no links found, otherwise return parts array
+    return lastIndex === 0 ? text : parts;
   };
 
   // Parse bold text **text**
