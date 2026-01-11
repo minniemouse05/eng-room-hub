@@ -1,4 +1,5 @@
 import { getAllDemos, getAllPlaygrounds } from './content';
+import { getAllEngineRoomContent } from './engine-room-content';
 import { ContentChunk } from '@/types';
 
 // Simple text chunking function
@@ -107,6 +108,42 @@ export function indexContent(): ContentChunk[] {
     }
   }
 
+  // Index Engine Room content
+  const engineRoomPages = getAllEngineRoomContent();
+  for (const page of engineRoomPages) {
+    // Add title/meta chunk
+    chunks.push({
+      id: `engine-room-${page.slug}-meta`,
+      content: `${page.title}: ${page.tags.join(', ')}. Category: ${page.category}.`,
+      sourceType: 'engine-room',
+      sourceSlug: page.slug,
+      sourceTitle: page.title,
+      sourceUrl: page.url,
+      metadata: {
+        tags: page.tags,
+        category: page.category,
+      },
+    });
+
+    // Chunk the content
+    const contentChunks = chunkText(page.content);
+    contentChunks.forEach((chunk, index) => {
+      chunks.push({
+        id: `engine-room-${page.slug}-${index}`,
+        content: chunk,
+        sourceType: 'engine-room',
+        sourceSlug: page.slug,
+        sourceTitle: page.title,
+        sourceUrl: page.url,
+        metadata: {
+          chunkIndex: index,
+          totalChunks: contentChunks.length,
+          category: page.category,
+        },
+      });
+    });
+  }
+
   return chunks;
 }
 
@@ -169,7 +206,7 @@ export function searchContent(
 // Format context for the LLM
 export function formatContext(chunks: ContentChunk[]): string {
   if (chunks.length === 0) {
-    return 'No relevant content found in the Design Hub.';
+    return 'No relevant content found.';
   }
 
   const grouped: Record<string, ContentChunk[]> = {};
@@ -182,13 +219,27 @@ export function formatContext(chunks: ContentChunk[]): string {
     grouped[key].push(chunk);
   }
 
-  let context = 'Relevant content from the Design Hub:\n\n';
+  let context = 'Relevant content:\n\n';
 
   for (const [key, groupChunks] of Object.entries(grouped)) {
     const [type, slug] = key.split(':');
     const title = groupChunks[0].sourceTitle;
-    const typeName = type === 'demo' ? 'Demo' : 'Playground';
-    const link = type === 'demo' ? `/workshop/${slug}` : `/maker/${slug}`;
+    const sourceUrl = groupChunks[0].sourceUrl;
+
+    let typeName: string;
+    let link: string;
+
+    if (type === 'demo') {
+      typeName = 'Design Hub Demo';
+      link = `/workshop/${slug}`;
+    } else if (type === 'playground') {
+      typeName = 'Design Hub Playground';
+      link = `/maker/${slug}`;
+    } else {
+      // engine-room
+      typeName = 'The Engine Room';
+      link = sourceUrl || `https://www.theengineroom.org/`;
+    }
 
     context += `### ${typeName}: ${title}\n`;
     context += `Link: ${link}\n`;
@@ -202,9 +253,9 @@ export function formatContext(chunks: ContentChunk[]): string {
 // Extract unique sources for citations
 export function extractSources(
   chunks: ContentChunk[]
-): Array<{ type: 'demo' | 'playground'; slug: string; title: string }> {
+): Array<{ type: 'demo' | 'playground' | 'engine-room'; slug: string; title: string; url?: string }> {
   const seen = new Set<string>();
-  const sources: Array<{ type: 'demo' | 'playground'; slug: string; title: string }> = [];
+  const sources: Array<{ type: 'demo' | 'playground' | 'engine-room'; slug: string; title: string; url?: string }> = [];
 
   for (const chunk of chunks) {
     const key = `${chunk.sourceType}:${chunk.sourceSlug}`;
@@ -214,6 +265,7 @@ export function extractSources(
         type: chunk.sourceType,
         slug: chunk.sourceSlug,
         title: chunk.sourceTitle,
+        url: chunk.sourceUrl,
       });
     }
   }

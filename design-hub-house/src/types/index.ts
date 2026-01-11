@@ -41,19 +41,21 @@ export interface ChatMessage {
 }
 
 export interface ChatSource {
-  type: 'demo' | 'playground';
+  type: 'demo' | 'playground' | 'engine-room';
   slug: string;
   title: string;
   relevance: number;
+  url?: string; // External URL for engine-room sources
 }
 
 // Content chunk for RAG
 export interface ContentChunk {
   id: string;
   content: string;
-  sourceType: 'demo' | 'playground';
+  sourceType: 'demo' | 'playground' | 'engine-room';
   sourceSlug: string;
   sourceTitle: string;
+  sourceUrl?: string; // External URL for engine-room sources
   metadata: Record<string, unknown>;
 }
 

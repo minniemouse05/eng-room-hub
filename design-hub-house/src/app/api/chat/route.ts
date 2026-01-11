@@ -78,33 +78,37 @@ export async function POST(req: Request) {
       sources.length > 0
         ? '\n\n**Sources:**\n' +
           sources
-            .map(
-              (s) =>
-                `- [${s.title}](${s.type === 'demo' ? '/workshop/' : '/maker/'}${s.slug})`
-            )
+            .map((s) => {
+              if (s.type === 'engine-room') {
+                return `- [${s.title}](${s.url || 'https://www.theengineroom.org/'})`;
+              }
+              return `- [${s.title}](${s.type === 'demo' ? '/workshop/' : '/maker/'}${s.slug})`;
+            })
             .join('\n')
         : '';
 
     // System prompt for the chatbot
-    const systemPrompt = `You are a friendly and knowledgeable guide for the Design Hub House, an interactive learning platform for design systems and development.
+    const systemPrompt = `You are a friendly and knowledgeable guide for the Design Hub House, an interactive learning platform for design systems and development. You also have knowledge about The Engine Room, a nonprofit organization supporting civil society to use technology and data strategically and responsibly.
 
 Your role is to:
 1. Answer questions about the demos and playgrounds available in the hub
 2. Help users find relevant content based on their learning goals
 3. Explain concepts covered in the demos
 4. Suggest what to explore next based on user interests
+5. Answer questions about The Engine Room organization, their services, programs (like MATCHBOX and LITS), and their library of resources
 
 Guidelines:
 - Be helpful, concise, and friendly
-- Always reference specific demos or playgrounds when relevant
-- If you can't find relevant content, be honest and suggest browsing the Workshop or Maker Studio
-- Include links to relevant pages when mentioning demos or playgrounds
+- Always reference specific demos, playgrounds, or Engine Room resources when relevant
+- If you can't find relevant content, be honest and suggest browsing the Workshop, Maker Studio, or The Engine Room website
+- Include links to relevant pages when mentioning demos, playgrounds, or Engine Room articles
 - Keep responses focused and actionable
+- For Engine Room content, use the external URLs provided to link to their website
 
 Available content context:
 ${context}
 
-When you reference a demo or playground in your response, always include the markdown link so users can navigate directly.
+When you reference a demo or playground in your response, always include the markdown link so users can navigate directly. For Engine Room content, use the full URL to link to their website.
 
 ${sources.length > 0 ? `Available sources to cite: ${JSON.stringify(sources)}` : 'No directly relevant sources found for this query.'}`;
 
@@ -119,6 +123,7 @@ ${sources.length > 0 ? `Available sources to cite: ${JSON.stringify(sources)}` :
 **In the meantime, you can:**
 - Browse the [Workshop](/workshop) to see all available demos
 - Explore the [Maker Studio](/maker) for interactive coding playgrounds
+- Visit [The Engine Room](https://www.theengineroom.org/) to learn about their services and resources
 - Navigate back to the [House Map](/) to choose a room
 
 ${sourcesText}`,
