@@ -20,14 +20,44 @@ const SUGGESTED_QUESTIONS = [
   'Tell me about button components',
 ];
 
+const STORAGE_KEY = 'design-hub-chat-messages';
+
 export function ChatInterface() {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [isHydrated, setIsHydrated] = useState(false);
 
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+
+  // Load messages from sessionStorage on mount
+  useEffect(() => {
+    try {
+      const stored = sessionStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (Array.isArray(parsed)) {
+          setMessages(parsed);
+        }
+      }
+    } catch {
+      // Ignore storage errors
+    }
+    setIsHydrated(true);
+  }, []);
+
+  // Save messages to sessionStorage whenever they change
+  useEffect(() => {
+    if (isHydrated && messages.length > 0) {
+      try {
+        sessionStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
+      } catch {
+        // Ignore storage errors
+      }
+    }
+  }, [messages, isHydrated]);
 
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
