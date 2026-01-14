@@ -1,0 +1,93 @@
+{
+  "$schema": "./rag-config.schema.json",
+  "sources": [
+    {
+      "name": "engine-room",
+      "baseUrl": "https://www.theengineroom.org",
+      "startUrls": [
+        "https://www.theengineroom.org/about/",
+        "https://www.theengineroom.org/services-support/",
+        "https://www.theengineroom.org/library/",
+        "https://www.theengineroom.org/news-events/"
+      ],
+      "depth": 1,
+      "category": "about",
+      "includePatterns": [
+        "/about/",
+        "/services-support/",
+        "/library/",
+        "/responsible-data-policy/"
+      ],
+      "excludePatterns": [
+        "/author/",
+        "/tag/",
+        "/page/",
+        "/wp-content/",
+        "/feed/",
+        "#"
+      ],
+      "selectors": {
+        "title": "h1, .entry-title, title",
+        "content": "article, .entry-content, main, .post-content",
+        "removeSelectors": ["nav", "footer", "header", ".sidebar", ".comments", "script", "style", ".social-share", ".related-posts"]
+      }
+    },
+    {
+      "name": "orgsec-wiki",
+      "baseUrl": "https://wiki.orgsec.community",
+      "startUrls": [
+        "https://wiki.orgsec.community/"
+      ],
+      "depth": 2,
+      "category": "security",
+      "useBrowser": true,
+      "waitForSelector": ".v-main",
+      "includePatterns": [],
+      "excludePatterns": [
+        "/Special:",
+        "/User:",
+        "/Talk:",
+        "/File:",
+        "action=edit",
+        "action=history",
+        "oldid=",
+        "#"
+      ],
+      "selectors": {
+        "title": "h1, .v-main h1, .page-title, title",
+        "content": ".v-main .contents, .v-main, main, article, .content",
+        "removeSelectors": ["nav", "footer", "header", ".sidebar", ".toc", ".v-navigation-drawer", "script", "style", ".v-footer"]
+      }
+    },
+    {
+      "name": "responsible-data-handbook",
+      "baseUrl": "https://the-engine-room.github.io",
+      "startUrls": [
+        "https://the-engine-room.github.io/responsible-data-handbook/"
+      ],
+      "depth": 2,
+      "category": "handbook",
+      "includePatterns": [
+        "/responsible-data-handbook/"
+      ],
+      "excludePatterns": [
+        "#"
+      ],
+      "selectors": {
+        "title": "h1, .page-title, title",
+        "content": "main, article, .content, .markdown-body, .post-content, section",
+        "removeSelectors": ["nav", "footer", "header", ".sidebar", ".toc", "script", "style"]
+      }
+    }
+  ],
+  "output": {
+    "path": "src/lib/engine-room-content.ts",
+    "format": "typescript"
+  },
+  "crawlOptions": {
+    "delayMs": 1500,
+    "maxPagesPerSource": 50,
+    "timeout": 60000,
+    "userAgent": "RAG-Content-Crawler/1.0"
+  }
+}

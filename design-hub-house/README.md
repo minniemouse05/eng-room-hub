@@ -198,6 +198,88 @@ The AI chatbot uses Retrieval-Augmented Generation (RAG) to answer questions abo
    - Includes links to relevant pages
    - Cites sources when appropriate
 
+### Updating External RAG Content
+
+The RAG system includes pre-indexed content from external sources (e.g., The Engine Room website, OrgSec Wiki). Use the update script to refresh this content:
+
+```bash
+# Preview what will be crawled (dry run)
+npm run update-rag:dry
+
+# Crawl all sources and update the content file
+npm run update-rag
+```
+
+#### Configuration
+
+Edit `scripts/rag-config.json` to configure sources:
+
+```json
+{
+  "sources": [
+    {
+      "name": "my-source",
+      "baseUrl": "https://example.org",
+      "startUrls": ["https://example.org/docs/"],
+      "depth": 2,
+      "category": "docs",
+      "useBrowser": false,
+      "includePatterns": ["/docs/"],
+      "excludePatterns": ["/author/", "#"],
+      "selectors": {
+        "title": "h1, .page-title",
+        "content": "main, article, .content",
+        "removeSelectors": ["nav", "footer", "script"]
+      }
+    }
+  ]
+}
+```
+
+#### Configuration Options
+
+| Option | Type | Description |
+|--------|------|-------------|
+| `name` | string | Identifier for the source |
+| `baseUrl` | string | Base URL for domain matching |
+| `startUrls` | string[] | URLs to begin crawling from |
+| `depth` | number | How many links deep to crawl (0 = start URLs only) |
+| `category` | string | Category tag for the content |
+| `useBrowser` | boolean | Use Puppeteer for JavaScript-rendered SPAs |
+| `waitForSelector` | string | CSS selector to wait for before extraction (when `useBrowser: true`) |
+| `includePatterns` | string[] | Only crawl URLs containing these strings (empty = all) |
+| `excludePatterns` | string[] | Skip URLs containing these strings |
+| `selectors.title` | string | CSS selectors for page title (comma-separated) |
+| `selectors.content` | string | CSS selectors for main content (comma-separated) |
+| `selectors.removeSelectors` | string[] | Elements to remove before extraction |
+
+#### Adding a New Source
+
+1. Add a new entry to the `sources` array in `scripts/rag-config.json`
+2. Set `useBrowser: true` if the site is a JavaScript SPA (React, Vue, etc.)
+3. Run `npm run update-rag:dry` to test the configuration
+4. Run `npm run update-rag` to generate the updated content file
+
+#### Global Crawl Options
+
+```json
+{
+  "crawlOptions": {
+    "delayMs": 1500,
+    "maxPagesPerSource": 50,
+    "timeout": 60000,
+    "userAgent": "RAG-Content-Crawler/1.0"
+  }
+}
+```
+
+| Option | Description |
+|--------|-------------|
+| `delayMs` | Delay between requests (rate limiting) |
+| `maxPagesPerSource` | Maximum pages to crawl per source |
+| `timeout` | Request timeout in milliseconds |
+| `userAgent` | User-Agent header for requests |
+
 ### Upgrading to Vector Search
 
 For production with larger content, consider:
@@ -281,6 +363,12 @@ npm start
 
 # Lint code
 npm run lint
+
+# Update RAG content from external sources
+npm run update-rag
+
+# Preview RAG crawl without writing files
+npm run update-rag:dry
 ```
 
 ## License
