@@ -97,7 +97,7 @@ export function PlaygroundRunner({ playground }: PlaygroundRunnerProps) {
             <SandpackPreview
               showOpenInCodeSandbox={false}
               showRefreshButton
-              style={{ height: 600 , flex: 1}}
+              style={{ height: 800, flex: 1 }}
             />
           </SandpackLayout>
         </SandpackProvider>
