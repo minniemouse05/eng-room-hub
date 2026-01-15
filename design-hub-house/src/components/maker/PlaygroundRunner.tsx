@@ -93,11 +93,13 @@ export function PlaygroundRunner({ playground }: PlaygroundRunnerProps) {
           files={files}
           theme="dark"
         >
-          <SandpackPreview
-            showOpenInCodeSandbox={false}
-            showRefreshButton
-            style={{ height: 600 }}
-          />
+          <SandpackLayout>
+            <SandpackPreview
+              showOpenInCodeSandbox={false}
+              showRefreshButton
+              style={{ height: 600 , flex: 1}}
+            />
+          </SandpackLayout>
         </SandpackProvider>
       </div>
     );
