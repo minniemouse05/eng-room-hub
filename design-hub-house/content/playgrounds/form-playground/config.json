@@ -2,7 +2,7 @@
   "slug": "form-playground",
   "title": "Form Validation Playground",
   "description": "Build forms with real-time validation, error states, and accessible error messages. Practice form handling patterns.",
-  "tags": ["forms", "validation", "accessibility"],
+  "tags": ["forms", "accessibility"],
   "stack": "react",
   "relatedDemos": ["form-validation"],
   "remixIdeas": [

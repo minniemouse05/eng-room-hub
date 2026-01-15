@@ -24,6 +24,7 @@ export interface PlaygroundConfig {
   relatedDemos: string[];
   files: PlaygroundFile[];
   remixIdeas?: string[];
+  hideCode?: boolean; // Hide code editor (useful for quizzes to hide answers)
 }
 
 export interface PlaygroundFile {

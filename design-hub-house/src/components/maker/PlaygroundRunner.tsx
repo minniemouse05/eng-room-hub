@@ -83,6 +83,26 @@ export function PlaygroundRunner({ playground }: PlaygroundRunnerProps) {
     setKey((k) => k + 1);
   };
 
+  // If hideCode is true, render a simpler preview-only layout
+  if (playground.hideCode) {
+    return (
+      <div className="border rounded-xl overflow-hidden bg-background">
+        <SandpackProvider
+          key={key}
+          template={template}
+          files={files}
+          theme="dark"
+        >
+          <SandpackPreview
+            showOpenInCodeSandbox={false}
+            showRefreshButton
+            style={{ height: 600 }}
+          />
+        </SandpackProvider>
+      </div>
+    );
+  }
+
   return (
     <div className="border rounded-xl overflow-hidden bg-background">
       <SandpackProvider
