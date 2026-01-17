@@ -20,7 +20,7 @@ export interface PlaygroundConfig {
   title: string;
   description: string;
   tags: string[];
-  stack: 'js' | 'ts' | 'react';
+  stack: 'js' | 'ts' | 'react' | 'css' | 'ai';
   relatedDemos: string[];
   files: PlaygroundFile[];
   remixIdeas?: string[];

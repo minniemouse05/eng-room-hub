@@ -10,8 +10,8 @@ interface FilterBarProps {
   onTagToggle: (tag: string) => void;
   difficulty?: 'beginner' | 'intermediate' | 'advanced';
   onDifficultyChange?: (difficulty: 'beginner' | 'intermediate' | 'advanced' | undefined) => void;
-  stack?: 'js' | 'ts' | 'react';
-  onStackChange?: (stack: 'js' | 'ts' | 'react' | undefined) => void;
+  stack?: 'js' | 'ts' | 'react' | 'css' | 'ai';
+  onStackChange?: (stack: 'js' | 'ts' | 'react' | 'css' | 'ai' | undefined) => void;
   sortBy: string;
   sortOrder: 'asc' | 'desc';
   onSortChange: (sortBy: string) => void;
@@ -40,7 +40,7 @@ export function FilterBar({
     'intermediate',
     'advanced',
   ];
-  const stacks: Array<'js' | 'ts' | 'react'> = ['js', 'ts', 'react'];
+  const stacks: Array<'js' | 'ts' | 'react' | 'css' | 'ai'> = ['react', 'css', 'ai', 'js', 'ts'];
 
   return (
     <div className="space-y-4">

@@ -3,7 +3,7 @@
   "title": "Clustering Explorer",
   "description": "Watch unsupervised learning in action! See how the algorithm groups similar customers together without being told the categories.",
   "tags": ["ai", "machine-learning", "beginner"],
-  "stack": "react",
+  "stack": "ai",
   "relatedDemos": ["what-is-machine-learning", "types-of-machine-learning"],
   "hideCode": true,
   "remixIdeas": [

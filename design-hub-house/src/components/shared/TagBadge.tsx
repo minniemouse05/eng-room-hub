@@ -61,7 +61,7 @@ export function DifficultyBadge({ difficulty, className }: DifficultyBadgeProps)
 }
 
 interface StackBadgeProps {
-  stack: 'js' | 'ts' | 'react';
+  stack: 'js' | 'ts' | 'react' | 'css' | 'ai';
   className?: string;
 }
 
@@ -70,12 +70,16 @@ export function StackBadge({ stack, className }: StackBadgeProps) {
     js: 'bg-yellow-100 text-yellow-800 dark:bg-yellow-900 dark:text-yellow-200',
     ts: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200',
     react: 'bg-cyan-100 text-cyan-800 dark:bg-cyan-900 dark:text-cyan-200',
+    css: 'bg-pink-100 text-pink-800 dark:bg-pink-900 dark:text-pink-200',
+    ai: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-200',
   };
 
   const labelMap = {
     js: 'JavaScript',
     ts: 'TypeScript',
     react: 'React',
+    css: 'CSS',
+    ai: 'AI/ML',
   };
 
   return (
