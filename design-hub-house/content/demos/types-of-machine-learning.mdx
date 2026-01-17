@@ -1,16 +1,16 @@
 ---
-title: Types of Machine Learning
 description: The three ways computers learn - with examples, by exploring, and through trial and error. No PhD required!
-tags:
-  - ai
-  - machine-learning
-  - beginner
 difficulty: beginner
-timeMinutes: 15
 relatedPlaygrounds:
   - teach-the-machine
   - clustering-explorer
   - robot-trainer
+tags:
+  - ai
+  - machine-learning
+  - beginner
+timeMinutes: 15
+title: Types of Machine Learning
 updatedAt: "2025-01-16"
 ---
 
@@ -19,11 +19,16 @@ updatedAt: "2025-01-16"
 All machine learning involves computers learning from data. But *how* they learn varies dramatically.
 
 Think of it like teaching styles:
+
 - Some kids learn best with a tutor explaining each answer
 - Some learn by exploring and discovering patterns themselves
 - Some learn by trying things and seeing what works
 
-Computers are the same. Let's explore the three main approaches.
+Computers are the same. Let's explore the three main approaches: supervised, unsupervised, and reinforcement learning.
+
+![Supervised vs Unsupervised Learning vs Reinforcement Learning - Supervised learning uses labeled data to train models to classify. Unsupervised learning finds natural groupings in unlabeled data. Reinforcement learning learns by trial and error using rewards.](/images/supervised.png)
+
+*Image source: [Edureka](https://www.slideshare.net/slideshow/supervised-vs-unsupervised-vs-reinforcement-learning-edureka/148276260)*
 
 ---
 
@@ -41,7 +46,7 @@ Computers are the same. Let's explore the three main approaches.
 
 ### How It Works
 
-```
+```ini
 Input (Features)          →    Output (Label)
 -----------------------------------------
 Email text                →    Spam or Not Spam
@@ -56,34 +61,11 @@ The computer finds patterns in the inputs that predict the outputs. Then it can 
 
 ### Real-World Examples
 
-**Email Spam Filters**
-
-| What the computer sees | What it learns |
-|----------------------|----------------|
-| Thousands of emails labeled "spam" or "not spam" | Patterns: suspicious links, ALL CAPS, urgent language, unknown senders |
-| Your feedback when you mark something as spam | Your personal preferences |
-
-**Result:** It can predict whether new emails are spam without you labeling them.
-
----
-
-**House Price Predictions**
-
-| What the computer sees | What it learns |
-|----------------------|----------------|
-| Thousands of home sales with features (bedrooms, square feet, location) and sale prices | How each feature affects price |
-
-**Result:** It can estimate the price of a house it's never seen based on its features.
-
----
-
-**Medical Diagnosis**
-
-| What the computer sees | What it learns |
-|----------------------|----------------|
-| Thousands of X-rays labeled by doctors as "healthy" or "shows disease" | Visual patterns that indicate problems |
-
-**Result:** It can flag potential issues for doctors to review.
+| Application | What the computer sees | What it learns | Result |
+|-------------|----------------------|----------------|--------|
+| **Email Spam Filters** | Thousands of emails labeled "spam" or "not spam" + your feedback | Patterns: suspicious links, ALL CAPS, urgent language, unknown senders | Predicts whether new emails are spam |
+| **House Price Predictions** | Thousands of home sales with features (bedrooms, sq ft, location) and prices | How each feature affects price | Estimates prices for houses it's never seen |
+| **Medical Diagnosis** | Thousands of X-rays labeled by doctors as "healthy" or "disease" | Visual patterns that indicate problems | Flags potential issues for doctors to review |
 
 ---
 
@@ -92,6 +74,7 @@ The computer finds patterns in the inputs that predict the outputs. Then it can 
 Supervised learning is powerful, but it requires *labeled data* — examples where you already know the answer.
 
 Getting labels is often:
+
 - **Expensive:** Someone has to label each example
 - **Time-consuming:** Medical images might need expert doctors
 - **Subjective:** Is this email "spam" or just "promotional"?
@@ -125,7 +108,7 @@ Getting labels is often:
 
 ### How It Works
 
-```
+```ini
 Input (Unlabeled Data)    →    Discovered Structure
 -----------------------------------------
 Customer purchase data    →    Customer segments
@@ -140,39 +123,18 @@ The computer asks: "What's the natural structure here? What goes together?"
 
 ### Real-World Examples
 
-**Customer Segmentation**
-
-| What the computer sees | What it discovers |
-|----------------------|-------------------|
-| Purchase history, browsing behavior, demographics | Natural customer groups: "Budget shoppers," "Brand loyalists," "Occasional splurgers" |
-
-**Result:** Marketing can target each group differently, even though nobody pre-defined the groups.
-
----
-
-**Anomaly Detection**
-
-| What the computer sees | What it discovers |
-|----------------------|-------------------|
-| Millions of normal credit card transactions | What "normal" looks like |
-
-**Result:** When something doesn't fit the pattern (like a purchase in another country), it flags it as potentially fraudulent.
-
----
-
-**Recommendation Discovery**
-
-| What the computer sees | What it discovers |
-|----------------------|-------------------|
-| What millions of users watched/bought/listened to | Hidden connections: "People who liked X also tend to like Y" |
-
-**Result:** Netflix suggests shows you've never heard of but end up loving.
+| Application | What the computer sees | What it discovers | Result |
+|-------------|----------------------|-------------------|--------|
+| **Customer Segmentation** | Purchase history, browsing behavior, demographics | Natural customer groups: "Budget shoppers," "Brand loyalists," "Occasional splurgers" | Marketing can target each group differently |
+| **Anomaly Detection** | Millions of normal credit card transactions | What "normal" looks like | Flags unusual activity (like purchases in another country) as potentially fraudulent |
+| **Recommendations** | What millions of users watched/bought/listened to | Hidden connections: "People who liked X also tend to like Y" | Netflix suggests shows you've never heard of but end up loving |
 
 ---
 
 ### The Power: No Labels Required
 
 The beauty of unsupervised learning:
+
 - Works with raw, unlabeled data (much cheaper and easier to get)
 - Can discover patterns humans never thought to look for
 - Scales to massive datasets
@@ -213,7 +175,7 @@ Without labels, how do you know if the patterns are useful?
 
 ### How It Works
 
-```
+```ini
                     ┌──────────────┐
     Action          │              │         Reward/Penalty
 Agent ────────────► │  Environment │ ────────────► Agent learns
@@ -225,6 +187,7 @@ Agent ────────────► │  Environment │ ────�
 ```
 
 The cycle:
+
 1. Agent observes the current state
 2. Agent takes an action
 3. Environment gives a reward (or penalty)
@@ -235,29 +198,11 @@ The cycle:
 
 ### Real-World Examples
 
-**Game-Playing AI**
-
-| The Setup | What Happens |
-|-----------|-------------|
-| Agent plays video game. Reward = points. Penalty = losing. | After millions of games, it masters strategies no human ever discovered. |
-
-**Famous example:** DeepMind's AlphaGo beat the world champion at Go, a game with more possible positions than atoms in the universe.
-
----
-
-**Self-Driving Cars**
-
-| The Setup | What Happens |
-|-----------|-------------|
-| Agent controls a car in simulation. Reward = safe driving. Penalty = crashes, traffic violations. | It learns to navigate complex traffic scenarios through experience. |
-
----
-
-**Robotics**
-
-| The Setup | What Happens |
-|-----------|-------------|
-| Robot arm tries to pick up objects. Reward = successful grasp. Penalty = dropping things. | It learns precise movements through thousands of attempts. |
+| Application | The Setup | What Happens |
+|-------------|-----------|-------------|
+| **Game-Playing AI** | Agent plays video game. Reward = points. Penalty = losing. | After millions of games, it masters strategies no human ever discovered. (DeepMind's AlphaGo beat the world Go champion!) |
+| **Self-Driving Cars** | Agent controls a car in simulation. Reward = safe driving. Penalty = crashes, traffic violations. | Learns to navigate complex traffic scenarios through experience |
+| **Robotics** | Robot arm tries to pick up objects. Reward = successful grasp. Penalty = dropping things. | Learns precise movements through thousands of attempts |
 
 ---
 
@@ -266,6 +211,7 @@ The cycle:
 **Exploration vs. Exploitation**
 
 The agent faces a dilemma:
+
 - **Exploit:** Do what's worked before (safe, but might miss better options)
 - **Explore:** Try new things (risky, but might find better strategies)
 
