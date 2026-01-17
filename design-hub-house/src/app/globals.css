@@ -127,6 +127,24 @@
 /* Code highlighting styles */
 .hljs {
   background: transparent !important;
+  color: inherit !important;
+}
+
+/* Ensure code blocks have dark background and visible text */
+pre:has(code),
+.prose pre,
+.prose pre:has(code) {
+  background-color: #09090b !important;
+  color: #fafafa !important;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+}
+
+pre code,
+.prose pre code {
+  color: inherit !important;
+  background: transparent !important;
 }
 
 .hljs-keyword,

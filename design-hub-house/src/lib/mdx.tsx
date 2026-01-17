@@ -37,7 +37,8 @@ const components = {
   ),
   code: (props: React.HTMLAttributes<HTMLElement>) => {
     // Check if this is an inline code or a code block
-    const isInline = !props.className?.includes('language-');
+    // Code blocks have either 'language-*' class (with language) or 'hljs' class (without language)
+    const isInline = !props.className?.includes('language-') && !props.className?.includes('hljs');
     if (isInline) {
       return (
         <code
@@ -46,7 +47,7 @@ const components = {
         />
       );
     }
-    return <code {...props} />;
+    return <code className="text-inherit" {...props} />;
   },
   pre: (props: React.HTMLAttributes<HTMLPreElement>) => (
     <pre

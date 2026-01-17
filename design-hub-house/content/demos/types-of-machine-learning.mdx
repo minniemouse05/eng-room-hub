@@ -1,0 +1,345 @@
+---
+title: Types of Machine Learning
+description: The three ways computers learn - with examples, by exploring, and through trial and error. No PhD required!
+tags:
+  - ai
+  - machine-learning
+  - beginner
+difficulty: beginner
+timeMinutes: 15
+relatedPlaygrounds:
+  - teach-the-machine
+  - clustering-explorer
+  - robot-trainer
+updatedAt: "2025-01-16"
+---
+
+# Types of Machine Learning
+
+All machine learning involves computers learning from data. But *how* they learn varies dramatically.
+
+Think of it like teaching styles:
+- Some kids learn best with a tutor explaining each answer
+- Some learn by exploring and discovering patterns themselves
+- Some learn by trying things and seeing what works
+
+Computers are the same. Let's explore the three main approaches.
+
+---
+
+## 1. Supervised Learning: Learning with Answers
+
+**The concept:** You give the computer examples AND the correct answers. It learns the connection between them.
+
+> **The Tutor Analogy**
+>
+> Imagine learning math with a patient tutor. They show you problem after problem, always revealing the answer afterward. Eventually, you can solve new problems on your own.
+>
+> That's supervised learning — learning from labeled examples.
+
+---
+
+### How It Works
+
+```
+Input (Features)          →    Output (Label)
+-----------------------------------------
+Email text                →    Spam or Not Spam
+House size, location      →    Price
+Medical scan              →    Disease or Healthy
+Customer data             →    Will buy or Won't buy
+```
+
+The computer finds patterns in the inputs that predict the outputs. Then it can make predictions on new data it's never seen.
+
+---
+
+### Real-World Examples
+
+**Email Spam Filters**
+
+| What the computer sees | What it learns |
+|----------------------|----------------|
+| Thousands of emails labeled "spam" or "not spam" | Patterns: suspicious links, ALL CAPS, urgent language, unknown senders |
+| Your feedback when you mark something as spam | Your personal preferences |
+
+**Result:** It can predict whether new emails are spam without you labeling them.
+
+---
+
+**House Price Predictions**
+
+| What the computer sees | What it learns |
+|----------------------|----------------|
+| Thousands of home sales with features (bedrooms, square feet, location) and sale prices | How each feature affects price |
+
+**Result:** It can estimate the price of a house it's never seen based on its features.
+
+---
+
+**Medical Diagnosis**
+
+| What the computer sees | What it learns |
+|----------------------|----------------|
+| Thousands of X-rays labeled by doctors as "healthy" or "shows disease" | Visual patterns that indicate problems |
+
+**Result:** It can flag potential issues for doctors to review.
+
+---
+
+### The Catch: You Need Labels
+
+Supervised learning is powerful, but it requires *labeled data* — examples where you already know the answer.
+
+Getting labels is often:
+- **Expensive:** Someone has to label each example
+- **Time-consuming:** Medical images might need expert doctors
+- **Subjective:** Is this email "spam" or just "promotional"?
+
+> **The 80/20 Reality**
+>
+> Data scientists joke that 80% of their job is preparing and cleaning data, not building fancy models.
+
+---
+
+### Common Supervised Learning Tasks
+
+| Task | What It Predicts | Example |
+|------|-----------------|---------|
+| **Classification** | Categories | Is this email spam? Is this transaction fraudulent? |
+| **Regression** | Numbers | What will this house sell for? How many units will we sell? |
+
+---
+
+## 2. Unsupervised Learning: Learning Without Answers
+
+**The concept:** You give the computer data with NO labels. It finds hidden patterns and structure on its own.
+
+> **The Closet Organization Analogy**
+>
+> Imagine dumping all your clothes in a pile and asking someone to organize them — without telling them your categories. They might naturally group by color, or season, or formality. They discover the structure themselves.
+>
+> That's unsupervised learning — finding patterns without being told what to look for.
+
+---
+
+### How It Works
+
+```
+Input (Unlabeled Data)    →    Discovered Structure
+-----------------------------------------
+Customer purchase data    →    Customer segments
+Website click patterns    →    User behavior groups
+Documents                 →    Topic clusters
+Transaction data          →    Normal vs. anomalous patterns
+```
+
+The computer asks: "What's the natural structure here? What goes together?"
+
+---
+
+### Real-World Examples
+
+**Customer Segmentation**
+
+| What the computer sees | What it discovers |
+|----------------------|-------------------|
+| Purchase history, browsing behavior, demographics | Natural customer groups: "Budget shoppers," "Brand loyalists," "Occasional splurgers" |
+
+**Result:** Marketing can target each group differently, even though nobody pre-defined the groups.
+
+---
+
+**Anomaly Detection**
+
+| What the computer sees | What it discovers |
+|----------------------|-------------------|
+| Millions of normal credit card transactions | What "normal" looks like |
+
+**Result:** When something doesn't fit the pattern (like a purchase in another country), it flags it as potentially fraudulent.
+
+---
+
+**Recommendation Discovery**
+
+| What the computer sees | What it discovers |
+|----------------------|-------------------|
+| What millions of users watched/bought/listened to | Hidden connections: "People who liked X also tend to like Y" |
+
+**Result:** Netflix suggests shows you've never heard of but end up loving.
+
+---
+
+### The Power: No Labels Required
+
+The beauty of unsupervised learning:
+- Works with raw, unlabeled data (much cheaper and easier to get)
+- Can discover patterns humans never thought to look for
+- Scales to massive datasets
+
+---
+
+### The Challenge: What Did It Actually Find?
+
+Without labels, how do you know if the patterns are useful?
+
+> **The Interpretation Problem**
+>
+> The computer grouped your customers into 5 segments. Great! But what do those segments *mean*? Are they actionable? That requires human interpretation.
+
+---
+
+### Common Unsupervised Learning Tasks
+
+| Task | What It Does | Example |
+|------|-------------|---------|
+| **Clustering** | Groups similar things together | Customer segments, document topics |
+| **Dimensionality Reduction** | Simplifies complex data | Compressing images, visualizing high-dimensional data |
+| **Association** | Finds things that occur together | "Customers who buy diapers also buy beer" |
+
+---
+
+## 3. Reinforcement Learning: Learning by Doing
+
+**The concept:** An "agent" learns by taking actions in an environment and receiving rewards or penalties. It figures out what works through trial and error.
+
+> **The Puppy Training Analogy**
+>
+> You don't explain to a puppy *why* sitting is good. You just reward sitting with treats and discourage jumping with "no!" Over time, the puppy learns which behaviors get rewards.
+>
+> That's reinforcement learning — learning from consequences.
+
+---
+
+### How It Works
+
+```
+                    ┌──────────────┐
+    Action          │              │         Reward/Penalty
+Agent ────────────► │  Environment │ ────────────► Agent learns
+                    │              │
+                    └──────────────┘
+                           │
+                           ▼
+                    New State
+```
+
+The cycle:
+1. Agent observes the current state
+2. Agent takes an action
+3. Environment gives a reward (or penalty)
+4. Agent updates its strategy
+5. Repeat millions of times
+
+---
+
+### Real-World Examples
+
+**Game-Playing AI**
+
+| The Setup | What Happens |
+|-----------|-------------|
+| Agent plays video game. Reward = points. Penalty = losing. | After millions of games, it masters strategies no human ever discovered. |
+
+**Famous example:** DeepMind's AlphaGo beat the world champion at Go, a game with more possible positions than atoms in the universe.
+
+---
+
+**Self-Driving Cars**
+
+| The Setup | What Happens |
+|-----------|-------------|
+| Agent controls a car in simulation. Reward = safe driving. Penalty = crashes, traffic violations. | It learns to navigate complex traffic scenarios through experience. |
+
+---
+
+**Robotics**
+
+| The Setup | What Happens |
+|-----------|-------------|
+| Robot arm tries to pick up objects. Reward = successful grasp. Penalty = dropping things. | It learns precise movements through thousands of attempts. |
+
+---
+
+### The Key Concepts
+
+**Exploration vs. Exploitation**
+
+The agent faces a dilemma:
+- **Exploit:** Do what's worked before (safe, but might miss better options)
+- **Explore:** Try new things (risky, but might find better strategies)
+
+> **Restaurant Analogy**
+>
+> Do you keep ordering your favorite dish (exploit), or try something new that might be even better (explore)? Reinforcement learning agents balance this tradeoff.
+
+---
+
+**Delayed Rewards**
+
+Sometimes the best action doesn't pay off immediately.
+
+> **Chess Example**
+>
+> Sacrificing your queen might seem terrible (negative immediate reward), but if it leads to checkmate three moves later (huge delayed reward), it's actually brilliant.
+>
+> RL agents learn to think ahead.
+
+---
+
+### Why Not Use It for Everything?
+
+Reinforcement learning is powerful but:
+
+- **Needs LOTS of trials:** Millions of attempts to learn
+- **Hard to define rewards:** What exactly should "good driving" reward?
+- **Can find unexpected solutions:** The agent might "cheat" in ways you didn't anticipate
+
+> **The Boat Race Bug**
+>
+> A reinforcement learning agent was trained to win boat races in a video game. Instead of racing, it discovered it could earn more points by driving in circles collecting power-ups — technically maximizing the reward, but not what the designers intended!
+
+---
+
+## Comparison: When to Use What?
+
+| Approach | Use When... | You Have... | Examples |
+|----------|-------------|------------|----------|
+| **Supervised** | You know what you want to predict | Labeled examples | Spam detection, price prediction, diagnosis |
+| **Unsupervised** | You want to discover hidden patterns | Unlabeled data | Customer segments, anomaly detection, recommendations |
+| **Reinforcement** | You need to make sequential decisions | An environment to practice in | Games, robotics, control systems |
+
+---
+
+## They Can Work Together
+
+These aren't mutually exclusive! Real systems often combine approaches:
+
+- **Pre-train** with unsupervised learning (find structure in lots of unlabeled data)
+- **Fine-tune** with supervised learning (refine with some labeled examples)
+- **Deploy** with reinforcement learning (keep improving from user feedback)
+
+---
+
+## Key Takeaways
+
+- **Supervised Learning:** Learns from labeled examples. "Here's the answer, learn the pattern."
+- **Unsupervised Learning:** Finds structure in unlabeled data. "Figure out what goes together."
+- **Reinforcement Learning:** Learns from rewards and penalties. "Try things and see what works."
+- Each has strengths and weaknesses — the best approach depends on your problem and data
+- Real systems often combine multiple approaches
+
+---
+
+## Try It Yourself
+
+**See these concepts in action:**
+
+- [Teach the Machine](/maker/teach-the-machine) — Experience supervised learning by training a classifier
+- [Clustering Explorer](/maker/clustering-explorer) — Watch unsupervised learning find groups
+- [Robot Trainer](/maker/robot-trainer) — Train an agent through reinforcement learning
+
+**Continue learning:**
+
+- [What is Machine Learning?](/workshop/what-is-machine-learning) — The fundamentals
+- [What is AI?](/workshop/intro-to-ai) — The bigger picture
