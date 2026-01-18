@@ -47,7 +47,7 @@ export default async function DemoPage({ params }: PageProps) {
   const relatedPlaygrounds = getRelatedPlaygrounds(demo.relatedPlaygrounds);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-background to-muted/20">
+    <main className="min-h-screen hero-bg">
       <div className="container mx-auto px-4 py-8">
         {/* Navigation */}
         <div className="flex items-center justify-between mb-8">

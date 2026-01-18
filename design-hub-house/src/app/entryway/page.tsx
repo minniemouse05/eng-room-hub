@@ -9,7 +9,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ArrowRight, Wrench, Code2 } from "lucide-react";
+import { ArrowRight, Wrench, Code2, MessageCircle } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Entryway",
@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function EntrywayPage() {
   return (
-    <main className="min-h-screen bg-gradient-to-b from-background to-muted/20">
+    <main className="min-h-screen hero-bg">
       <div className="container mx-auto px-4 py-8">
         {/* Navigation */}
         <div className="flex items-center justify-between mb-8">
@@ -33,7 +33,7 @@ export default function EntrywayPage() {
         <header className="my-8">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-14 h-14 rounded-2xl bg-indigo-100 flex items-center justify-center">
-              <span className="text-3xl">💬</span>
+              <MessageCircle className="w-7 h-7 text-indigo-600" />
             </div>
             <div>
               <h1 className="text-3xl font-bold">Entryway</h1>

@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { getAllPlaygrounds, getAllPlaygroundTags } from '@/lib/content';
 import { BackToHouse, Breadcrumbs } from '@/components/shared';
 import { MakerFilters } from '@/components/maker';
+import { Code2 } from 'lucide-react';
 
 export const metadata: Metadata = {
   title: 'Maker Studio',
@@ -13,7 +14,7 @@ export default function MakerPage() {
   const allTags = getAllPlaygroundTags();
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-background to-muted/20">
+    <main className="min-h-screen hero-bg">
       <div className="container mx-auto px-4 py-8">
         {/* Navigation */}
         <div className="flex items-center justify-between mb-8">
@@ -27,7 +28,7 @@ export default function MakerPage() {
         <header className="my-8">
           <div className="flex items-center gap-4 mb-4">
             <div className="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center">
-              <span className="text-3xl">💻</span>
+              <Code2 className="w-7 h-7 text-emerald-600" />
             </div>
             <div>
               <h1 className="text-3xl font-bold">Maker Studio</h1>

@@ -44,41 +44,95 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
+
+  /* Design Hub House - Custom Color Palette */
+  --color-electric-blue: #5271f7;
+  --color-primary-blue: #195dfa;
+  --color-indigo: #4f61e3;
+  --color-lavender: #7c7dc9;
+  --color-cyan: #2cb4e0;
+  --color-coral: #fd946f;
+  --color-peach: #fcb78a;
+  --color-cream: #fad096;
+  --color-magenta: #b65ea0;
+  --color-peach-bg: #ffeee5;
+  --color-blush: #fedcd1;
+  --color-off-white: #fff4eb;
+  --color-neutral: #edeae2;
+  --color-mint: #bcc9bc;
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --radius: 0.75rem;
+  --background: #fff4eb;
+  --foreground: #1a1a2e;
+  --card: rgba(255, 255, 255, 0.85);
+  --card-foreground: #1a1a2e;
+  --popover: #ffffff;
+  --popover-foreground: #1a1a2e;
+  --primary: #5271f7;
+  --primary-foreground: #ffffff;
+  --secondary: #ffeee5;
+  --secondary-foreground: #1a1a2e;
+  --muted: #edeae2;
+  --muted-foreground: #64648c;
+  --accent: #4f61e3;
+  --accent-foreground: #ffffff;
+  --destructive: #ef4444;
+  --border: rgba(79, 97, 227, 0.15);
+  --input: rgba(79, 97, 227, 0.1);
+  --ring: #5271f7;
+  --chart-1: #fd946f;
+  --chart-2: #2cb4e0;
+  --chart-3: #4f61e3;
+  --chart-4: #fad096;
+  --chart-5: #b65ea0;
+  --sidebar: #fff4eb;
+  --sidebar-foreground: #1a1a2e;
+  --sidebar-primary: #5271f7;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ffeee5;
+  --sidebar-accent-foreground: #1a1a2e;
+  --sidebar-border: rgba(79, 97, 227, 0.15);
+  --sidebar-ring: #5271f7;
+
+  /* Custom Design System Tokens */
+  /* background of landing page*/
+  --gradient-hero: linear-gradient(
+    135deg,
+    #fff8f5 0%,
+    #fffcfa 45%,
+    #fff5f0 100%
+  );
+  --gradient-blue-glow: radial-gradient(
+    circle at 30% 20%,
+    rgba(1, 51, 255, 0.12) 0%,
+    transparent 55%
+  );
+  --gradient-rainbow: linear-gradient(
+    135deg,
+    #5271f7 0%,
+    #2cb4e0 30%,
+    #fad096 55%,
+    #fd946f 75%,
+    #b65ea0 100%
+  );
+  --gradient-card: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 244, 235, 0.8) 100%
+  );
+
+  --shadow-soft: 0 4px 24px -4px rgba(79, 97, 227, 0.12);
+  --shadow-glow-blue: 0 8px 32px -8px rgba(1, 51, 255, 0.25);
+  --shadow-glow-coral: 0 8px 32px -8px rgba(253, 148, 111, 0.3);
+  --shadow-glow-cyan: 0 8px 32px -8px rgba(44, 180, 224, 0.3);
+  --shadow-glow-indigo: 0 8px 32px -8px rgba(79, 97, 227, 0.3);
+
+  /* Room Colors */
+  --room-workshop: #fd946f;
+  --room-entryway: #4f61e3;
+  --room-maker: #2cb4e0;
 }
 
 .dark {
@@ -122,6 +176,181 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* ============================================
+   DESIGN HUB HOUSE - CUSTOM DESIGN SYSTEM
+   ============================================ */
+
+/* Hero Background with Gradient + Noise */
+.hero-bg {
+  background: var(--gradient-hero);
+  position: relative;
+}
+
+.hero-bg::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-blue-glow);
+  pointer-events: none;
+}
+
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.4;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+}
+
+/* Noise texture overlay utility */
+.noise-overlay {
+  position: relative;
+}
+
+.noise-overlay::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+  border-radius: inherit;
+}
+
+/* Rainbow gradient border effect */
+.rainbow-border {
+  position: relative;
+  background: var(--card);
+  border-radius: 1.5rem;
+}
+
+.rainbow-border::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background: var(--gradient-rainbow);
+  border-radius: calc(1.5rem + 2px);
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.rainbow-border:hover::before {
+  opacity: 1;
+}
+
+/* Glass card effect */
+.glass-card {
+  background: var(--gradient-card);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Glow effects on hover */
+.glow-blue:hover {
+  box-shadow: var(--shadow-glow-blue);
+}
+
+.glow-coral:hover {
+  box-shadow: var(--shadow-glow-coral);
+}
+
+.glow-cyan:hover {
+  box-shadow: var(--shadow-glow-cyan);
+}
+
+.glow-indigo:hover {
+  box-shadow: var(--shadow-glow-indigo);
+}
+
+/* Electric blue headline */
+.electric-headline {
+  color: #373737; /*var(--primary);*/
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Rainbow text gradient */
+.rainbow-text {
+  background: var(--gradient-rainbow);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Soft button hover */
+.btn-soft {
+  transition: all 0.2s ease;
+}
+
+.btn-soft:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Room tile hover glow */
+.room-tile {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.room-tile:hover {
+  transform: scale(1.02);
+}
+
+.room-tile.workshop:hover {
+  box-shadow: var(--shadow-glow-coral);
+}
+
+.room-tile.entryway:hover {
+  box-shadow: var(--shadow-glow-indigo);
+}
+
+.room-tile.maker:hover {
+  box-shadow: var(--shadow-glow-cyan);
+}
+
+/* Floating animation for decorative elements */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+/* Gradient shimmer effect */
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+.shimmer-on-hover:hover {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out;
 }
 
 /* Code highlighting styles */
