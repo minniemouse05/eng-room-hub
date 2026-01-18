@@ -1,0 +1,199 @@
+---
+description: Peek under the hood of Large Language Models. Learn about tokens, context windows, and how these AI systems actually generate text.
+difficulty: beginner
+relatedPlaygrounds:
+  - llm-word-predictor
+tags:
+  - ai
+  - llm
+  - beginner
+timeMinutes: 12
+title: How LLMs Work
+updatedAt: "2025-01-17"
+---
+
+# How LLMs Work
+
+Ever wondered what actually happens when you ask ChatGPT or Claude a question? Let's demystify it - no computer science degree required!
+
+---
+
+## The Core Idea: Prediction
+
+Here's the surprising truth: **at their heart, LLMs are prediction machines.**
+
+They've been trained to answer one simple question over and over:
+
+> "Given these words, what word is most likely to come next?"
+
+That's it! But this simple capability, applied at massive scale with sophisticated techniques, leads to remarkably intelligent-seeming behavior.
+
+---
+
+## A Simple Example
+
+Let's say you type: **"The capital of Kenya is"**
+
+The LLM looks at those words and predicts what comes next:
+
+| Possible Next Word | Probability |
+|-------------------|-------------|
+| **Nairobi** | 95% |
+| located | 2% |
+| a | 1% |
+| the | 0.5% |
+| ... | ... |
+
+It picks "Nairobi" because that's what it learned from reading millions of texts where this pattern appeared.
+
+> **Key insight:** The LLM doesn't "know" facts like a database. It has learned patterns about what words tend to follow other words.
+
+---
+
+## The Building Blocks
+
+Let's understand the key components that make LLMs work:
+
+### 1. Tokens: Breaking Text into Pieces
+
+LLMs don't read words the way we do. They break text into **tokens** - which might be whole words, parts of words, or even single characters.
+
+**Example:**
+
+```sh
+"transformative" → "trans" + "form" + "ative"
+"AI" → "AI" (single token)
+"don't" → "don" + "'" + "t"
+```
+
+**Why does this matter?**
+
+- LLMs process tokens, not words
+- Longer responses = more tokens = more processing
+- This is why some services charge "per token"
+
+---
+
+### 2. Context Window: The Model's Memory
+
+The **context window** is how much text the LLM can "see" at once when generating a response.
+
+Think of it like this:
+
+> **Analogy:** Imagine reading a book, but you can only see the current page and the previous 10 pages. That's your "context window."
+
+| Model Type | Typical Context Window |
+|------------|----------------------|
+| Older models | ~4,000 tokens (a few pages) |
+| Modern models | 100,000+ tokens (a small book) |
+
+**Why does this matter?**
+
+- Longer context = can handle longer documents
+- But the model can "forget" things from the beginning if the conversation gets too long
+
+---
+
+### 3. Attention: Finding What Matters
+
+The **attention mechanism** is the secret sauce that made modern LLMs possible.
+
+When processing your question, the model doesn't treat all words equally. It learns to pay more **attention** to the words that matter most for the current task.
+
+**Example:** In the sentence "The bank by the river had beautiful flowers"
+
+When figuring out what "bank" means, the model pays special attention to "river" - which tells it we're talking about a riverbank, not a financial institution.
+
+> **This is revolutionary:** Before attention mechanisms, AI struggled with context. Now it can understand that the same word means different things in different situations.
+
+---
+
+### 4. Parameters: The Brain's Settings
+
+**Parameters** are the millions (or billions!) of numerical values that control how the model processes information.
+
+Think of them like:
+
+- Settings on a massive mixing board
+- Each one fine-tuned during training
+- Together they encode everything the model has learned
+
+| Model | Parameters |
+|-------|-----------|
+| Small model | ~100 million |
+| GPT-3 | 175 billion |
+| Latest models | 1+ trillion |
+
+More parameters generally = more capability (but also more computing power needed).
+
+---
+
+## The Generation Process
+
+When you ask an LLM a question, here's what happens:
+
+```ini
+1. Your text is broken into tokens
+         ↓
+2. Tokens are converted to numbers the model understands
+         ↓
+3. The model processes these through many layers
+         ↓
+4. Attention helps focus on relevant parts
+         ↓
+5. The model predicts the most likely next token
+         ↓
+6. That token is added, and steps 3-5 repeat
+         ↓
+7. This continues until the response is complete
+```
+
+**The key point:** The model generates text **one token at a time**, each time considering everything that came before.
+
+---
+
+## Why This Matters for You
+
+Understanding how LLMs work helps you:
+
+### Use Them Better
+
+- **Be specific:** More context = better predictions
+- **Break down complex tasks:** Easier predictions = better results
+- **Understand limitations:** They predict, they don't truly "know"
+
+### Spot Problems
+
+- If the model seems to lose track, the context window might be full
+- If it makes up facts, remember: it's predicting likely text, not consulting a database
+
+### Have Realistic Expectations
+
+- They're incredibly capable pattern matchers
+- They're not conscious or truly understanding
+- They work best as tools to augment human work
+
+---
+
+## Key Takeaways
+
+1. **LLMs predict the next word** - over and over, very well
+2. **Tokens are the building blocks** - not quite words, not quite letters
+3. **Context windows limit memory** - they can only "see" so much at once
+4. **Attention enables understanding** - helping the model focus on what matters
+5. **Parameters encode learning** - billions of settings fine-tuned on vast data
+
+---
+
+## Try It Yourself
+
+Experience how word prediction works in the [LLM Word Predictor](/maker/llm-word-predictor) playground. See how changing the input changes the predictions!
+
+---
+
+## Learn More
+
+Want to go deeper? Here are some great resources:
+
+- [3Blue1Brown's 5-minute video on how LLMs work](https://www.youtube.com/watch?v=LPZh9BOjkQs)
+- [Anthropic's research on tracing LLM thoughts](https://www.anthropic.com/research/tracing-thoughts-language-model)

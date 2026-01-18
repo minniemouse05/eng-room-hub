@@ -77,7 +77,9 @@ export function PlaygroundRunner({ playground }: PlaygroundRunnerProps) {
   });
 
   // Determine template based on stack
-  const template = playground.stack === 'react' ? 'react-ts' : 'vanilla-ts';
+  // react, css, and ai stacks all use React components
+  const useReactTemplate = ['react', 'css', 'ai'].includes(playground.stack);
+  const template = useReactTemplate ? 'react-ts' : 'vanilla-ts';
 
   const handleReset = () => {
     setKey((k) => k + 1);
