@@ -53,44 +53,44 @@ export default function EntrywayPage() {
 
           {/* Quick Links Sidebar */}
           <aside className="space-y-6">
-            <Card>
+            <Card className="quick-nav-panel">
               <CardHeader>
                 <CardTitle className="text-lg">Quick Navigation</CardTitle>
                 <CardDescription>Jump directly to other rooms</CardDescription>
               </CardHeader>
               <CardContent className="space-y-3">
-                <Link href="/workshop" className="block">
-                  <div className="flex items-center gap-3 p-3 rounded-lg bg-amber-50 hover:bg-amber-100 transition-colors">
-                    <Wrench className="h-5 w-5 text-amber-600" />
+                <Link href="/workshop" className="block focus-visible:outline-none">
+                  <div className="room-nav-item room-nav-item--workshop">
+                    <Wrench className="h-5 w-5 room-nav-icon" />
                     <div className="flex-1">
-                      <p className="font-medium text-sm">Workshop</p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="room-nav-title">Workshop</p>
+                      <p className="room-nav-desc">
                         Tool demos & tutorials
                       </p>
                     </div>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground" />
+                    <ArrowRight className="h-4 w-4 room-nav-arrow" />
                   </div>
                 </Link>
-                <Link href="/maker" className="block">
-                  <div className="flex items-center gap-3 p-3 rounded-lg bg-emerald-50 hover:bg-emerald-100 transition-colors">
-                    <Code2 className="h-5 w-5 text-emerald-600" />
+                <Link href="/maker" className="block focus-visible:outline-none">
+                  <div className="room-nav-item room-nav-item--maker">
+                    <Code2 className="h-5 w-5 room-nav-icon" />
                     <div className="flex-1">
-                      <p className="font-medium text-sm">Maker Studio</p>
-                      <p className="text-xs text-muted-foreground">
+                      <p className="room-nav-title">Maker Studio</p>
+                      <p className="room-nav-desc">
                         Coding playgrounds
                       </p>
                     </div>
-                    <ArrowRight className="h-4 w-4 text-muted-foreground" />
+                    <ArrowRight className="h-4 w-4 room-nav-arrow" />
                   </div>
                 </Link>
               </CardContent>
             </Card>
 
-            <Card>
+            <Card className="about-panel">
               <CardHeader>
                 <CardTitle className="text-lg">About the Guide</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3 text-sm text-muted-foreground">
+              <CardContent className="space-y-3 text-sm">
                 <p>
                   The House Guide uses AI to help you explore our content. It
                   knows about The Engine Room and all the demos and playgrounds
