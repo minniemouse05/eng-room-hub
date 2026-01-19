@@ -147,4 +147,34 @@ export interface UserPreferences {
   startingLevel?: DemoFrontmatter['difficulty'];
   completedLessons?: string[]; // Lesson slugs
   completedModules?: string[]; // Module IDs
+  completedPlaygrounds?: string[]; // Playground slugs
+}
+
+// ============================================
+// Maker Studio Collection System
+// Organizes playgrounds into discoverable groups
+// ============================================
+
+// A PlaygroundCollection groups related playgrounds
+export interface PlaygroundCollection {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  color: string;
+  audience?: Audience[];
+  difficulty?: DemoFrontmatter['difficulty']; // Primary difficulty level
+  stack?: PlaygroundConfig['stack']; // Primary tech stack (optional)
+  playgroundSlugs: string[]; // Ordered list of playground slugs
+  relatedModuleId?: string; // Links to Workshop module for "Continue learning"
+  relatedLessonSlugs?: string[]; // Lessons that recommend this collection
+  isStartHere?: boolean;
+  isFeatured?: boolean;
+}
+
+// Maps Workshop lessons to recommended playgrounds
+export interface LessonPlaygroundLink {
+  lessonSlug: string;
+  playgroundSlugs: string[]; // Recommended playgrounds after this lesson
+  collectionId?: string; // Or recommend entire collection
 }

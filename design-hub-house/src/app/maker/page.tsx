@@ -1,11 +1,13 @@
+import { Suspense } from 'react';
 import { Metadata } from 'next';
 import { getAllPlaygrounds, getAllPlaygroundTags } from '@/lib/content';
 import { BackToHouse, Breadcrumbs } from '@/components/shared';
-import { MakerFilters } from '@/components/maker';
+import { MakerContent } from '@/components/maker';
 
 export const metadata: Metadata = {
   title: 'Maker Studio',
-  description: 'Interactive coding playgrounds to practice design patterns and build components.',
+  description:
+    'Interactive playgrounds to practice AI concepts, machine learning, and coding patterns.',
 };
 
 export default function MakerPage() {
@@ -26,22 +28,32 @@ export default function MakerPage() {
         {/* Header */}
         <header className="my-8">
           <div className="flex items-center gap-4 mb-4">
-            <div className="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center">
+            <div
+              className="w-14 h-14 rounded-2xl flex items-center justify-center"
+              style={{
+                background:
+                  'linear-gradient(135deg, rgba(57, 230, 255, 0.3) 0%, rgba(57, 230, 255, 0.1) 100%)',
+                boxShadow: '0 0 24px rgba(57, 230, 255, 0.2)',
+                border: '1px solid rgba(57, 230, 255, 0.25)',
+              }}
+            >
               <span className="text-3xl">💻</span>
             </div>
             <div>
-              <h1 className="text-3xl font-bold">Maker Studio</h1>
-              <p className="text-muted-foreground">Interactive Coding Playgrounds</p>
+              <h1 className="text-3xl font-bold text-text-primary">Maker Studio</h1>
+              <p className="text-text-secondary">Interactive Learning Playgrounds</p>
             </div>
           </div>
-          <p className="text-lg text-muted-foreground max-w-2xl">
-            Get your hands dirty with interactive coding playgrounds. Write, edit, and run
-            code in real-time to practice what you&apos;ve learned in the Workshop.
+          <p className="text-lg text-text-muted max-w-2xl">
+            Practice what you&apos;ve learned with hands-on activities. Each collection
+            aligns with Workshop lessons to reinforce your understanding.
           </p>
         </header>
 
-        {/* Playgrounds Grid with Filters */}
-        <MakerFilters playgrounds={playgrounds} allTags={allTags} />
+        {/* Playgrounds with Collections - wrapped in Suspense for useSearchParams */}
+        <Suspense fallback={<div className="text-text-muted">Loading...</div>}>
+          <MakerContent playgrounds={playgrounds} allTags={allTags} />
+        </Suspense>
       </div>
     </main>
   );

@@ -1421,3 +1421,143 @@ a[aria-disabled="true"] {
 .module-lesson-item--complete:hover {
   opacity: 1;
 }
+
+/* ============================================
+   MAKER STUDIO COLLECTION SYSTEM
+   Tabs, cards, detail view, recommended section
+   ============================================ */
+
+/* Recommended section */
+.maker-recommended {
+  background: linear-gradient(135deg, rgba(57, 230, 255, 0.08) 0%, rgba(57, 230, 255, 0.02) 100%);
+  border: 1px solid rgba(57, 230, 255, 0.2);
+}
+
+/* Tab navigation */
+.maker-tabs {
+  border: 1px solid var(--border-soft);
+}
+
+.maker-tab {
+  color: var(--text-muted);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.maker-tab:hover {
+  color: var(--text-secondary);
+  background: rgba(246, 248, 255, 0.05);
+}
+
+.maker-tab--active {
+  color: var(--text-primary);
+  background: var(--glass-strong-bg);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.maker-tab:focus-visible {
+  outline: 2px solid var(--focus-ring-color);
+  outline-offset: 2px;
+}
+
+/* Collection card */
+.collection-card {
+  cursor: pointer;
+}
+
+.collection-card-inner {
+  background: var(--glass-soft-bg);
+  border: 1px solid var(--border-soft);
+}
+
+.collection-card:hover .collection-card-inner {
+  background: var(--glass-hover-bg);
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.collection-card:focus-visible .collection-card-inner {
+  outline: 3px solid var(--focus-ring-color);
+  outline-offset: 2px;
+}
+
+/* Collection badges */
+.collection-badge {
+  font-weight: 500;
+}
+
+.collection-badge--start {
+  background: rgba(255, 211, 106, 0.15);
+  color: var(--warm-yellow);
+  border: 1px solid rgba(255, 211, 106, 0.3);
+}
+
+.collection-badge--complete {
+  background: rgba(125, 255, 197, 0.15);
+  color: var(--mint);
+  border: 1px solid rgba(125, 255, 197, 0.3);
+}
+
+/* Collection detail view */
+.collection-detail-back {
+  font-size: 0.875rem;
+}
+
+.collection-detail-back:focus-visible {
+  outline: 2px solid var(--focus-ring-color);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.collection-detail-header {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.collection-detail-cta {
+  color: white;
+  font-weight: 600;
+  border: none;
+}
+
+.collection-detail-cta:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+}
+
+.collection-detail-cta:focus-visible {
+  outline: 3px solid var(--focus-ring-color);
+  outline-offset: 2px;
+}
+
+/* Playground items in collection detail */
+.collection-playground-item {
+  background: rgba(246, 248, 255, 0.03);
+  border: 1px solid transparent;
+  text-decoration: none;
+}
+
+.collection-playground-item:hover {
+  background: rgba(246, 248, 255, 0.08);
+  border-color: var(--border-soft);
+}
+
+.collection-playground-item:focus-visible {
+  outline: 3px solid var(--focus-ring-color);
+  outline-offset: 2px;
+}
+
+.collection-playground-item--next {
+  background: rgba(246, 248, 255, 0.06);
+  border: 1px solid;
+}
+
+.collection-playground-item--complete {
+  opacity: 0.8;
+}
+
+.collection-playground-item--complete:hover {
+  opacity: 1;
+}
