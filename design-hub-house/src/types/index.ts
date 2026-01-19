@@ -49,6 +49,15 @@ export interface ChatSource {
   url?: string; // External URL for engine-room sources
 }
 
+// Chat thread for multi-conversation support
+export interface ChatThread {
+  id: string;
+  title: string;
+  createdAt: number; // Unix timestamp for easy serialization
+  messages: ChatMessage[];
+  draftInput?: string; // Unsent text preserved per thread
+}
+
 // Content chunk for RAG
 export interface ContentChunk {
   id: string;
