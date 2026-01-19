@@ -30,7 +30,8 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
         <a
           key={match.index}
           href={match[2]}
-          className="text-primary underline underline-offset-2 hover:text-primary/80"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           {match[1]}
         </a>
@@ -114,8 +115,10 @@ export function ChatMessage({ role, content }: ChatMessageProps) {
   return (
     <div
       className={cn(
-        'flex gap-3 p-4 rounded-2xl',
-        isUser ? 'bg-primary text-primary-foreground ml-12' : 'bg-muted mr-12'
+        'chat-bubble flex gap-3 p-4 rounded-2xl',
+        isUser
+          ? 'chat-bubble--user bg-primary text-primary-foreground ml-12'
+          : 'chat-bubble--assistant bg-muted mr-12'
       )}
     >
       <div

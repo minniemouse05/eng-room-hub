@@ -1059,6 +1059,80 @@ a[aria-disabled="true"] {
 }
 
 /* ============================================
+   CHAT BUBBLE LINK STYLES
+   Scoped link styling for AI chatbot messages
+   ============================================ */
+
+/* Assistant bubble (dark muted background) - cyan links */
+.chat-bubble--assistant {
+  --chat-link: var(--cyan);                           /* #39E6FF - bright cyan */
+  --chat-link-hover: var(--mint);                     /* #7DFFC5 - mint green */
+  --chat-link-visited: var(--lavender);               /* #B9A7FF - soft purple */
+  --chat-link-active: var(--warm-yellow);             /* #FFD36A - click feedback */
+  --chat-link-focus: var(--warm-yellow);              /* #FFD36A - focus ring */
+  --chat-link-underline: rgba(57, 230, 255, 0.5);     /* cyan at 50% */
+  --chat-link-underline-hover: var(--mint);
+}
+
+/* User bubble (primary indigo background) - off-white links */
+.chat-bubble--user {
+  --chat-link: var(--off-white);                      /* #F6F8FF - high contrast white */
+  --chat-link-hover: var(--warm-yellow);              /* #FFD36A - bright highlight */
+  --chat-link-visited: rgba(246, 248, 255, 0.8);      /* slightly muted white */
+  --chat-link-active: var(--coral);                   /* #FF5C6C - distinct feedback */
+  --chat-link-focus: var(--warm-yellow);              /* #FFD36A - focus ring */
+  --chat-link-underline: rgba(246, 248, 255, 0.6);    /* white at 60% */
+  --chat-link-underline-hover: var(--warm-yellow);
+}
+
+/* Base link styles inside chat bubbles */
+.chat-bubble a {
+  color: var(--chat-link);
+  text-decoration: underline;
+  text-decoration-color: var(--chat-link-underline);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  font-weight: 500;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease, text-decoration-thickness 0.15s ease;
+}
+
+.chat-bubble a:hover {
+  color: var(--chat-link-hover);
+  text-decoration-color: var(--chat-link-underline-hover);
+  text-decoration-thickness: 2px;
+}
+
+.chat-bubble a:active {
+  color: var(--chat-link-active);
+}
+
+.chat-bubble a:visited {
+  color: var(--chat-link-visited);
+}
+
+/* Visited + hover should still show hover state */
+.chat-bubble a:visited:hover {
+  color: var(--chat-link-hover);
+}
+
+/* Focus-visible with high contrast ring */
+.chat-bubble a:focus-visible {
+  outline: 3px solid var(--chat-link-focus);
+  outline-offset: 3px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 6px rgba(255, 211, 106, 0.35);
+  text-decoration: none;
+}
+
+/* Ensure links inside code blocks don't get link styling */
+.chat-bubble code a,
+.chat-bubble pre a {
+  color: inherit;
+  text-decoration: none;
+  font-weight: inherit;
+}
+
+/* ============================================
    DISABLED STATES
    ============================================ */
 
