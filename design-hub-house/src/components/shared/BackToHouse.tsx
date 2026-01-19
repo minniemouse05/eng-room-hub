@@ -10,7 +10,7 @@ export function BackToHouse() {
       <Button
         variant="ghost"
         size="sm"
-        className="gap-2 text-muted-foreground hover:text-foreground"
+        className="gap-2 text-text-secondary hover:text-white hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-cyan focus-visible:ring-offset-2 focus-visible:ring-offset-transparent"
       >
         <ArrowLeft className="h-4 w-4" />
         Back to House

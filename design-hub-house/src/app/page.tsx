@@ -22,10 +22,10 @@ export default function HomePage() {
       <div className="container mx-auto px-4 py-8 lg:py-16 relative z-10">
         {/* Header */}
         <header className="text-center mb-12 lg:mb-16">
-          <h1 className="text-4xl lg:text-5xl font-bold tracking-tight mb-4 text-off-white text-glow-strong">
+          <h1 className="text-4xl lg:text-5xl font-bold tracking-tight mb-4 text-white text-glow-strong">
             Design Hub House
           </h1>
-          <p className="text-lg lg:text-xl text-off-white/70 max-w-2xl mx-auto">
+          <p className="text-lg lg:text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
             An interactive learning hub for design systems, tools, and code.
             Explore the house to discover demos, playgrounds, and AI-powered guidance.
           </p>
@@ -37,7 +37,7 @@ export default function HomePage() {
           <div className="relative">
             <div className="glass-panel p-8">
               <HouseMap onRoomHover={setHoveredRoom} hoveredRoom={hoveredRoom} />
-              <p className="text-center text-sm text-off-white/50 mt-6">
+              <p className="text-center text-sm text-text-muted mt-6">
                 Click on a room to navigate
               </p>
             </div>
@@ -60,7 +60,7 @@ export default function HomePage() {
         </div>
 
         {/* Footer hint */}
-        <footer className="text-center mt-16 text-sm text-off-white/50">
+        <footer className="text-center mt-16 text-sm text-text-muted">
           <p>
           ❤️ The Engine Room
           </p>

@@ -35,6 +35,10 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
     return hoveredRoom?.id === roomId || focusedRoom === roomId;
   };
 
+  const isFocused = (roomId: RoomId) => {
+    return focusedRoom === roomId;
+  };
+
   return (
     <svg
       viewBox="0 0 400 350"
@@ -86,38 +90,46 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
           </feMerge>
         </filter>
 
-        {/* Subtle grain texture */}
-        <filter id="grain">
-          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise" />
-          <feComposite in="SourceGraphic" in2="noise" operator="in" />
+        {/* Strong focus glow filter */}
+        <filter id="focusGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur stdDeviation="3" result="blur" />
+          <feFlood floodColor="#39E6FF" floodOpacity="0.6" result="color" />
+          <feComposite in="color" in2="blur" operator="in" result="glow" />
+          <feMerge>
+            <feMergeNode in="glow" />
+            <feMergeNode in="glow" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
+
+        {/* Text shadow filter for better readability */}
+        <filter id="textShadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="1" stdDeviation="2" floodColor="#000000" floodOpacity="0.5" />
         </filter>
       </defs>
 
       {/* Doodle decorations - sparkles and swirls */}
       <g className="animate-twinkle" style={{ animationDelay: '0s' }}>
-        {/* Sparkle top-left */}
-        <line x1="45" y1="60" x2="45" y2="80" stroke="#F6F8FF" strokeWidth="1.5" strokeLinecap="round" opacity="0.8" />
-        <line x1="35" y1="70" x2="55" y2="70" stroke="#F6F8FF" strokeWidth="1.5" strokeLinecap="round" opacity="0.8" />
+        <line x1="45" y1="60" x2="45" y2="80" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" opacity="0.8" />
+        <line x1="35" y1="70" x2="55" y2="70" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" opacity="0.8" />
       </g>
 
       <g className="animate-twinkle" style={{ animationDelay: '1s' }}>
-        {/* Sparkle top-right */}
-        <line x1="355" y1="75" x2="355" y2="95" stroke="#F6F8FF" strokeWidth="1.5" strokeLinecap="round" opacity="0.7" />
-        <line x1="345" y1="85" x2="365" y2="85" stroke="#F6F8FF" strokeWidth="1.5" strokeLinecap="round" opacity="0.7" />
+        <line x1="355" y1="75" x2="355" y2="95" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" opacity="0.7" />
+        <line x1="345" y1="85" x2="365" y2="85" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" opacity="0.7" />
       </g>
 
       <g className="animate-twinkle" style={{ animationDelay: '0.5s' }}>
-        {/* Small star near chimney */}
-        <circle cx="280" cy="45" r="2" fill="#F6F8FF" opacity="0.9" />
-        <line x1="280" y1="38" x2="280" y2="52" stroke="#F6F8FF" strokeWidth="1" strokeLinecap="round" opacity="0.6" />
-        <line x1="273" y1="45" x2="287" y2="45" stroke="#F6F8FF" strokeWidth="1" strokeLinecap="round" opacity="0.6" />
+        <circle cx="280" cy="45" r="2" fill="#FFFFFF" opacity="0.9" />
+        <line x1="280" y1="38" x2="280" y2="52" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" opacity="0.6" />
+        <line x1="273" y1="45" x2="287" y2="45" stroke="#FFFFFF" strokeWidth="1" strokeLinecap="round" opacity="0.6" />
       </g>
 
       {/* Decorative swirl near roof */}
       <motion.path
         d="M 60 95 Q 70 80 85 90 Q 100 100 95 115"
         fill="none"
-        stroke="#F6F8FF"
+        stroke="#FFFFFF"
         strokeWidth="1.5"
         strokeLinecap="round"
         opacity="0.5"
@@ -126,14 +138,14 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
         transition={{ duration: 2, delay: 0.5 }}
       />
 
-      {/* Decorative geometric outline - tilted rectangle */}
+      {/* Decorative geometric outline */}
       <motion.rect
         x="330"
         y="140"
         width="50"
         height="40"
         fill="none"
-        stroke="#F6F8FF"
+        stroke="#FFFFFF"
         strokeWidth="1.5"
         opacity="0.4"
         transform="rotate(15 355 160)"
@@ -143,11 +155,11 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
         transition={{ duration: 1, delay: 0.8 }}
       />
 
-      {/* Speed lines / motion dashes near house */}
+      {/* Speed lines / motion dashes */}
       <g opacity="0.4">
-        <line x1="15" y1="180" x2="30" y2="180" stroke="#F6F8FF" strokeWidth="1.5" strokeLinecap="round" />
-        <line x1="10" y1="195" x2="28" y2="195" stroke="#F6F8FF" strokeWidth="1.5" strokeLinecap="round" />
-        <line x1="18" y1="210" x2="32" y2="210" stroke="#F6F8FF" strokeWidth="1.5" strokeLinecap="round" />
+        <line x1="15" y1="180" x2="30" y2="180" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
+        <line x1="10" y1="195" x2="28" y2="195" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
+        <line x1="18" y1="210" x2="32" y2="210" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
       </g>
 
       {/* House outline - Roof with cool gradient */}
@@ -163,7 +175,7 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
       <motion.path
         d="M200 15 L385 118"
         fill="none"
-        stroke="#F6F8FF"
+        stroke="#FFFFFF"
         strokeWidth="1.5"
         strokeLinecap="round"
         strokeDasharray="4 6"
@@ -180,9 +192,9 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
         width="320"
         height="210"
         fill="url(#warmGradient)"
-        stroke="#F6F8FF"
+        stroke="#FFFFFF"
         strokeWidth="1.5"
-        strokeOpacity="0.3"
+        strokeOpacity="0.4"
         rx="8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -200,17 +212,17 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
         tabIndex={0}
         role="button"
         aria-label="Enter Entryway - AI Chatbot room"
-        filter={isRoomActive('entryway') ? 'url(#glow)' : undefined}
+        filter={isFocused('entryway') ? 'url(#focusGlow)' : isRoomActive('entryway') ? 'url(#glow)' : undefined}
       >
         <motion.rect
           x="150"
           y="200"
           width="100"
           height="130"
-          fill={isRoomActive('entryway') ? 'url(#entrywayGradient)' : 'rgba(106, 44, 255, 0.3)'}
-          stroke="#F6F8FF"
-          strokeWidth={isRoomActive('entryway') ? 2 : 1}
-          strokeOpacity={isRoomActive('entryway') ? 1 : 0.5}
+          fill={isRoomActive('entryway') ? 'url(#entrywayGradient)' : 'rgba(106, 44, 255, 0.4)'}
+          stroke={isFocused('entryway') ? '#39E6FF' : '#FFFFFF'}
+          strokeWidth={isFocused('entryway') ? 3 : isRoomActive('entryway') ? 2 : 1.5}
+          strokeOpacity={isRoomActive('entryway') ? 1 : 0.6}
           rx="6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -221,18 +233,18 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
         <motion.path
           d="M160 200 Q200 170 240 200"
           fill="none"
-          stroke="#F6F8FF"
+          stroke="#FFFFFF"
           strokeWidth="1.5"
           strokeLinecap="round"
-          opacity={isRoomActive('entryway') ? 1 : 0.5}
+          opacity={isRoomActive('entryway') ? 1 : 0.6}
         />
         {/* Door handle */}
         <circle
           cx="235"
           cy="270"
           r="5"
-          fill="#F6F8FF"
-          opacity={isRoomActive('entryway') ? 1 : 0.7}
+          fill="#FFFFFF"
+          opacity={isRoomActive('entryway') ? 1 : 0.8}
         />
         {/* Door window */}
         <rect
@@ -240,31 +252,32 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
           y="220"
           width="50"
           height="40"
-          fill={isRoomActive('entryway') ? 'rgba(246, 248, 255, 0.3)' : 'rgba(246, 248, 255, 0.15)'}
-          stroke="#F6F8FF"
+          fill={isRoomActive('entryway') ? 'rgba(255, 255, 255, 0.25)' : 'rgba(255, 255, 255, 0.15)'}
+          stroke="#FFFFFF"
           strokeWidth="1"
-          strokeOpacity="0.5"
+          strokeOpacity="0.6"
           rx="4"
         />
-        {/* Icon placeholder */}
+        {/* Icon */}
         <text
           x="200"
           y="290"
           textAnchor="middle"
           fontSize="24"
-          fill="#F6F8FF"
-          style={{ filter: isRoomActive('entryway') ? 'drop-shadow(0 0 8px rgba(246, 248, 255, 0.8))' : 'none' }}
+          fill="#FFFFFF"
+          style={{ filter: isRoomActive('entryway') ? 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.9))' : 'none' }}
         >
           💬
         </text>
+        {/* Label with text shadow for readability */}
         <text
           x="200"
           y="315"
           textAnchor="middle"
-          fontSize="11"
-          fontWeight="600"
-          fill="#F6F8FF"
-          opacity={isRoomActive('entryway') ? 1 : 0.9}
+          fontSize="12"
+          fontWeight="700"
+          fill="#FFFFFF"
+          filter="url(#textShadow)"
         >
           Entryway
         </text>
@@ -281,17 +294,17 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
         tabIndex={0}
         role="button"
         aria-label="Enter Workshop - Tool Demos room"
-        filter={isRoomActive('workshop') ? 'url(#glow)' : undefined}
+        filter={isFocused('workshop') ? 'url(#focusGlow)' : isRoomActive('workshop') ? 'url(#glow)' : undefined}
       >
         <motion.rect
           x="55"
           y="140"
           width="80"
           height="80"
-          fill={isRoomActive('workshop') ? 'url(#workshopGradient)' : 'rgba(255, 154, 61, 0.3)'}
-          stroke="#F6F8FF"
-          strokeWidth={isRoomActive('workshop') ? 2 : 1}
-          strokeOpacity={isRoomActive('workshop') ? 1 : 0.5}
+          fill={isRoomActive('workshop') ? 'url(#workshopGradient)' : 'rgba(255, 154, 61, 0.4)'}
+          stroke={isFocused('workshop') ? '#39E6FF' : '#FFFFFF'}
+          strokeWidth={isFocused('workshop') ? 3 : isRoomActive('workshop') ? 2 : 1.5}
+          strokeOpacity={isRoomActive('workshop') ? 1 : 0.6}
           rx="6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -299,27 +312,28 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
           transition={{ duration: 0.3, delay: 0.1 }}
         />
         {/* Window panes */}
-        <line x1="95" y1="140" x2="95" y2="220" stroke="#F6F8FF" strokeWidth="1" opacity="0.5" />
-        <line x1="55" y1="180" x2="135" y2="180" stroke="#F6F8FF" strokeWidth="1" opacity="0.5" />
+        <line x1="95" y1="140" x2="95" y2="220" stroke="#FFFFFF" strokeWidth="1" opacity="0.5" />
+        <line x1="55" y1="180" x2="135" y2="180" stroke="#FFFFFF" strokeWidth="1" opacity="0.5" />
         {/* Icon */}
         <text
           x="95"
           y="170"
           textAnchor="middle"
           fontSize="24"
-          fill="#F6F8FF"
-          style={{ filter: isRoomActive('workshop') ? 'drop-shadow(0 0 8px rgba(246, 248, 255, 0.8))' : 'none' }}
+          fill="#FFFFFF"
+          style={{ filter: isRoomActive('workshop') ? 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.9))' : 'none' }}
         >
           🔧
         </text>
+        {/* Label with text shadow */}
         <text
           x="95"
           y="205"
           textAnchor="middle"
-          fontSize="10"
-          fontWeight="600"
-          fill="#F6F8FF"
-          opacity={isRoomActive('workshop') ? 1 : 0.9}
+          fontSize="11"
+          fontWeight="700"
+          fill="#FFFFFF"
+          filter="url(#textShadow)"
         >
           Workshop
         </text>
@@ -336,17 +350,17 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
         tabIndex={0}
         role="button"
         aria-label="Enter Maker Studio - Coding Playgrounds room"
-        filter={isRoomActive('maker') ? 'url(#glow)' : undefined}
+        filter={isFocused('maker') ? 'url(#focusGlow)' : isRoomActive('maker') ? 'url(#glow)' : undefined}
       >
         <motion.rect
           x="265"
           y="140"
           width="80"
           height="80"
-          fill={isRoomActive('maker') ? 'url(#makerGradient)' : 'rgba(57, 230, 255, 0.3)'}
-          stroke="#F6F8FF"
-          strokeWidth={isRoomActive('maker') ? 2 : 1}
-          strokeOpacity={isRoomActive('maker') ? 1 : 0.5}
+          fill={isRoomActive('maker') ? 'url(#makerGradient)' : 'rgba(57, 230, 255, 0.4)'}
+          stroke={isFocused('maker') ? '#39E6FF' : '#FFFFFF'}
+          strokeWidth={isFocused('maker') ? 3 : isRoomActive('maker') ? 2 : 1.5}
+          strokeOpacity={isRoomActive('maker') ? 1 : 0.6}
           rx="6"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -354,27 +368,28 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
           transition={{ duration: 0.3, delay: 0.2 }}
         />
         {/* Window panes */}
-        <line x1="305" y1="140" x2="305" y2="220" stroke="#F6F8FF" strokeWidth="1" opacity="0.5" />
-        <line x1="265" y1="180" x2="345" y2="180" stroke="#F6F8FF" strokeWidth="1" opacity="0.5" />
+        <line x1="305" y1="140" x2="305" y2="220" stroke="#FFFFFF" strokeWidth="1" opacity="0.5" />
+        <line x1="265" y1="180" x2="345" y2="180" stroke="#FFFFFF" strokeWidth="1" opacity="0.5" />
         {/* Icon */}
         <text
           x="305"
           y="170"
           textAnchor="middle"
           fontSize="24"
-          fill="#F6F8FF"
-          style={{ filter: isRoomActive('maker') ? 'drop-shadow(0 0 8px rgba(246, 248, 255, 0.8))' : 'none' }}
+          fill="#FFFFFF"
+          style={{ filter: isRoomActive('maker') ? 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.9))' : 'none' }}
         >
           💻
         </text>
+        {/* Label with text shadow */}
         <text
           x="305"
           y="205"
           textAnchor="middle"
-          fontSize="9"
-          fontWeight="600"
-          fill="#F6F8FF"
-          opacity={isRoomActive('maker') ? 1 : 0.9}
+          fontSize="10"
+          fontWeight="700"
+          fill="#FFFFFF"
+          filter="url(#textShadow)"
         >
           Maker Studio
         </text>
@@ -387,35 +402,35 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
         width="30"
         height="60"
         fill="url(#coolGradient)"
-        stroke="#F6F8FF"
+        stroke="#FFFFFF"
         strokeWidth="1"
-        strokeOpacity="0.4"
+        strokeOpacity="0.5"
         rx="4"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.3 }}
       />
 
-      {/* Welcome text on roof */}
+      {/* Welcome text on roof with shadow for readability */}
       <text
         x="200"
         y="90"
         textAnchor="middle"
         fontSize="14"
         fontWeight="700"
-        fill="#F6F8FF"
-        style={{ textShadow: '0 0 10px rgba(246, 248, 255, 0.5)' }}
+        fill="#FFFFFF"
+        filter="url(#textShadow)"
       >
         Design Hub House
       </text>
 
-      {/* Additional doodle decoration - circle swirl bottom right */}
+      {/* Additional doodle decoration - circle swirl */}
       <motion.circle
         cx="375"
         cy="290"
         r="15"
         fill="none"
-        stroke="#F6F8FF"
+        stroke="#FFFFFF"
         strokeWidth="1.5"
         opacity="0.4"
         initial={{ pathLength: 0 }}
@@ -427,7 +442,7 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
         cy="290"
         r="8"
         fill="none"
-        stroke="#F6F8FF"
+        stroke="#FFFFFF"
         strokeWidth="1"
         opacity="0.3"
         initial={{ pathLength: 0 }}
