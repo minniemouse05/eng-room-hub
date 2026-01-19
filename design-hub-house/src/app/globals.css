@@ -71,6 +71,20 @@
   --focus-glow: 0 0 0 6px rgba(57, 230, 255, 0.35);
 
   /* ==========================================
+     LINK COLOR TOKENS
+     Designed for dark gradient backgrounds
+     ========================================== */
+  --link-default: var(--cyan);
+  --link-hover: var(--mint);
+  --link-active: var(--warm-yellow);
+  --link-visited: var(--lavender);
+  --link-muted: rgba(57, 230, 255, 0.78);
+  --link-on-glass: var(--cyan);
+  --link-focus-ring: var(--warm-yellow);
+  --link-underline: currentColor;
+  --link-underline-hover: currentColor;
+
+  /* ==========================================
      SHADOWS & GLOWS
      ========================================== */
   --shadow-glow-cobalt: 0 4px 30px rgba(47, 91, 255, 0.35);
@@ -159,6 +173,13 @@
   --color-text-secondary: var(--text-secondary);
   --color-text-muted: var(--text-muted);
   --color-text-faint: var(--text-faint);
+
+  /* Link color roles */
+  --color-link: var(--link-default);
+  --color-link-hover: var(--link-hover);
+  --color-link-active: var(--link-active);
+  --color-link-visited: var(--link-visited);
+  --color-link-muted: var(--link-muted);
 
   /* Core palette colors */
   --color-cobalt: var(--cobalt);
@@ -721,24 +742,213 @@ select:disabled {
 }
 
 /* ============================================
-   LINKS
+   LINKS - Complete State System
+   Designed for dark gradient backgrounds
    ============================================ */
 
+/* Default anchor styles (unstyled links) */
 a:not([class]) {
-  color: var(--cyan);
+  color: var(--link-default);
   text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color 0.2s ease;
+  text-decoration-color: rgba(57, 230, 255, 0.5);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease, text-decoration-thickness 0.2s ease;
 }
 
 a:not([class]):hover {
-  color: var(--lavender);
+  color: var(--link-hover);
+  text-decoration-color: var(--link-hover);
+  text-decoration-thickness: 2px;
+}
+
+a:not([class]):active {
+  color: var(--link-active);
+  text-decoration-color: var(--link-active);
+}
+
+a:not([class]):visited {
+  color: var(--link-visited);
+  text-decoration-color: rgba(185, 167, 255, 0.5);
+}
+
+a:not([class]):visited:hover {
+  color: var(--link-hover);
+  text-decoration-color: var(--link-hover);
 }
 
 a:not([class]):focus-visible {
-  outline: 2px solid var(--cyan);
-  outline-offset: 2px;
-  border-radius: 2px;
+  outline: 3px solid var(--link-focus-ring);
+  outline-offset: 3px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 6px rgba(255, 211, 106, 0.3);
+  text-decoration: none;
+}
+
+/* ============================================
+   LINK UTILITY CLASSES
+   For styled links in different contexts
+   ============================================ */
+
+/* Standard link - cyan with underline */
+.link {
+  color: var(--link-default);
+  text-decoration: underline;
+  text-decoration-color: rgba(57, 230, 255, 0.5);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.link:hover {
+  color: var(--link-hover);
+  text-decoration-color: var(--link-hover);
+  text-decoration-thickness: 2px;
+}
+
+.link:active {
+  color: var(--link-active);
+}
+
+.link:focus-visible {
+  outline: 3px solid var(--link-focus-ring);
+  outline-offset: 3px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 6px rgba(255, 211, 106, 0.3);
+}
+
+/* Muted link - for secondary/less prominent links */
+.link-muted {
+  color: var(--link-muted);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(57, 230, 255, 0.3);
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.link-muted:hover {
+  color: var(--link-default);
+  border-bottom-color: var(--link-default);
+}
+
+.link-muted:focus-visible {
+  outline: 3px solid var(--link-focus-ring);
+  outline-offset: 3px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 6px rgba(255, 211, 106, 0.3);
+}
+
+/* Subtle link - no underline until hover */
+.link-subtle {
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.link-subtle:hover {
+  color: var(--link-default);
+  text-decoration: underline;
+  text-decoration-color: var(--link-default);
+  text-underline-offset: 3px;
+}
+
+.link-subtle:focus-visible {
+  outline: 3px solid var(--link-focus-ring);
+  outline-offset: 3px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 6px rgba(255, 211, 106, 0.3);
+}
+
+/* Link on glass panels - slightly brighter for contrast */
+.link-on-glass {
+  color: var(--link-default);
+  text-decoration: underline;
+  text-decoration-color: rgba(57, 230, 255, 0.6);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  font-weight: 500;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.link-on-glass:hover {
+  color: var(--text-primary);
+  text-decoration-color: var(--text-primary);
+  text-decoration-thickness: 2px;
+}
+
+.link-on-glass:focus-visible {
+  outline: 3px solid var(--link-focus-ring);
+  outline-offset: 3px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 6px rgba(255, 211, 106, 0.3);
+}
+
+/* Nav link - for navigation items */
+.link-nav {
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 0.25rem 0;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.link-nav:hover {
+  color: var(--text-primary);
+  border-bottom-color: var(--link-default);
+}
+
+.link-nav:active {
+  color: var(--link-active);
+  border-bottom-color: var(--link-active);
+}
+
+.link-nav[aria-current="page"],
+.link-nav.active {
+  color: var(--text-primary);
+  border-bottom-color: var(--link-default);
+}
+
+.link-nav:focus-visible {
+  outline: 3px solid var(--link-focus-ring);
+  outline-offset: 3px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 6px rgba(255, 211, 106, 0.3);
+}
+
+/* Disabled link state */
+.link-disabled,
+a[aria-disabled="true"] {
+  color: var(--text-faint);
+  text-decoration: none;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Inline link within prose/body text */
+.prose a,
+.prose-content a {
+  color: var(--link-default);
+  text-decoration: underline;
+  text-decoration-color: rgba(57, 230, 255, 0.5);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+  font-weight: 500;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.prose a:hover,
+.prose-content a:hover {
+  color: var(--link-hover);
+  text-decoration-color: var(--link-hover);
+  text-decoration-thickness: 2px;
+}
+
+.prose a:focus-visible,
+.prose-content a:focus-visible {
+  outline: 3px solid var(--link-focus-ring);
+  outline-offset: 3px;
+  border-radius: 3px;
+  box-shadow: 0 0 0 6px rgba(255, 211, 106, 0.3);
+  text-decoration: none;
 }
 
 /* ============================================
