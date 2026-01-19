@@ -8,14 +8,24 @@ export default function HomePage() {
   const [hoveredRoom, setHoveredRoom] = useState<Room | null>(null);
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-background to-muted/30">
-      <div className="container mx-auto px-4 py-8 lg:py-16">
+    <main className="min-h-screen relative">
+      {/* Decorative blobs for depth - positioned behind content */}
+      <div
+        className="blob blob-warm w-64 h-64 -top-20 -right-20 opacity-40"
+        aria-hidden="true"
+      />
+      <div
+        className="blob blob-cool w-80 h-80 -bottom-32 -left-32 opacity-30"
+        aria-hidden="true"
+      />
+
+      <div className="container mx-auto px-4 py-8 lg:py-16 relative z-10">
         {/* Header */}
         <header className="text-center mb-12 lg:mb-16">
-          <h1 className="text-4xl lg:text-5xl font-bold tracking-tight mb-4">
+          <h1 className="text-4xl lg:text-5xl font-bold tracking-tight mb-4 text-off-white text-glow-strong">
             Design Hub House
           </h1>
-          <p className="text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg lg:text-xl text-off-white/70 max-w-2xl mx-auto">
             An interactive learning hub for design systems, tools, and code.
             Explore the house to discover demos, playgrounds, and AI-powered guidance.
           </p>
@@ -25,10 +35,9 @@ export default function HomePage() {
         <div className="hidden lg:grid lg:grid-cols-2 lg:gap-12 lg:items-center max-w-6xl mx-auto">
           {/* House Map */}
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-amber-500/10 to-emerald-500/10 rounded-3xl blur-3xl" />
-            <div className="relative bg-background/80 backdrop-blur-sm rounded-3xl border p-8 shadow-xl">
+            <div className="glass-panel p-8">
               <HouseMap onRoomHover={setHoveredRoom} hoveredRoom={hoveredRoom} />
-              <p className="text-center text-sm text-muted-foreground mt-6">
+              <p className="text-center text-sm text-off-white/50 mt-6">
                 Click on a room to navigate
               </p>
             </div>
@@ -43,8 +52,7 @@ export default function HomePage() {
         {/* Mobile Layout: Simplified House + Button List */}
         <div className="lg:hidden">
           <div className="relative max-w-sm mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/10 via-amber-500/10 to-emerald-500/10 rounded-3xl blur-3xl" />
-            <div className="relative bg-background/80 backdrop-blur-sm rounded-3xl border p-6 shadow-xl">
+            <div className="glass-panel p-6">
               <HouseMap onRoomHover={setHoveredRoom} hoveredRoom={hoveredRoom} />
             </div>
           </div>
@@ -52,7 +60,7 @@ export default function HomePage() {
         </div>
 
         {/* Footer hint */}
-        <footer className="text-center mt-16 text-sm text-muted-foreground">
+        <footer className="text-center mt-16 text-sm text-off-white/50">
           <p>
           ❤️ The Engine Room
           </p>

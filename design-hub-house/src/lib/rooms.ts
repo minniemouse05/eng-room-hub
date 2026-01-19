@@ -7,7 +7,7 @@ export const rooms: Room[] = [
     description: 'Meet your AI guide who knows everything about the Design Hub. Ask questions, get recommendations, and explore the house with personalized assistance.',
     icon: 'MessageCircle',
     route: '/entryway',
-    color: '#6366f1', // indigo
+    color: '#6A2CFF', // electric-violet
   },
   {
     id: 'workshop',
@@ -15,7 +15,7 @@ export const rooms: Room[] = [
     description: 'Discover hands-on tool demos and tutorials. Learn about design systems, components, and development patterns through guided examples.',
     icon: 'Wrench',
     route: '/workshop',
-    color: '#f59e0b', // amber
+    color: '#FF9A3D', // orange
   },
   {
     id: 'maker',
@@ -23,7 +23,7 @@ export const rooms: Room[] = [
     description: 'Get your hands dirty with interactive coding playgrounds. Write, edit, and run code in real-time to practice what you\'ve learned.',
     icon: 'Code2',
     route: '/maker',
-    color: '#10b981', // emerald
+    color: '#39E6FF', // cyan
   },
 ];
 

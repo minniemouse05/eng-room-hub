@@ -32,6 +32,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}
       >
+        {/* Atmospheric gradient background with animated glow pools */}
+        <div className="atmosphere-bg" aria-hidden="true">
+          <div className="glow-pool glow-pool-cyan" />
+        </div>
+
+        {/* Noise/grain texture overlay */}
+        <div className="noise-overlay" aria-hidden="true" />
+
         {children}
       </body>
     </html>
