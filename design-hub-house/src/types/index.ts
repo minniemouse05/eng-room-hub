@@ -90,3 +90,61 @@ export interface FilterState {
   sortBy: 'updatedAt' | 'timeMinutes' | 'title';
   sortOrder: 'asc' | 'desc';
 }
+
+// ============================================
+// Workshop Module System
+// Supports structured learning paths at scale
+// ============================================
+
+// Target audience for content
+export type Audience = 'learner' | 'builder' | 'leader';
+
+// A Module is an ordered collection of lessons around a topic
+export interface Module {
+  id: string;
+  title: string;
+  description: string;
+  icon: string; // Emoji or icon name
+  color: string; // Accent color (hex)
+  audience?: Audience[]; // Who this module is for (optional, empty = everyone)
+  difficultyRange: [DemoFrontmatter['difficulty'], DemoFrontmatter['difficulty']]; // [min, max]
+  estimatedMinutes: number; // Total time (can be calculated from lessons)
+  prerequisites?: string[]; // Module IDs that should be completed first
+  lessonSlugs: string[]; // Ordered list of lesson (demo) slugs
+  isStartHere?: boolean; // Recommended starting point
+  isFeatured?: boolean; // Show in featured section
+}
+
+// A Track is a curated sequence of modules for a specific goal
+export interface Track {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  color: string;
+  audience: Audience; // Primary audience for this track
+  moduleIds: string[]; // Ordered list of module IDs
+  goal: string; // What you'll achieve: "Understand AI basics", "Build AI apps", etc.
+}
+
+// A Collection is a non-linear grouping of lessons across modules
+// (e.g., "Ethics & Safety", "Quick Reads", "Case Studies")
+export interface Collection {
+  id: string;
+  title: string;
+  description: string;
+  icon: string;
+  lessonSlugs: string[]; // Can span multiple modules
+  tags?: string[]; // Auto-include lessons with these tags
+}
+
+// User's selected learning goal (for personalization)
+export type LearningGoal = 'learn-basics' | 'build-apps' | 'lead-strategy';
+
+// User preferences for lightweight personalization (stored in localStorage)
+export interface UserPreferences {
+  learningGoal?: LearningGoal;
+  startingLevel?: DemoFrontmatter['difficulty'];
+  completedLessons?: string[]; // Lesson slugs
+  completedModules?: string[]; // Module IDs
+}
