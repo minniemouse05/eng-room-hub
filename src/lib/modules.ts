@@ -105,12 +105,12 @@ export const modules: Module[] = [
     id: 'responsible-ai-cso',
     title: 'Responsible AI for Civil Society',
     description:
-      'Essential guidance for civil society organizations navigating AI adoption. Learn to evaluate AI solutions, understand environmental impacts, and apply community-centered approaches.',
+      'Cut through the AI hype. Practical frameworks for evaluating vendors, understanding environmental costs, and making decisions that align with your values—built for CSOs, not tech companies.',
     icon: '🌍',
     color: '#22C55E', // green
     audience: ['learner', 'leader'],
     difficultyRange: ['beginner', 'beginner'],
-    estimatedMinutes: 60,
+    estimatedMinutes: 50,
     prerequisites: ['ai-fundamentals'],
     lessonSlugs: [
       'chatbots-humanitarian-contexts',

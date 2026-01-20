@@ -2,6 +2,16 @@ import { compileMDX } from 'next-mdx-remote/rsc';
 import remarkGfm from 'remark-gfm';
 import rehypeSlug from 'rehype-slug';
 import rehypeHighlight from 'rehype-highlight';
+import {
+  Callout,
+  QuickNav,
+  DecisionTree,
+  ComparisonTable,
+  StepProcess,
+  ImpactScale,
+  KeyTakeaways,
+  TryThis,
+} from '@/components/mdx';
 
 // Custom MDX components with nice styling
 const components = {
@@ -80,6 +90,15 @@ const components = {
     // eslint-disable-next-line @next/next/no-img-element
     <img className="my-4 rounded-lg max-w-full" alt={props.alt || ''} {...props} />
   ),
+  // Custom MDX components for rich content
+  Callout,
+  QuickNav,
+  DecisionTree,
+  ComparisonTable,
+  StepProcess,
+  ImpactScale,
+  KeyTakeaways,
+  TryThis,
 };
 
 export async function renderMDX(source: string) {

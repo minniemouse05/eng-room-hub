@@ -1,214 +1,228 @@
 ---
-title: Environmental Impact of AI
-description: Understand the environmental costs of AI systems—from energy consumption to water usage—and learn how organizations can make more sustainable AI choices.
+description: The hidden environmental costs of AI—energy, water, carbon—and how your organization can make choices that align with your values.
+difficulty: beginner
+relatedPlaygrounds:
+  - ai-carbon-calculator
 tags:
   - ai
   - environment
   - sustainability
   - ethics
   - beginner
-difficulty: beginner
-timeMinutes: 12
-relatedPlaygrounds:
-  - ai-carbon-calculator
+timeMinutes: 10
+title: Environmental Impact of AI
 updatedAt: "2025-01-20"
 ---
 
-# Environmental Impact of AI
+# The Environmental Cost of That AI Query
 
-AI systems don't just consume data—they consume enormous amounts of energy and water. As organizations consider adopting AI, understanding these environmental costs is part of responsible decision-making. This lesson breaks down the environmental footprint of AI and what you can do about it.
+You ask ChatGPT a question. It answers in seconds. What you don't see: thousands of servers humming in a data center, consuming electricity and water to process your request.
 
----
+**If your organization works on climate, environment, or sustainability—this is a conversation you need to have about your own AI use.**
 
-## The Hidden Costs of AI
-
-When you send a message to an AI chatbot, it feels effortless. But behind that simple interaction:
-
-- **Thousands of servers** process your request
-- **Massive amounts of electricity** power those servers
-- **Cooling systems** prevent equipment from overheating
-- **Water** often cools those systems
-
-> Every AI query has a carbon footprint. Most users never see it.
+<QuickNav items={[
+{ label: "What AI actually consumes", time: "2 min" },
+{ label: "The numbers that matter", time: "2 min" },
+{ label: "Making better choices", time: "3 min" },
+{ label: "Questions for your team", time: "3 min" }
+]} />
 
 ---
 
-## Understanding AI's Energy Consumption
+## What AI Actually Consumes
 
-### Training vs. Inference
+Every AI interaction uses three resources most people never think about:
 
-AI systems use energy in two main phases:
+<Callout type="key" title="The hidden ingredients">
 
-| Phase | What Happens | Energy Impact |
-|-------|--------------|---------------|
-| **Training** | The AI learns from massive datasets | Enormous one-time cost |
-| **Inference** | The AI responds to user queries | Smaller per-query, but adds up |
+**Electricity** — Massive computing power runs the calculations
 
-**Training costs are staggering:**
-- Training a large language model can emit as much carbon as **five cars over their entire lifetimes**
-- A single training run can cost **millions of dollars** in compute alone
-- Training happens once, but the environmental debt is significant
+**Water** — Data centers need cooling; cooling often needs water
 
-**Inference costs accumulate:**
-- Each query uses less energy than training
-- But billions of queries per day add up quickly
-- As AI becomes more popular, inference energy grows rapidly
+**Carbon** — Unless powered by renewables, all that electricity means emissions
 
-### The Numbers
+</Callout>
 
-Recent research shows:
+### Training vs. Using
 
-- **AI data centers** may consume 3-4% of global electricity by 2030
-- **A single ChatGPT query** uses roughly 10x the energy of a Google search
-- **Cooling AI systems** can require millions of liters of water daily
+AI has two phases, with very different footprints:
 
----
+| | **Training** | **Using (Inference)** |
+|---|---|---|
+| **What happens** | AI learns from billions of examples | AI answers your question |
+| **When it happens** | Once (or periodically) | Every single query |
+| **Energy use** | Enormous one-time cost | Small per query, but adds up |
+| **Who pays** | The AI company | You (indirectly), the planet |
 
-## Water: The Overlooked Resource
+<Callout type="example" title="Scale matters">
+Training GPT-3 once emitted roughly as much carbon as **five cars driven for their entire lifetimes**.
 
-Data centers get hot. Cooling them often requires water.
-
-**How much water?**
-- Training GPT-3 consumed an estimated **700,000 liters of water**
-- A large data center can use **3-5 million liters per day**
-- In water-stressed regions, this creates real tensions with local communities
-
-**Why it matters:**
-- Many data centers are located in areas already facing water scarcity
-- Climate change is making water resources less predictable
-- Local communities may bear costs while benefits flow elsewhere
+But billions of queries per day? That inference energy is growing faster than training energy.
+</Callout>
 
 ---
 
-## Five Things Every Organization Should Know
+## The Numbers That Matter
 
-Based on environmental research, here are five key facts for organizations considering AI:
+Let's get concrete:
 
-### 1. Not All AI Is Equal
+<ImpactScale
+title="Energy use comparison (per query)"
+items={[
+{ label: "Google search", level: 1, description: "~0.0003 kWh" },
+{ label: "Simple AI query", level: 2, description: "~0.001-0.01 kWh" },
+{ label: "ChatGPT-style query", level: 3, description: "~0.01-0.05 kWh (10-50x a search)" },
+{ label: "Image generation", level: 4, description: "~0.1-0.3 kWh" },
+{ label: "Training a large model", level: 5, description: "~1,000,000+ kWh total" }
+]}
+lowLabel="Lower impact"
+highLabel="Higher impact"
+/>
 
-Different AI approaches have vastly different footprints:
+### The water you don't see
 
-| Approach | Energy Cost | When to Use |
-|----------|-------------|-------------|
-| **Rule-based systems** | Very low | Simple, predictable tasks |
-| **Traditional ML** | Low to moderate | Classification, prediction |
-| **Small language models** | Moderate | Specific text tasks |
-| **Large language models** | High | Complex reasoning, generation |
+Data centers get hot. Cooling them often uses water—a lot of it.
 
-> **Principle:** Use the simplest AI that solves your problem.
+- Training GPT-3 used an estimated **700,000 liters of water**
+- A large data center can use **3-5 million liters daily**
+- Many are located in regions already facing water stress
 
-### 2. Location Matters
-
-Where AI runs affects its carbon footprint:
-
-- Data centers powered by **renewable energy** have lower emissions
-- Running AI in regions with **clean grids** reduces impact
-- Some cloud providers let you choose **green regions**
-
-**Questions to ask your AI provider:**
-- What powers your data centers?
-- Do you offer carbon-neutral options?
-- Where will my data be processed?
-
-### 3. Efficiency Is Improving (But So Is Demand)
-
-The good news: AI is getting more efficient. Newer models often do more with less.
-
-The challenge: Demand is growing even faster. Efficiency gains are offset by:
-- More people using AI
-- More complex tasks being automated
-- Always-on AI assistants
-
-### 4. "Green AI" Is Emerging
-
-Researchers and companies are working on:
-
-- **Model compression:** Making models smaller without losing capability
-- **Efficient architectures:** Designs that use less compute
-- **Carbon-aware computing:** Running AI when and where energy is cleanest
-- **Renewable-powered data centers:** Shifting to clean energy
-
-### 5. You Have Choices
-
-Organizations aren't powerless. You can:
-
-- Choose providers with strong environmental commitments
-- Use AI selectively rather than for everything
-- Prefer smaller, task-specific models when appropriate
-- Include environmental impact in procurement decisions
+<Callout type="warning" title="Environmental justice angle">
+The communities near data centers bear the water and energy costs. The benefits of AI flow elsewhere. If your organization works on justice issues, this matters.
+</Callout>
 
 ---
 
-## Making Sustainable AI Decisions
+## Making Better Choices
 
-Here's a framework for thinking about AI and environment:
+You're not powerless. Here's how to reduce AI's environmental footprint:
 
-### Step 1: Do You Need AI?
+### 1. Ask: Do you actually need AI?
 
-Before any AI adoption, ask:
-- Is AI necessary, or are simpler solutions available?
-- What's the marginal benefit of AI over alternatives?
-- Is this a core need or a "nice to have"?
+<DecisionTree
+title="Do you need AI for this task?"
+tree={{
+question: "Could a simpler tool (spreadsheet, database, basic automation) do the job?",
+yes: "Use the simpler tool → Much lower environmental cost",
+no: {
+question: "Does AI provide significant value over the simpler option?",
+yes: "Consider AI → But right-size it (see below)",
+no: "Skip AI → The environmental cost isn't justified"
+}
+}}
+/>
 
-### Step 2: Right-Size Your AI
+### 2. Right-size your AI
 
-If AI is appropriate:
-- Use the smallest model that meets your needs
-- Consider task-specific models over general-purpose ones
-- Avoid over-engineering with more AI than necessary
+Not all AI is equal. Match the tool to the task:
 
-### Step 3: Choose Responsible Providers
+<ComparisonTable
+headers={["Low impact", "Medium impact", "High impact"]}
+rows={[
+{ label: "Type", values: ["Rule-based / Traditional ML", "Small language models", "Large language models (GPT-4, Claude)"] },
+{ label: "Good for", values: ["Classification, simple predictions", "Specific text tasks", "Complex reasoning, generation"] },
+{ label: "Energy cost", values: [{ text: "Very low", highlight: "good" }, "Moderate", { text: "High", highlight: "bad" }] },
+{ label: "Use when", values: ["Task is well-defined", "Need some flexibility", "Truly need advanced capabilities"] }
+]}
+/>
 
-When selecting AI services:
-- Ask about energy sources and carbon commitments
-- Look for transparency in environmental reporting
-- Consider providers with science-based targets
+<Callout type="tip">
+**The principle:** Use the simplest AI that solves your problem. Don't use GPT-4 for tasks a basic classifier could handle.
+</Callout>
 
-### Step 4: Monitor and Optimize
+### 3. Choose greener providers
 
-Once using AI:
-- Track your usage patterns
-- Eliminate unnecessary AI calls
-- Cache results where possible
-- Review periodically—do you still need this?
+Not all AI providers are equal on sustainability:
+
+**Questions to ask vendors:**
+
+- What powers your data centers? (Renewables? Fossil fuels?)
+- Do you offer carbon-neutral computing options?
+- Do you publish environmental impact reports?
+- Can I choose which region processes my data?
+
+<Callout type="tip" title="Quick win">
+Some cloud providers let you select "green regions" powered by renewable energy. The AI works the same; the carbon footprint shrinks.
+</Callout>
+
+### 4. Optimize your usage
+
+Once you're using AI:
+
+- **Batch requests** when possible instead of many small queries
+- **Cache results** for common questions
+- **Set usage limits** to prevent runaway consumption
+- **Review periodically** — Do you still need this AI integration?
 
 ---
 
-## The Bigger Picture
+## Questions for Your Team
 
-AI's environmental impact exists within larger contexts:
+If your organization is considering AI, discuss these:
 
-### Environmental Justice
+<StepProcess
+title="Environmental AI Checklist"
+steps={[
+{
+title: "Values alignment check",
+description: "If we work on climate or environment, how do we justify AI's carbon footprint? What's our threshold?",
+action: "Draft a 2-sentence position on AI and environment"
+},
+{
+title: "Necessity check",
+description: "For each AI use case, ask: Is the benefit worth the environmental cost? Could we achieve 80% of the benefit with a simpler tool?",
+action: "List your AI use cases and rate necessity 1-5"
+},
+{
+title: "Provider check",
+description: "What are our current AI providers' environmental practices? Do we know? Should we switch?",
+action: "Email vendors asking about their sustainability practices"
+},
+{
+title: "Transparency check",
+description: "Should we disclose our AI usage and its environmental impact to stakeholders?",
+action: "Decide: Will we report on AI environmental impact? How?"
+}
+]}
+/>
 
-- Data center impacts often fall on local communities
-- Water and energy competition affects vulnerable populations
-- Benefits of AI may not reach those bearing environmental costs
+---
 
-### Organizational Values
+## Common Pitfalls
 
-If your organization works on:
-- Climate change
-- Environmental justice
-- Sustainable development
+<Callout type="pitfall" title="Assuming 'efficiency' means 'green'">
+AI is getting more efficient per query. But usage is growing faster than efficiency. The total environmental impact is increasing, not decreasing.
+</Callout>
 
-...your AI choices should align with these values.
+<Callout type="pitfall" title="Ignoring the supply chain">
+Your organization's direct AI use is just the start. What about your partners? Your platforms? Your vendors? The AI is everywhere now.
+</Callout>
 
-### Transparency
-
-Consider being open about:
-- Your organization's AI usage
-- Steps you're taking to minimize impact
-- Trade-offs you've made and why
+<Callout type="pitfall" title="Waiting for perfect information">
+We don't have precise numbers for every AI system's footprint. Don't let that paralyze you. The direction is clear: more AI = more energy. Act on what we know.
+</Callout>
 
 ---
 
 ## Key Takeaways
 
-1. **AI has real environmental costs** - Energy, water, and carbon emissions
-2. **Not all AI is equal** - Different approaches have different footprints
-3. **Choices matter** - Providers, models, and usage patterns affect impact
-4. **Efficiency helps but isn't enough** - Demand often outpaces improvements
-5. **Align AI use with values** - Environmental organizations should practice what they preach
+<KeyTakeaways items={[
+"Every AI query has a carbon and water footprint—it's just invisible to users",
+"Training is expensive, but inference (daily use) is where the scale hits",
+"Use the simplest AI that solves your problem; don't over-engineer",
+"Ask providers about their energy sources and sustainability practices",
+"If you work on environment or climate, your AI choices should align with your mission"
+]} />
+
+---
+
+## Try This Next
+
+<TryThis
+title="AI Carbon Calculator"
+description="Compare the environmental impact of different AI choices. See how model size, usage patterns, and energy sources change the footprint."
+href="/maker/ai-carbon-calculator"
+/>
 
 ---
 
@@ -216,18 +230,13 @@ Consider being open about:
 
 This lesson draws on:
 
-- **Environmental Impact of AI** (Report) - Comprehensive breakdown of AI's environmental costs
-- **AI in Africa** - Regional perspectives on AI infrastructure and sustainability
+- **[Environmental Impact of AI](https://www.thegreenwebfoundation.org/publications/report-ai-environmental-impact/)** — Comprehensive breakdown of AI's environmental costs and what businesses should know
+- **[AI in Africa](https://landscapestudy.tiiny.site/)** — Regional perspectives on AI infrastructure and sustainability challenges
 
 ---
 
-## Apply What You've Learned
+## Keep Learning
 
-Ready to estimate and compare the environmental impact of different AI choices? Try the [AI Carbon Calculator](/maker/ai-carbon-calculator) to explore trade-offs.
+**Next up:** [An African AI Pluriverse](/workshop/african-ai-pluriverse) — What AI looks like when communities lead the design
 
----
-
-## Continue Your Learning
-
-- **Next:** [An African AI Pluriverse](/workshop/african-ai-pluriverse)
-- **Previous:** [Chatbots in Humanitarian Contexts](/workshop/chatbots-humanitarian-contexts)
+**Previous:** [Chatbots in Humanitarian Contexts](/workshop/chatbots-humanitarian-contexts)

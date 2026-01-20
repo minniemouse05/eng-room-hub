@@ -1,213 +1,228 @@
 ---
-title: Chatbots in Humanitarian Contexts
-description: Explore the tradeoffs, risks, and potential benefits of using chatbots in humanitarian work. Learn what to consider before deploying conversational AI in sensitive contexts.
+description: A practical guide for CSOs considering chatbots. Learn when they help, when they harm, and the five questions to ask before you build one.
+difficulty: beginner
+relatedPlaygrounds:
+  - chatbot-adoption-checklist
 tags:
   - ai
   - chatbots
   - humanitarian
   - ethics
   - beginner
-difficulty: beginner
-timeMinutes: 15
-relatedPlaygrounds:
-  - chatbot-adoption-checklist
+timeMinutes: 12
+title: Chatbots in Humanitarian Contexts
 updatedAt: "2025-01-20"
 ---
 
-# Chatbots in Humanitarian Contexts
+# Should Your Organization Use a Chatbot?
 
-Chatbots—automated conversational agents—are increasingly being explored by humanitarian organizations. But deploying AI in contexts where people are vulnerable requires careful consideration. This lesson explores when chatbots might help, when they might harm, and what questions to ask before adopting them.
+A refugee arrives at a border crossing at 2am. They need to know: *Where can I get medical help? Is my family's asylum claim still processing? What documents do I need?*
 
----
+A chatbot could answer instantly, in their language, any time of day. Or it could give wrong information that puts them in danger.
 
-## What Are Chatbots?
+**This lesson helps you figure out which outcome is more likely for your context.**
 
-A chatbot is software that can have text or voice conversations with humans. Modern chatbots range from simple rule-based systems (following scripts) to sophisticated AI powered by large language models (LLMs) that can understand and generate natural language.
-
-**Types of chatbots:**
-
-| Type | How It Works | Example Use |
-|------|--------------|-------------|
-| **Rule-based** | Follows pre-written scripts and decision trees | FAQ bots, menu navigation |
-| **AI-powered** | Uses machine learning to understand intent | Customer service, triage |
-| **LLM-based** | Uses large language models for natural conversation | Information assistance, counseling support |
+<QuickNav items={[
+{ label: "What chatbots actually do", time: "2 min" },
+{ label: "The real risks", time: "3 min" },
+{ label: "Five questions to ask first", time: "4 min" },
+{ label: "Decision guide", time: "3 min" }
+]} />
 
 ---
 
-## Why Humanitarian Organizations Consider Chatbots
+## What Chatbots Actually Do
 
-Organizations explore chatbots for several reasons:
+A chatbot is software that talks with people through text or voice. Think of it as a spectrum:
 
-### Potential Benefits
+<ComparisonTable
+headers={["Simple", "Smart", "Very Smart"]}
+rows={[
+{ label: "How it works", values: ["Follows a script", "Recognizes patterns", "Generates responses"] },
+{ label: "Example", values: ["Press 1 for hours...", "I think you're asking about...", "Let me explain that..."] },
+{ label: "Can handle surprises?", values: [{ text: "No", highlight: "bad" }, "Sometimes", { text: "Often", highlight: "good" }] },
+{ label: "Risk of wrong answers", values: [{ text: "Low", highlight: "good" }, "Medium", { text: "Higher", highlight: "bad" }] }
+]}
+/>
 
-- **Scale:** Reaching more people than human staff alone can serve
-- **Availability:** Providing 24/7 access to information
-- **Languages:** Supporting multiple languages simultaneously
-- **Consistency:** Delivering standardized information reliably
-- **Reduced stigma:** Some people feel more comfortable sharing sensitive information with a bot
+**Why CSOs consider chatbots:**
 
-### Real-World Applications
+- **Reach more people.** Your 3-person team can't answer 10,000 questions a day. A bot can.
+- **Be available 24/7.** Crises don't keep office hours.
+- **Speak multiple languages.** Without hiring 20 translators.
+- **Reduce stigma.** Some people share sensitive information more easily with a machine.
 
-Chatbots have been piloted for:
-- Providing health information in crisis zones
-- Answering questions about refugee services
-- Mental health support and crisis counseling
-- Distributing emergency alerts and safety information
-- Collecting feedback from beneficiaries
+<Callout type="key">
+Chatbots are tools for *scaling information delivery*. They're not tools for building relationships, making complex judgments, or replacing human expertise.
+</Callout>
 
 ---
 
-## The Risks and Tradeoffs
+## The Real Risks
 
-Before getting excited about chatbots, organizations must honestly assess the risks:
+Here's what can go wrong—and does go wrong—when chatbots meet vulnerable populations:
 
-### 1. Accuracy and Misinformation
+### Wrong information, delivered confidently
 
-> **Key concern:** Chatbots can give wrong information confidently.
+<Callout type="warning" title="This happens more than you'd think">
+A health chatbot tells someone their symptoms aren't serious. They delay seeking care. The chatbot was wrong.
 
-In humanitarian contexts, bad information can be dangerous. If a chatbot gives incorrect health advice, wrong directions to safety, or misleading legal information, real harm results.
+Unlike a human, chatbots don't say "I'm not sure" or "let me check." They just answer. Even when they shouldn't.
+</Callout>
 
-**Questions to ask:**
-- What happens when the chatbot doesn't know the answer?
-- How will we verify the information it provides?
-- Who is accountable when errors occur?
+**Ask yourself:** If our chatbot gives wrong information about [medical care / legal rights / safety procedures], what's the worst realistic outcome?
 
-### 2. Context and Cultural Sensitivity
+### Cultural context gets lost
 
-AI systems often struggle with:
-- Local dialects and informal language
-- Cultural nuances and context
-- Understanding when someone needs urgent human help
-- Recognizing signs of distress or danger
+Most AI is trained on English-language, Western data. It often:
 
-**Example:** A mental health chatbot trained on English data may miss distress signals expressed differently in other cultures.
+- Misunderstands local dialects and expressions
+- Misses cultural cues about distress or urgency
+- Applies inappropriate assumptions about gender, family, or social norms
 
-### 3. Data Privacy and Protection
+<Callout type="example" title="Real situation">
+A mental health chatbot trained in the US missed that a user saying "I want to sleep forever" was expressing suicidal thoughts—because that phrasing wasn't in its training data. The chatbot responded with sleep hygiene tips.
+</Callout>
 
-Using chatbots means collecting conversation data—often sensitive data from vulnerable people.
+### Data becomes a liability
 
-**Critical questions:**
-- Where is conversation data stored?
-- Who has access to it?
-- Could this data put people at risk if breached?
-- Do users understand what happens to their data?
-- Are there legal requirements (GDPR, local laws) to consider?
+Every conversation with your chatbot is data. Data that could:
 
-### 4. The Dehumanization Risk
+- Be subpoenaed by governments
+- Be leaked in a breach
+- Expose sensitive patterns (who's asking about asylum, when, from where)
+- Be used to train commercial AI systems (check your vendor's terms!)
 
-> "Am I talking to a real person who cares, or a machine that processes my words?"
+### The human connection disappears
 
-For people in crisis, the human connection may be part of the help itself. Replacing that with automation—even well-intentioned automation—changes the nature of the support.
+For someone in crisis, sometimes what helps most is *being heard by another person*. A chatbot can't provide that. And if people *think* they're talking to a human when they're not, trust erodes.
 
-### 5. Digital Divide
+### You exclude the people who need you most
 
 Chatbots assume:
-- Access to devices and internet
-- Digital literacy
-- Ability to type or speak to a device
+
+- A smartphone or computer
+- Reliable internet
+- Ability to read and type
 - Comfort with technology
 
-This can exclude the most marginalized—often the people humanitarian organizations most need to reach.
+The most marginalized people often have none of these.
 
 ---
 
-## Five Key Considerations Before Adoption
+## Five Questions to Ask First
 
-Based on research and field experience, here are five essential considerations:
+Before building or buying a chatbot, work through these honestly:
 
-### 1. Is a Chatbot the Right Tool?
-
-Ask honestly: Is this problem best solved by automation?
-
-Sometimes the answer is **no**. If the work requires:
-- Deep empathy and human connection
-- Complex judgment calls
-- High-stakes decisions
-- Building trust over time
-
-...a chatbot may not be appropriate.
-
-### 2. What Could Go Wrong?
-
-Conduct a thorough risk assessment:
-
-- **Worst case:** What's the worst outcome if the chatbot fails?
-- **Vulnerable users:** How might the most vulnerable users be affected?
-- **Failure modes:** How will users know when the bot can't help?
-- **Escalation:** Is there a clear path to human support?
-
-### 3. Do You Have the Capacity?
-
-Chatbots are not "set and forget." They require:
-
-- Technical expertise to build and maintain
-- Content expertise to ensure accuracy
-- Monitoring to catch problems
-- Human backup for escalation
-- Ongoing training and updates
-
-> **Reality check:** A poorly maintained chatbot is worse than no chatbot.
-
-### 4. Have You Involved Affected Communities?
-
-Before deploying technology that serves a community, involve them in the design:
-
-- What do they actually need?
-- How do they prefer to receive information?
-- What concerns do they have about AI?
-- Have you tested with representative users?
-
-### 5. What Are Your Ethical Red Lines?
-
-Define clear boundaries:
-
-- What will this chatbot never do? (Make medical diagnoses? Give legal advice?)
-- When must it always connect to a human?
-- What data will never be collected?
-- Under what circumstances would you shut it down?
+<StepProcess
+title="The Pre-Chatbot Checklist"
+steps={[
+{
+title: "Is a chatbot the right tool?",
+description: "Would a simple FAQ page, phone hotline, or trained community volunteers work better? Chatbots shine for high-volume, straightforward information needs. They fail for complex situations requiring judgment.",
+action: "Write down the specific problem. Is it really a chatbot problem?"
+},
+{
+title: "What's the worst that could happen?",
+description: "If the chatbot fails completely—gives wrong info, goes offline, gets hacked—what's the impact on the people you serve?",
+action: "Describe your worst-case scenario in one paragraph."
+},
+{
+title: "Do you have the capacity to maintain it?",
+description: "Chatbots need ongoing care: content updates, monitoring for errors, technical maintenance, human backup for escalations. Budget 20-40% of build cost annually for maintenance.",
+action: "Name who will own this. What happens when they leave?"
+},
+{
+title: "Have you asked the community?",
+description: "Do the people you're building this for actually want a chatbot? Have you tested with representative users, including those with low digital literacy?",
+action: "Schedule 5 conversations with potential users before deciding."
+},
+{
+title: "Where are your red lines?",
+description: "What will this chatbot NEVER do? Make medical diagnoses? Give legal advice? Collect location data? Define these upfront.",
+action: "Write your chatbot's ethical boundaries in 3-5 clear rules."
+}
+]}
+/>
 
 ---
 
-## Case Study: Lessons Learned
+## Decision Guide
 
-A humanitarian organization deployed a chatbot to provide health information during a disease outbreak. Initial results looked promising—thousands of interactions, positive feedback scores.
+Use this to quickly assess if a chatbot makes sense:
 
-But deeper analysis revealed:
-- The bot struggled with local dialect variations
-- Older users often couldn't complete interactions
-- Some users shared sensitive symptoms without understanding data wasn't private
-- The escalation to human support was rarely used—not because it wasn't needed, but because users didn't know it existed
+<DecisionTree
+title="Should you build a chatbot?"
+tree={{
+question: "Is the information you're providing straightforward and fact-based?",
+yes: {
+question: "Can you handle the risk of occasional wrong answers?",
+yes: {
+question: "Do you have capacity to maintain it long-term?",
+yes: "Proceed carefully → Start with a small pilot",
+no: "Pause → Build capacity first or choose simpler solution"
+},
+no: "Stop → Chatbot risk too high for your context"
+},
+no: "Stop → Chatbots aren't right for complex, judgment-based needs"
+}}
+/>
 
-**The fix:** The organization scaled back the chatbot's role, improved training, added prominent "talk to a human" options, and created clearer data privacy notices.
+---
+
+## Common Pitfalls
+
+<Callout type="pitfall" title="Building first, asking questions later">
+Many organizations build chatbots because they seem innovative, then discover the tool doesn't match the need. Always start with the problem, not the solution.
+</Callout>
+
+<Callout type="pitfall" title="Hiding the 'talk to a human' option">
+If users can't easily reach a real person, they'll either give up or trust the bot when they shouldn't. Make human escalation prominent and easy.
+</Callout>
+
+<Callout type="pitfall" title="Assuming the vendor handles ethics">
+Your chatbot vendor's terms of service probably let them use conversations to train their AI. They probably store data in jurisdictions you haven't considered. Read the fine print.
+</Callout>
+
+<Callout type="pitfall" title="Measuring the wrong things">
+"10,000 conversations!" sounds impressive. But: Did people get accurate information? Did they find human help when needed? Did anyone get hurt? Those metrics are harder to track—and more important.
+</Callout>
 
 ---
 
 ## Key Takeaways
 
-1. **Chatbots are not neutral tools** - They embed assumptions and carry risks
-2. **Humanitarian contexts require extra care** - Vulnerable populations deserve protection
-3. **"Can we?" is different from "should we?"** - Capability doesn't equal appropriateness
-4. **Human backup is essential** - Always provide paths to human support
-5. **Start small and learn** - Pilot carefully before scaling
+<KeyTakeaways items={[
+"Chatbots scale information delivery, not relationships or judgment",
+"The risks are real: wrong information, cultural blindness, data exposure, exclusion",
+"Ask five questions before building: right tool? worst case? capacity? community input? red lines?",
+"Always provide an easy path to human support",
+"Start small, measure what matters, and be willing to shut it down"
+]} />
+
+---
+
+## Try This Next
+
+<TryThis
+title="Chatbot Adoption Checklist"
+description="Work through 15 questions across 5 categories to assess whether a chatbot is right for your context—and identify gaps to address before you build."
+href="/maker/chatbot-adoption-checklist"
+/>
 
 ---
 
 ## Resources
 
-This lesson draws on research and guidance from:
+This lesson draws on:
 
-- **Chatbots in Humanitarian Contexts** (The Engine Room) - Comprehensive analysis of tradeoffs and risks
-- **Considerations before designing & adopting chatbots** (The Engine Room) - Practical pre-adoption checklist
-
----
-
-## Apply What You've Learned
-
-Ready to assess whether a chatbot is right for your context? Use the [Chatbot Adoption Checklist](/maker/chatbot-adoption-checklist) to work through the key considerations.
+- **[Chatbots in Humanitarian Contexts](https://www.theengineroom.org/library/new-research-chatbots-in-humanitarian-contexts/)** — Analysis of tradeoffs and risks in deploying chatbots for vulnerable populations
+- **[Considerations before designing & adopting chatbots](https://www.theengineroom.org/library/five-considerations-for-humanitarians-before-designing-adopting-chatbots/)** — Practical pre-adoption framework
 
 ---
 
-## Continue Your Learning
+## Keep Learning
 
-- **Next:** [Environmental Impact of AI](/workshop/ai-environmental-impact)
-- **Related:** [Ethical Considerations for LLMs](/workshop/llm-ethics)
+**Next up:** [Environmental Impact of AI](/workshop/ai-environmental-impact) — The hidden costs of AI that most organizations don't consider
+
+**Related:** [Ethical Considerations for LLMs](/workshop/llm-ethics)

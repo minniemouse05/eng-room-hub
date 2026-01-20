@@ -1,304 +1,313 @@
 ---
-title: Evaluating AI Solutions for Your Organization
-description: Learn practical frameworks for assessing AI tools, vendors, and your organization's readiness. Make informed decisions about AI adoption.
+description: Cut through the hype. A practical framework for assessing AI vendors, checking your organization's readiness, and making decisions you won't regret.
+difficulty: beginner
+relatedPlaygrounds:
+  - ai-vendor-assessment
 tags:
   - ai
   - evaluation
   - governance
   - strategy
   - beginner
-difficulty: beginner
-timeMinutes: 18
-relatedPlaygrounds:
-  - ai-vendor-assessment
+timeMinutes: 15
+title: Evaluating AI Solutions
 updatedAt: "2025-01-20"
 ---
 
-# Evaluating AI Solutions for Your Organization
+# How to Evaluate AI Without Getting Burned
 
-AI vendors promise transformation. Marketing materials glow with possibilities. But how do you separate genuine value from hype? This lesson provides practical frameworks for evaluating AI solutions—from assessing vendors to checking your own organizational readiness.
+Every AI vendor promises transformation. Glossy decks show impressive demos. But six months later, many organizations discover the AI doesn't work as advertised, costs more than expected, or creates problems nobody anticipated.
+
+**This lesson gives you a practical framework to avoid that outcome.**
+
+<QuickNav items={[
+{ label: "First question: Do you need AI?", time: "2 min" },
+{ label: "Evaluating vendors", time: "5 min" },
+{ label: "Checking your readiness", time: "4 min" },
+{ label: "The evaluation process", time: "4 min" }
+]} />
 
 ---
 
-## Before You Evaluate: Is AI the Right Tool?
+## First Question: Do You Actually Need AI?
 
-Before diving into vendor comparisons, pause and ask:
+Before comparing vendors, ask the harder question:
 
-### The Fundamental Question
+<DecisionTree
+title="Is AI the right solution?"
+tree={{
+question: "Can you clearly describe the problem you're solving?",
+yes: {
+question: "Would a simpler tool (spreadsheet, database, basic automation) work?",
+yes: "Start with the simpler tool → You can always add AI later",
+no: {
+question: "Do you have the data AI needs to learn from?",
+yes: "AI might be appropriate → Continue to evaluation",
+no: "Pause → Build your data foundation first"
+}
+},
+no: "Stop → Define the problem before choosing solutions"
+}}
+/>
 
-> "Is AI the best solution to this problem, or are we reaching for AI because it's trendy?"
+<Callout type="key" title="The honest test">
+If you can't explain what success looks like without using the word "AI," you're not ready to buy AI.
+</Callout>
 
-Sometimes the answer is:
-- **A simpler tool would work better** (spreadsheet, database, rule-based automation)
-- **A human process is more appropriate** (relationship-building, complex judgment)
-- **The problem isn't well-defined enough** (AI needs clear goals to work toward)
-- **The data doesn't exist** (AI needs data to learn from)
+### When AI makes sense
 
-### When AI Might Be Right
+- You have lots of data and need to find patterns
+- The task is repetitive but requires judgment (not just rules)
+- Perfect accuracy isn't required—humans can review
+- You have capacity to implement *and maintain* it
 
-AI tends to work well when:
-- You have large amounts of data
-- The task is repetitive but requires pattern recognition
-- Perfect accuracy isn't required (humans can review)
-- The problem is well-defined with clear success metrics
-- You have capacity to implement and maintain it
+### When AI probably doesn't make sense
 
-### When AI Might Not Be Right
-
-Be cautious if:
 - You're not sure what problem you're solving
-- The consequences of errors are severe and irreversible
-- You lack data or your data is poor quality
-- You need to explain exactly why decisions are made
-- You don't have ongoing capacity to maintain the system
+- Errors would be severe and irreversible
+- You lack quality data
+- You need to explain exactly *why* each decision was made
+- You don't have ongoing capacity to maintain it
 
 ---
 
-## Framework 1: Evaluating AI Service Providers
+## Evaluating Vendors: Five Dimensions
 
-When assessing AI vendors or tools, consider these dimensions:
+When you do evaluate AI tools, assess them across these five areas:
 
-### Technical Capability
+### 1. Technical capability
 
-| Question | Why It Matters |
-|----------|----------------|
-| Does it actually work for your use case? | Marketing claims vs. reality |
-| How accurate is it? What are the error rates? | Understanding limitations |
-| Does it handle your languages and contexts? | Many AI tools are English-centric |
-| Can you test before committing? | Pilots reveal real-world performance |
+**The core question:** Does it actually work for *your* use case?
+
+<Callout type="warning" title="Demo ≠ Reality">
+Demos are designed to impress. They show best-case scenarios with perfect data. Always test with *your* actual data, in *your* actual context.
+</Callout>
+
+**Questions to ask:**
+
+- What's the accuracy rate? What kinds of errors does it make?
+- Does it work in the languages our communities use?
+- Can we pilot before committing?
+- What happens when it doesn't know the answer?
 
 **Red flags:**
-- Vendor can't provide accuracy metrics
+
+- Can't provide accuracy metrics
 - No trial or pilot option
-- Promises sound too good to be true
+- Promises that sound too good
 
-### Data Practices
+### 2. Data practices
 
-| Question | Why It Matters |
-|----------|----------------|
-| What data does the system need? | Understanding data requirements |
-| Where is data stored and processed? | Privacy and jurisdiction |
-| Is your data used to train their models? | Your data may benefit competitors |
-| What happens to data if you stop using the service? | Data portability and deletion |
+**The core question:** What happens to your data?
+
+| Ask this | Why it matters |
+|---|---|
+| Where is data stored? | Jurisdiction affects legal protections |
+| Is our data used to train their models? | Your data might benefit competitors |
+| Can we delete our data? | Essential for data protection compliance |
+| What if we leave? | Data portability matters |
 
 **Red flags:**
-- Unclear data policies
+
+- Vague or evasive answers about data
 - Data stored in problematic jurisdictions
-- No option to delete your data
-- Your data improves their product without compensation
+- Your data improves their product with no benefit to you
 
-### Security and Privacy
+### 3. Security and privacy
 
-| Question | Why It Matters |
-|----------|----------------|
-| What security certifications do they have? | Evidence of security practices |
-| How is data encrypted? | Protection in transit and at rest |
-| Who can access your data? | Internal access controls |
-| Have they had security breaches? | Track record matters |
+**The core question:** Can they protect sensitive information?
+
+**Questions to ask:**
+
+- What security certifications do they have? (SOC 2, ISO 27001, etc.)
+- How is data encrypted—in transit and at rest?
+- Who internally can access our data?
+- Have they had breaches? How did they respond?
 
 **Red flags:**
-- No security certifications
+
+- No recognized security certifications
 - Vague answers about encryption
-- History of breaches without improvement
-- Resistance to security audits
+- History of breaches without clear improvements
 
-### Ethics and Responsibility
+### 4. Ethics and responsibility
 
-| Question | Why It Matters |
-|----------|----------------|
-| Do they have published AI ethics principles? | Stated commitments |
-| How do they handle bias? | Awareness of fairness issues |
-| What's their transparency about AI limitations? | Honesty about capabilities |
-| Do they have responsible AI governance? | Structured accountability |
+**The core question:** Do they take AI risks seriously?
 
-**Red flags:**
-- No ethics principles or they're vague
-- Dismissive of bias concerns
-- Overpromising and underdelivering
-- No clear accountability for AI harms
+**Questions to ask:**
 
-### Support and Partnership
-
-| Question | Why It Matters |
-|----------|----------------|
-| What training and onboarding do they provide? | Getting your team up to speed |
-| How responsive is technical support? | When things go wrong |
-| Do they have experience with organizations like yours? | Relevant expertise |
-| What's their roadmap and stability? | Long-term viability |
+- Do they have published AI ethics principles?
+- How do they test for and address bias?
+- Are they honest about limitations?
+- What accountability exists if their AI causes harm?
 
 **Red flags:**
+
+- No ethics principles (or only vague ones)
+- Dismissive about bias concerns
+- Overpromising capabilities
+- No clear accountability
+
+### 5. Support and viability
+
+**The core question:** Will they be a good partner?
+
+**Questions to ask:**
+
+- What training and onboarding do they provide?
+- How responsive is support when things go wrong?
+- Do they have experience with organizations like ours?
+- Are they financially stable?
+
+**Red flags:**
+
 - Poor reviews from similar organizations
-- Unresponsive during sales process
+- Unresponsive during the sales process (it only gets worse)
 - No experience in your sector
-- Financial instability
+- Signs of financial instability
 
 ---
 
-## Framework 2: Organizational Readiness Assessment
+## Checking Your Readiness
 
-Before adopting AI, honestly assess whether your organization is ready:
+Even the best AI tool will fail if your organization isn't ready. Assess yourself honestly:
 
-### Data Readiness
+<StepProcess
+title="Organizational Readiness Check"
+steps={[
+{
+title: "Data readiness",
+description: "Do you have the data AI needs? Is it accurate, complete, and accessible? Do you have permission to use it?",
+action: "Audit your data. Fix gaps before buying AI."
+},
+{
+title: "Technical readiness",
+description: "Can AI integrate with your existing systems? Do you have (or can you hire) people to implement and maintain it?",
+action: "Map integration requirements. Identify your technical gaps."
+},
+{
+title: "Organizational readiness",
+description: "Does leadership understand what AI can and can't do? Will staff embrace or resist it? Do you have budget for ongoing costs?",
+action: "Have honest conversations with leadership and staff."
+},
+{
+title: "Governance readiness",
+description: "Do you have AI use policies? Who's accountable for AI decisions? How will you monitor for problems?",
+action: "Draft policies before you buy, not after."
+}
+]}
+/>
 
-| Dimension | Questions |
-|-----------|-----------|
-| **Data availability** | Do you have the data AI needs? Is it accessible? |
-| **Data quality** | Is your data accurate, complete, and consistent? |
-| **Data governance** | Do you have policies for data management? |
-| **Data privacy** | Can you use this data ethically and legally? |
-
-**Action items if not ready:**
-- Audit existing data
-- Establish data quality processes
-- Create data governance policies
-- Review privacy obligations
-
-### Technical Infrastructure
-
-| Dimension | Questions |
-|-----------|-----------|
-| **Integration** | Can AI tools connect with your existing systems? |
-| **Computing resources** | Do you have necessary hardware/cloud access? |
-| **Technical staff** | Do you have people who can implement and maintain AI? |
-| **Security infrastructure** | Can you protect AI systems adequately? |
-
-**Action items if not ready:**
-- Map integration requirements
-- Budget for infrastructure
-- Hire or train technical capacity
-- Strengthen security practices
-
-### Organizational Capacity
-
-| Dimension | Questions |
-|-----------|-----------|
-| **Leadership buy-in** | Do decision-makers understand and support AI adoption? |
-| **Change management** | Can your organization adapt to new ways of working? |
-| **Staff readiness** | Are employees prepared to work with AI? |
-| **Resources** | Do you have budget for implementation and ongoing costs? |
-
-**Action items if not ready:**
-- Educate leadership on AI realities
-- Develop change management plan
-- Invest in staff training
-- Create realistic budget (including ongoing costs)
-
-### Governance Readiness
-
-| Dimension | Questions |
-|-----------|-----------|
-| **Policies** | Do you have AI use policies? |
-| **Accountability** | Who is responsible for AI decisions and outcomes? |
-| **Monitoring** | How will you track AI performance and problems? |
-| **Ethics oversight** | Who reviews AI decisions for ethical concerns? |
-
-**Action items if not ready:**
-- Draft AI use policies
-- Assign clear accountability
-- Establish monitoring processes
-- Create ethics review mechanisms
+<Callout type="tip" title="The honest conversation">
+If your readiness check reveals gaps, that's valuable information. It's much better to discover you're not ready *before* signing a contract than *after*.
+</Callout>
 
 ---
 
 ## The Evaluation Process
 
-Here's a practical process for evaluating AI solutions:
+Here's a practical timeline:
 
-### Step 1: Define the Problem (2-4 weeks)
+### Phase 1: Define (2-4 weeks)
 
 - Write a clear problem statement
-- Define what success looks like
+- Define what success looks like (specific, measurable)
 - Identify constraints and requirements
 - Get stakeholder alignment
 
-**Deliverable:** Problem brief that everyone agrees on
+**Output:** Problem brief that everyone agrees on
 
-### Step 2: Assess Readiness (2-4 weeks)
+### Phase 2: Assess readiness (2-4 weeks)
 
-- Evaluate organizational readiness using framework above
+- Use the readiness framework above
 - Identify gaps that need addressing
-- Decide whether to proceed or pause
+- Decide: proceed, pause, or stop
 
-**Deliverable:** Readiness assessment with action plan
+**Output:** Readiness assessment with action plan
 
-### Step 3: Research Options (2-4 weeks)
+### Phase 3: Research (2-4 weeks)
 
 - Identify potential vendors/tools
 - Gather initial information
 - Create shortlist (3-5 options)
 
-**Deliverable:** Shortlist with initial assessment
+**Output:** Shortlist with initial scores
 
-### Step 4: Deep Evaluation (4-8 weeks)
+### Phase 4: Deep evaluation (4-8 weeks)
 
-- Request detailed information from shortlisted vendors
-- Check references from similar organizations
-- Conduct demos or pilots
+- Request detailed information
+- Check references (especially from similar organizations)
+- Conduct pilots with your actual data
 - Score against your criteria
 
-**Deliverable:** Evaluation matrix with scores and notes
+**Output:** Evaluation matrix
 
-### Step 5: Decide (1-2 weeks)
+### Phase 5: Decide (1-2 weeks)
 
-- Review evaluation with stakeholders
-- Make selection or decide not to proceed
-- Document decision rationale
+- Review with stakeholders
+- Make selection—or decide not to proceed
+- Document your rationale
 
-**Deliverable:** Decision document
+**Output:** Decision document
 
-### Step 6: Implement and Monitor (ongoing)
+### Phase 6: Implement and monitor (ongoing)
 
-- Execute implementation plan
-- Monitor performance against expectations
-- Adjust or exit if needed
-
-**Deliverable:** Operational AI system with monitoring
+- Execute carefully
+- Monitor against expectations
+- Be willing to adjust or exit
 
 ---
 
-## Common Evaluation Mistakes
+## Common Pitfalls
 
-Learn from others' errors:
+<Callout type="pitfall" title="Falling for the demo">
+Demos are theater. The AI is shown with perfect data, ideal conditions, and cherry-picked examples. Always, always pilot with your own data.
+</Callout>
 
-### Mistake 1: Falling for the Demo
+<Callout type="pitfall" title="Ignoring total cost">
+License fees are just the start. Real costs include:
+- Implementation and integration
+- Training your team
+- Ongoing maintenance and updates
+- Staff time for oversight
+- Opportunity cost of what you're not doing instead
 
-Demos are designed to impress. Real-world performance is often different.
+Budget 2-3x the license cost for the first year.
+</Callout>
 
-**Fix:** Always pilot with your actual data and use cases.
+<Callout type="pitfall" title="Underestimating change">
+AI changes how people work. Expect resistance, confusion, and a learning curve. Plan for change management from day one.
+</Callout>
 
-### Mistake 2: Ignoring Total Cost
+<Callout type="pitfall" title="Skipping the ethics review">
+Ethical problems often emerge after deployment. By then, you've invested resources and reputation. Include ethics review in your evaluation—not as an afterthought.
+</Callout>
 
-License fees are just the start. Real costs include implementation, training, maintenance, and opportunity costs.
-
-**Fix:** Calculate total cost of ownership over 3-5 years.
-
-### Mistake 3: Underestimating Change
-
-AI changes how people work. Resistance and adjustment take time.
-
-**Fix:** Plan for change management from the start.
-
-### Mistake 4: Skipping Ethics Review
-
-Ethical problems often emerge after deployment, causing reputation damage and harm.
-
-**Fix:** Include ethics review in evaluation process.
-
-### Mistake 5: No Exit Strategy
-
-If the AI doesn't work, can you stop using it? What happens to your data?
-
-**Fix:** Plan for exit before you start.
+<Callout type="pitfall" title="No exit strategy">
+Before you start, know how you'd stop. What happens to your data? How do you migrate to something else? Plan your exit before your entry.
+</Callout>
 
 ---
 
 ## Key Takeaways
 
-1. **Start with the problem** - Is AI actually the right solution?
-2. **Assess your readiness** - Technical, organizational, and governance capacity matters
-3. **Evaluate vendors systematically** - Use frameworks to compare fairly
-4. **Include ethics and responsibility** - Not optional considerations
-5. **Plan for the long term** - Implementation and maintenance, not just purchase
+<KeyTakeaways items={[
+"Start with the problem, not the solution—do you actually need AI?",
+"Evaluate vendors across five dimensions: technical, data, security, ethics, support",
+"Assess your own readiness: data, technical, organizational, governance",
+"Demos lie—always pilot with your actual data",
+"Plan for total cost (2-3x license), change management, and exit strategy"
+]} />
+
+---
+
+## Try This Next
+
+<TryThis
+title="AI Vendor Assessment Tool"
+description="Compare AI vendors across 20 criteria in 5 categories. Score multiple options side-by-side and identify red flags before you commit."
+href="/maker/ai-vendor-assessment"
+/>
 
 ---
 
@@ -306,21 +315,15 @@ If the AI doesn't work, can you stop using it? What happens to your data?
 
 This lesson draws on:
 
-- **Responsible AI Adoption for Civil Society Organizations** (The Engine Room) - Assessment frameworks for CSOs
-- **An AI Evaluation Framework for the Development Sector** - Technical evaluation guidance
-- **AI Guide** (Mozilla) - Practical guidance on choosing AI tools
-- **Alidade** (The Engine Room) - Tool selection guidance for social change projects
+- **[Responsible AI Adoption for Civil Society Organizations](https://theengineroom.hotglue.me/Brian-Rich)** — Assessment frameworks designed for CSOs
+- **[An AI Evaluation Framework for the Development Sector](https://www.cgdev.org/blog/ai-evaluation-framework-for-the-development-sector)** — Technical evaluation guidance
+- **[AI Guide](https://ai-guide.future.mozilla.org/content/introduction/#if-youre-new-to-ai)** — Practical guidance on choosing and comparing AI tools
+- **[Alidade](https://alidade.tech/)** — Tool selection guidance for social change projects
 
 ---
 
-## Apply What You've Learned
+## Keep Learning
 
-Ready to assess an AI vendor or solution? Use the [AI Vendor Assessment Tool](/maker/ai-vendor-assessment) to work through key evaluation criteria.
+**Previous:** [An African AI Pluriverse](/workshop/african-ai-pluriverse)
 
----
-
-## Continue Your Learning
-
-- **Previous:** [An African AI Pluriverse](/workshop/african-ai-pluriverse)
-- **Related:** [Ethical Considerations for LLMs](/workshop/llm-ethics)
-- **Explore more:** [Chatbots in Humanitarian Contexts](/workshop/chatbots-humanitarian-contexts)
+**Related:** [Ethical Considerations for LLMs](/workshop/llm-ethics) | [Chatbots in Humanitarian Contexts](/workshop/chatbots-humanitarian-contexts)
