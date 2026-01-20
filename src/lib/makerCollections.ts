@@ -138,6 +138,36 @@ export const playgroundCollections: PlaygroundCollection[] = [
     relatedLessonSlugs: ['state-management', 'form-validation'],
     isFeatured: false,
   },
+
+  // ----------------------------------------
+  // RESPONSIBLE AI FOR CIVIL SOCIETY
+  // Aligns with Responsible AI for CSO module
+  // ----------------------------------------
+  {
+    id: 'responsible-ai-tools',
+    title: 'Responsible AI Tools',
+    description:
+      'Practical tools for civil society organizations evaluating and adopting AI responsibly. Checklists, calculators, and assessment frameworks.',
+    icon: '🌍',
+    color: '#22C55E', // green
+    audience: ['learner', 'leader'],
+    difficulty: 'beginner',
+    stack: 'ai',
+    playgroundSlugs: [
+      'chatbot-adoption-checklist',
+      'ai-carbon-calculator',
+      'african-ai-values-explorer',
+      'ai-vendor-assessment',
+    ],
+    relatedModuleId: 'responsible-ai-cso',
+    relatedLessonSlugs: [
+      'chatbots-humanitarian-contexts',
+      'ai-environmental-impact',
+      'african-ai-pluriverse',
+      'evaluating-ai-solutions',
+    ],
+    isFeatured: true,
+  },
 ];
 
 // ============================================
@@ -217,6 +247,28 @@ export const lessonPlaygroundLinks: LessonPlaygroundLink[] = [
     lessonSlug: 'form-validation',
     playgroundSlugs: ['form-playground'],
     collectionId: 'react-fundamentals',
+  },
+
+  // Responsible AI for CSO lessons
+  {
+    lessonSlug: 'chatbots-humanitarian-contexts',
+    playgroundSlugs: ['chatbot-adoption-checklist'],
+    collectionId: 'responsible-ai-tools',
+  },
+  {
+    lessonSlug: 'ai-environmental-impact',
+    playgroundSlugs: ['ai-carbon-calculator'],
+    collectionId: 'responsible-ai-tools',
+  },
+  {
+    lessonSlug: 'african-ai-pluriverse',
+    playgroundSlugs: ['african-ai-values-explorer'],
+    collectionId: 'responsible-ai-tools',
+  },
+  {
+    lessonSlug: 'evaluating-ai-solutions',
+    playgroundSlugs: ['ai-vendor-assessment'],
+    collectionId: 'responsible-ai-tools',
   },
 ];
 

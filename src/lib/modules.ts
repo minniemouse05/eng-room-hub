@@ -96,6 +96,30 @@ export const modules: Module[] = [
     ],
     isFeatured: false,
   },
+
+  // ----------------------------------------
+  // RESPONSIBLE AI FOR CIVIL SOCIETY
+  // TER-curated content for CSOs
+  // ----------------------------------------
+  {
+    id: 'responsible-ai-cso',
+    title: 'Responsible AI for Civil Society',
+    description:
+      'Essential guidance for civil society organizations navigating AI adoption. Learn to evaluate AI solutions, understand environmental impacts, and apply community-centered approaches.',
+    icon: '🌍',
+    color: '#22C55E', // green
+    audience: ['learner', 'leader'],
+    difficultyRange: ['beginner', 'beginner'],
+    estimatedMinutes: 60,
+    prerequisites: ['ai-fundamentals'],
+    lessonSlugs: [
+      'chatbots-humanitarian-contexts',
+      'ai-environmental-impact',
+      'african-ai-pluriverse',
+      'evaluating-ai-solutions',
+    ],
+    isFeatured: true,
+  },
 ];
 
 // ============================================
@@ -134,7 +158,7 @@ export const tracks: Track[] = [
     icon: '🎯',
     color: '#FF9A3D',
     audience: 'leader',
-    moduleIds: ['ai-fundamentals', 'llm-essentials'],
+    moduleIds: ['ai-fundamentals', 'llm-essentials', 'responsible-ai-cso'],
     goal: 'Make informed decisions about AI adoption and strategy',
   },
 ];
@@ -150,7 +174,14 @@ export const collections: Collection[] = [
     title: 'Ethics & Safety',
     description: 'Responsible AI practices, limitations awareness, and ethical considerations.',
     icon: '⚖️',
-    lessonSlugs: ['llm-ethics', 'llm-limitations'],
+    lessonSlugs: [
+      'llm-ethics',
+      'llm-limitations',
+      'chatbots-humanitarian-contexts',
+      'ai-environmental-impact',
+      'african-ai-pluriverse',
+      'evaluating-ai-solutions',
+    ],
     tags: ['ethics', 'safety', 'governance'],
   },
   {
