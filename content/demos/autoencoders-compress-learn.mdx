@@ -1,0 +1,239 @@
+---
+title: "Autoencoders: Compress and Learn"
+description: What if a network had to squeeze data through a tiny bottleneck and rebuild it? Autoencoders learn efficient representations by reconstructing their inputs.
+tags:
+  - ai
+  - deep-learning
+  - neural-networks
+  - autoencoders
+  - beginner
+difficulty: beginner
+timeMinutes: 8
+relatedPlaygrounds:
+  - autoencoder-playground
+updatedAt: "2025-01-22"
+---
+
+# Autoencoders: Compress and Learn
+
+Most networks transform inputs into outputs: images into labels, text into translations. **Autoencoders** do something different—they try to recreate their input.
+
+Why would that be useful? The trick is they have to squeeze the data through a tiny bottleneck first.
+
+---
+
+## The Big Idea
+
+> **Autoencoders compress data into a small representation, then reconstruct the original from that compressed form.**
+
+Imagine summarizing a book into three sentences, then trying to rewrite the entire book from just those sentences. You'd have to capture the essential information.
+
+That's what autoencoders learn: the essential features that allow reconstruction.
+
+---
+
+## The Architecture
+
+An autoencoder has two halves:
+
+### Encoder: Compress
+Takes the input and squeezes it down to a smaller representation (the "latent space" or "bottleneck").
+
+```
+Input (784 values) → Encoder → Compressed (32 values)
+```
+
+### Decoder: Reconstruct
+Takes the compressed representation and tries to rebuild the original input.
+
+```
+Compressed (32 values) → Decoder → Reconstructed (784 values)
+```
+
+The goal: make the output match the input as closely as possible.
+
+```
+Input ────→ [Encoder] ────→ Bottleneck ────→ [Decoder] ────→ Output
+                              (small!)
+                                 │
+                                 └── The learned representation
+```
+
+---
+
+## What Gets Learned
+
+The magic happens at the bottleneck. To successfully compress and reconstruct, the network must learn:
+
+- **What features matter:** Which aspects of the input are essential
+- **What can be discarded:** Noise, redundancy, irrelevant details
+- **Efficient encoding:** How to represent important information compactly
+
+The compressed representation becomes a useful summary of the input.
+
+---
+
+## A Concrete Example
+
+Consider an autoencoder for face images:
+
+**Input:** 100×100 pixel face = 10,000 values
+
+**Bottleneck:** 128 values
+
+**Output:** Reconstructed face = 10,000 values
+
+What might those 128 values represent?
+- Skin tone
+- Face shape
+- Eye color and position
+- Hair style and color
+- Expression
+
+The network discovers these features automatically—nobody told it about "faces." It just learned what's needed to reconstruct them.
+
+---
+
+## Why This Matters
+
+Autoencoders are useful for several tasks:
+
+### Dimensionality Reduction
+Turn high-dimensional data into lower-dimensional representations for visualization or other models.
+
+### Feature Learning
+The bottleneck features often capture meaningful aspects of the data that can be used for other tasks.
+
+### Denoising
+Train the autoencoder to reconstruct clean images from noisy inputs. It learns to ignore noise.
+
+```
+Noisy image → Encoder → Decoder → Clean image
+```
+
+### Anomaly Detection
+Train on "normal" data. If new data can't be reconstructed well, it might be anomalous.
+
+```
+Normal: input ≈ output ✓
+Anomaly: input ≠ output ✗ (flag it!)
+```
+
+---
+
+## One Thing People Mix Up
+
+**The bottleneck size matters—a lot.**
+
+- **Too big:** The network just copies data through without learning useful compression
+- **Too small:** Can't capture enough information; reconstructions are blurry/wrong
+- **Just right:** Forces the network to learn efficient, meaningful representations
+
+There's no universal "right" size—it depends on how complex your data is.
+
+---
+
+## Variations
+
+### Sparse Autoencoders
+Add a penalty for using too many neurons at once. This encourages learning distinct, specialized features.
+
+### Variational Autoencoders (VAEs)
+Add randomness to the bottleneck. This allows generating new, similar data—not just reconstructing the input.
+
+VAEs can create new faces that never existed, similar to the training data.
+
+### Denoising Autoencoders
+Intentionally corrupt inputs (add noise), train to reconstruct the clean version. Makes the learned features more robust.
+
+---
+
+## Real Applications
+
+| Application | How It Works |
+|-------------|--------------|
+| **Anomaly detection** | Manufacturing defects, fraud detection—spot things that don't reconstruct well |
+| **Image denoising** | Remove grain, artifacts, or corruption from photos |
+| **Data compression** | Learn efficient representations for storage/transmission |
+| **Feature extraction** | Use bottleneck representations as inputs to other models |
+| **Recommendation systems** | Compress user preferences, find similar users |
+
+---
+
+## How Training Works
+
+The loss function is simple: how different is the output from the input?
+
+```
+Loss = difference(input, output)
+```
+
+Common measures:
+- Mean squared error (pixel-by-pixel difference)
+- Binary cross-entropy (for binary data)
+
+Backpropagation adjusts both encoder and decoder to minimize this reconstruction error.
+
+---
+
+## The Bottleneck Visualization
+
+Think of it like this:
+
+```
+INPUT                BOTTLENECK              OUTPUT
+[Full image]    →    [Essence]    →    [Rebuilt image]
+
+All the details      Just the            Details regenerated
+                     important           from the essence
+                     stuff
+```
+
+The bottleneck forces compression. Compression forces learning what matters.
+
+---
+
+## If You Only Remember One Thing...
+
+Autoencoders learn by compressing data through a bottleneck and trying to reconstruct it. The compressed representation captures the essential features—useful for dimensionality reduction, denoising, and anomaly detection.
+
+---
+
+## Mini-Check
+
+**Q: Why do autoencoders have a bottleneck instead of just copying input to output?**
+
+<details>
+<summary>See answer</summary>
+
+The bottleneck forces the network to learn efficient representations. If it could just copy all the values, it wouldn't learn anything meaningful. By squeezing through a smaller representation, it must discover which features are essential for reconstruction—that's where the learning happens.
+
+</details>
+
+---
+
+## Try It Yourself
+
+Experiment with compression in the [Autoencoder Playground](/maker/autoencoder-playground). Adjust the bottleneck size and see how it affects reconstruction quality.
+
+---
+
+## Module Complete!
+
+You've learned the foundations of deep learning:
+
+- What makes deep learning "deep" (layers!)
+- Neural network building blocks (neurons, weights, biases, activations)
+- How networks learn (forward pass, backpropagation)
+- Specialized architectures for different data types:
+  - **CNNs** for images
+  - **RNNs/LSTMs** for sequences
+  - **Transformers** for everything (especially language)
+  - **GANs** for generation
+  - **Autoencoders** for compression and reconstruction
+
+These are the foundations behind modern AI—from face filters to language models to self-driving cars.
+
+**Where to go next:**
+- [What Are LLMs?](/workshop/what-are-llms) — Dive deeper into language models
+- [How LLMs Work](/workshop/how-llms-work) — Under the hood of ChatGPT and Claude

@@ -11,6 +11,7 @@ import {
   ImpactScale,
   KeyTakeaways,
   TryThis,
+  AlgorithmVisualizer,
 } from '@/components/mdx';
 
 // Custom MDX components with nice styling
@@ -99,6 +100,7 @@ const components = {
   ImpactScale,
   KeyTakeaways,
   TryThis,
+  AlgorithmVisualizer,
 };
 
 export async function renderMDX(source: string) {

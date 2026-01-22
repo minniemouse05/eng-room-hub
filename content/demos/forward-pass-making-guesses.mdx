@@ -1,0 +1,175 @@
+---
+title: "Forward Pass: Making Guesses"
+description: How neural networks actually produce an answer. Follow data as it flows from input to output in one forward sweep.
+tags:
+  - ai
+  - deep-learning
+  - neural-networks
+  - beginner
+difficulty: beginner
+timeMinutes: 7
+relatedPlaygrounds:
+  - forward-pass-simulator
+updatedAt: "2025-01-22"
+---
+
+# Forward Pass: Making Guesses
+
+You've learned the parts: neurons, weights, biases, activations. Now let's see them work together.
+
+When a neural network makes a prediction, data flows in one direction—from input to output. This is called the **forward pass**.
+
+---
+
+## The Big Picture
+
+> **Forward pass = data flowing through the network to produce an output.**
+
+Think of it like a factory assembly line:
+
+1. Raw materials (your data) enter at the start
+2. Each station (layer) processes and transforms them
+3. A finished product (prediction) comes out the end
+
+Nothing flows backward during this phase. It's purely: in → process → out.
+
+---
+
+## Step by Step
+
+Let's trace how an image of a cat becomes the prediction "cat."
+
+### Step 1: Input Enters
+
+The image gets converted to numbers—pixel brightness values.
+
+```
+Image (64×64 pixels) → 4,096 numbers representing pixel values
+```
+
+These numbers enter the **input layer**. One neuron per input value.
+
+### Step 2: First Hidden Layer
+
+Each neuron in the first hidden layer:
+- Receives values from *all* input neurons
+- Multiplies by weights, adds bias
+- Applies activation function
+- Outputs a single number
+
+This layer might learn to detect simple patterns: edges, color gradients, basic textures.
+
+### Step 3: Through More Layers
+
+The outputs from layer 1 become inputs to layer 2.
+
+Same process: weighted sum → bias → activation.
+
+Each successive layer detects more abstract patterns:
+- Layer 2: corners, curves, simple shapes
+- Layer 3: eyes, ears, fur patterns
+- Layer 4: "this looks like a face"
+
+### Step 4: Output Layer
+
+The final hidden layer feeds into the **output layer**.
+
+For image classification, you might have one output neuron per category:
+
+| Output Neuron | Value | Interpretation |
+|---------------|-------|----------------|
+| Cat | 0.89 | 89% confidence |
+| Dog | 0.08 | 8% confidence |
+| Bird | 0.03 | 3% confidence |
+
+The network's guess: **Cat** (highest score wins).
+
+---
+
+## A Concrete Example
+
+Let's trace actual numbers through a tiny network.
+
+**Network:** 2 inputs → 2 hidden neurons → 1 output
+
+**Inputs:** `[0.5, 0.8]` (maybe representing two pixel values)
+
+**Hidden Layer:**
+
+| Neuron | Calculation | Result |
+|--------|-------------|--------|
+| H1 | (0.5 × 0.6) + (0.8 × 0.4) + bias(0.1) = 0.72 → ReLU → **0.72** | 0.72 |
+| H2 | (0.5 × -0.3) + (0.8 × 0.9) + bias(-0.2) = 0.37 → ReLU → **0.37** | 0.37 |
+
+**Output Layer:**
+
+| Neuron | Calculation | Result |
+|--------|-------------|--------|
+| Out | (0.72 × 0.5) + (0.37 × 0.8) + bias(0.0) = 0.656 → Sigmoid → **0.66** | 0.66 |
+
+**Final output: 0.66** (maybe interpreted as 66% confidence in a "yes" prediction)
+
+---
+
+## One Thing People Mix Up
+
+**The forward pass doesn't change the network.** Weights and biases stay exactly the same during a forward pass.
+
+- Forward pass = making a prediction with current weights
+- Learning/training = *adjusting* weights based on errors (that's the backward pass)
+
+The forward pass is like taking a test. You use what you know. You don't learn new things during the test itself.
+
+---
+
+## Why It's Called "Forward"
+
+Because data only moves in one direction: forward through the layers.
+
+```
+Input → Layer 1 → Layer 2 → ... → Output
+  →        →         →              →
+```
+
+No loops, no going back. This is what makes these "feedforward" neural networks.
+
+(Some network types *do* have loops—those are called recurrent networks. More on those later.)
+
+---
+
+## Speed Check
+
+The forward pass is fast. Like, really fast.
+
+Modern networks can process:
+- Images: thousands per second
+- Text: millions of words per second
+
+This is why AI assistants can respond quickly—the forward pass is the easy part. Training (adjusting weights) is what takes days or weeks.
+
+---
+
+## If You Only Remember One Thing...
+
+The forward pass is the network making a guess. Data flows in, gets multiplied and transformed layer by layer, and a prediction comes out. No learning happens here—just using what the network already knows.
+
+---
+
+## Mini-Check
+
+**Q: During a forward pass, what changes?**
+
+<details>
+<summary>See answer</summary>
+
+Nothing inside the network changes. The weights and biases stay the same. Only the data flows through, producing an output. Learning (changing weights) happens during backpropagation, not the forward pass.
+
+</details>
+
+---
+
+## Try It Yourself
+
+Step through a forward pass manually in the [Forward Pass Simulator](/maker/forward-pass-simulator). Watch the numbers flow, see the math happen, and understand what's really going on.
+
+**Next up:** [Backpropagation: Learning from Mistakes](/workshop/backprop-learning-from-mistakes) — how the network actually improves.

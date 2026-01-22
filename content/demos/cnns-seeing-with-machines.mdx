@@ -1,0 +1,222 @@
+---
+title: "CNNs: Seeing with Machines"
+description: How computers learn to recognize images. Meet Convolutional Neural Networks—the architecture behind face recognition, medical imaging, and your phone's camera.
+tags:
+  - ai
+  - deep-learning
+  - neural-networks
+  - cnn
+  - beginner
+difficulty: beginner
+timeMinutes: 9
+relatedPlaygrounds:
+  - cnn-filter-explorer
+updatedAt: "2025-01-22"
+---
+
+# CNNs: Seeing with Machines
+
+Regular neural networks treat inputs as a flat list of numbers. That works fine for simple data, but images have *structure*—pixels next to each other are related. A face isn't random dots; it's eyes near a nose near a mouth.
+
+**Convolutional Neural Networks (CNNs)** are designed to understand that structure. They're the reason your phone can recognize faces and doctors can use AI to read X-rays.
+
+---
+
+## The Core Insight
+
+> **CNNs slide small "filters" across an image, detecting patterns like edges, textures, and shapes.**
+
+Instead of looking at the whole image at once, CNNs look at small patches—checking: "Is there an edge here? A corner there? A curve?"
+
+These small pattern detectors get combined into bigger pattern detectors, until the network recognizes complex objects.
+
+---
+
+## How Filters Work
+
+A **filter** (also called a kernel) is a small grid of weights—typically 3×3 or 5×5.
+
+The filter slides across the image, one patch at a time:
+
+```
+Image patch:       Filter:          Result:
+┌───┬───┬───┐     ┌───┬───┬───┐
+│ 1 │ 2 │ 1 │     │-1 │ 0 │ 1 │     → Multiply each pair,
+├───┼───┼───┤  ×  ├───┼───┼───┤        sum them up
+│ 0 │ 1 │ 2 │     │-1 │ 0 │ 1 │     → Get a single number
+├───┼───┼───┤     ├───┼───┼───┤
+│ 1 │ 0 │ 1 │     │-1 │ 0 │ 1 │
+└───┴───┴───┘     └───┴───┴───┘
+```
+
+The filter slides to the next position and repeats. By the end, you have a new image showing where that pattern was detected.
+
+---
+
+## What Filters Detect
+
+Different filters detect different things:
+
+| Filter Type | What It Finds |
+|-------------|---------------|
+| Horizontal edge | Lines going left-right |
+| Vertical edge | Lines going up-down |
+| Corner detector | Where edges meet |
+| Blur | Smooth areas (softens image) |
+| Sharpen | High-contrast edges |
+
+The network **learns** which filters to use. You don't design them—training discovers the most useful ones.
+
+---
+
+## Building Up to Objects
+
+CNNs stack multiple layers, each detecting more complex patterns:
+
+**Layer 1: Simple patterns**
+- Edges (horizontal, vertical, diagonal)
+- Color gradients
+- Spots and blobs
+
+**Layer 2: Parts**
+- Corners and curves
+- Textures (fur, fabric, skin)
+- Basic shapes
+
+**Layer 3: Components**
+- Eyes, wheels, windows
+- Recognizable sub-parts
+
+**Layer 4+: Objects**
+- "This is a face"
+- "This is a car"
+- "This is a building"
+
+Each layer builds on the previous one. Simple features combine into complex understanding.
+
+---
+
+## The CNN Architecture
+
+A typical CNN has three types of layers:
+
+### Convolutional Layers
+Apply filters to detect patterns. This is where the "convolutional" name comes from.
+
+### Pooling Layers
+Shrink the image while keeping important information. Like zooming out—you lose detail but keep the big picture.
+
+Common approach: take the maximum value in each 2×2 patch.
+
+```
+┌───┬───┐
+│ 1 │ 3 │  → Max = 4
+├───┼───┤
+│ 4 │ 2 │
+└───┴───┘
+```
+
+### Fully Connected Layers
+At the end, flatten everything and connect to output categories:
+- "92% cat"
+- "5% dog"
+- "3% bird"
+
+---
+
+## Why CNNs Work So Well for Images
+
+Three key properties make CNNs powerful:
+
+### 1. Local Connectivity
+Each neuron only looks at a small patch, not the whole image. This reduces complexity and matches how visual patterns work—nearby pixels are most relevant to each other.
+
+### 2. Weight Sharing
+The same filter is used across the entire image. A horizontal-edge detector works everywhere, not just in one spot. This dramatically reduces the number of weights to learn.
+
+### 3. Translation Invariance
+A cat is a cat whether it's in the top-left or bottom-right. Because filters slide everywhere, CNNs can recognize objects regardless of position.
+
+---
+
+## Real-World Applications
+
+| Application | How CNNs Help |
+|-------------|---------------|
+| **Face recognition** | Detects facial features, matches to known faces |
+| **Medical imaging** | Spots tumors, fractures, abnormalities in X-rays/MRIs |
+| **Self-driving cars** | Identifies pedestrians, signs, lane markings |
+| **Object detection** | "There's a person at position (120, 340)" |
+| **Photo organization** | Groups your photos by who's in them |
+
+---
+
+## One Thing People Mix Up
+
+**CNNs don't "see" like humans do.** They detect statistical patterns in pixels.
+
+A CNN might recognize a cat by fur texture patterns, not by understanding "cat-ness." This is why:
+- Adversarial images (tiny invisible tweaks) can fool CNNs
+- They might focus on backgrounds instead of subjects
+- They don't truly "understand" what they're seeing
+
+They're powerful pattern matchers, not visual thinkers.
+
+---
+
+## A Quick Visual
+
+```
+Input Image
+    ↓
+┌──────────────────────────┐
+│ Conv Layer 1: Find edges │
+└──────────────────────────┘
+    ↓
+┌──────────────────────────┐
+│ Pooling: Shrink          │
+└──────────────────────────┘
+    ↓
+┌──────────────────────────┐
+│ Conv Layer 2: Find parts │
+└──────────────────────────┘
+    ↓
+┌──────────────────────────┐
+│ Pooling: Shrink more     │
+└──────────────────────────┘
+    ↓
+┌──────────────────────────┐
+│ Fully Connected: Classify│
+└──────────────────────────┘
+    ↓
+Output: "Cat (92%)"
+```
+
+---
+
+## If You Only Remember One Thing...
+
+CNNs use small sliding filters to detect patterns in images—edges become shapes become objects. Each layer builds on the previous one, letting the network recognize increasingly complex visual concepts.
+
+---
+
+## Mini-Check
+
+**Q: Why do CNNs use small filters instead of looking at the whole image at once?**
+
+<details>
+<summary>See answer</summary>
+
+Two reasons:
+1. **Efficiency:** Fewer weights to learn (the same filter works everywhere)
+2. **Structure:** Visual patterns are local—an edge here doesn't depend on pixels far away. Small filters capture these local relationships naturally.
+
+</details>
+
+---
+
+## Try It Yourself
+
+See filters in action with the [CNN Filter Explorer](/maker/cnn-filter-explorer). Watch how different filters detect edges, corners, and textures as they slide across an image.
+
+**Next up:** [RNNs: Sequences and Memory](/workshop/rnns-sequences-and-memory) — neural networks that understand order and time.

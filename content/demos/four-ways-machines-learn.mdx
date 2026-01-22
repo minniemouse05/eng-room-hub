@@ -1,0 +1,182 @@
+---
+title: Four Ways Machines Learn
+description: There are only four main recipes in the AI cookbook. Once you know them, you'll start seeing them everywhere.
+tags:
+  - ai
+  - algorithms
+  - classification
+  - regression
+  - clustering
+  - reinforcement-learning
+  - beginner
+difficulty: beginner
+timeMinutes: 10
+relatedPlaygrounds:
+  - algorithm-type-explorer
+updatedAt: "2025-01-20"
+---
+
+# Four Ways Machines Learn
+
+There are only four main recipes in the AI cookbook—and once you know them, you'll start seeing them everywhere.
+
+<QuickNav items={[
+  { label: "The big picture", time: "1 min" },
+  { label: "The four recipes", time: "6 min" },
+  { label: "How to tell them apart", time: "2 min" },
+  { label: "Test yourself", time: "1 min" }
+]} />
+
+---
+
+## The Big Picture
+
+Think of AI algorithms as recipes. Each recipe is good at a different kind of task. Some recipes sort things into boxes. Others predict numbers. Others find natural groupings. And one learns by trial and error, like a toddler figuring out how to stack blocks.
+
+Here's the good news: you don't need to memorize formulas. You just need to recognize which recipe fits which situation.
+
+<Callout type="tip" title="Quick intuition">
+If someone describes an AI system to you, ask yourself: "What's the output?" The answer tells you which recipe they're using.
+</Callout>
+
+---
+
+## The Four Recipes
+
+### 1. Classification: The Sorting Hat
+
+This recipe answers yes/no or this/that questions.
+
+**What it does:** Takes an input and assigns it to one of several predefined categories.
+
+**The output is always:** A label or category (spam/not spam, cat/dog, high risk/low risk)
+
+<Callout type="example" title="Real examples">
+- **Email:** Spam or not spam?
+- **Medical imaging:** Does this scan show signs of disease?
+- **Banking:** Is this transaction fraudulent?
+- **Support tickets:** Is this billing, technical, or general?
+</Callout>
+
+*Quick intuition:* If the answer is a label or category that you defined in advance, it's classification.
+
+---
+
+### 2. Regression: The Number Predictor
+
+This recipe predicts a number on a sliding scale.
+
+**What it does:** Looks at input features and outputs a continuous numerical value.
+
+**The output is always:** A number (price, temperature, score, count)
+
+<Callout type="example" title="Real examples">
+- **Real estate:** What will this house sell for?
+- **Retail:** How many customers will visit tomorrow?
+- **Weather:** What temperature will it be at 3pm?
+- **Healthcare:** How many days will this patient stay in hospital?
+</Callout>
+
+*Quick intuition:* If the answer is "how much" or "how many," it's regression.
+
+---
+
+### 3. Clustering: The Natural Grouper
+
+This recipe finds patterns you didn't define in advance.
+
+**What it does:** Looks at your data and discovers natural groupings based on similarity.
+
+**The output is always:** Groups or segments that the AI discovered (not ones you told it about)
+
+<Callout type="example" title="Real examples">
+- **Marketing:** What types of customers do we have? (Let the AI find the segments)
+- **Security:** Which network behaviors are unusual? (Anomaly detection)
+- **Research:** What themes emerge from these survey responses?
+- **Biology:** How do these genes group together?
+</Callout>
+
+*Quick intuition:* If you're asking "what groups exist in this data?" without defining the groups yourself, it's clustering.
+
+---
+
+### 4. Reinforcement Learning: The Trial-and-Error Learner
+
+This recipe learns by doing, getting rewards for good moves and penalties for bad ones.
+
+**What it does:** An "agent" takes actions in an environment, learns from feedback, and gradually figures out the best strategy.
+
+**The output is always:** A policy or strategy (a sequence of decisions)
+
+<Callout type="example" title="Real examples">
+- **Games:** Learning to play chess, Go, or video games
+- **Robotics:** Teaching a robot arm to pick up objects
+- **Recommendations:** Optimizing which content to show in what order
+- **Autonomous vehicles:** Learning to navigate safely
+</Callout>
+
+*Quick intuition:* If the AI needs to learn a strategy through practice and feedback, it's reinforcement learning.
+
+---
+
+## How to Tell Them Apart
+
+<ComparisonTable
+  headers={["Classification", "Regression", "Clustering", "Reinforcement Learning"]}
+  rows={[
+    { label: "Output type", values: ["Category/label", "Number", "Groups", "Strategy/actions"] },
+    { label: "You define the answer?", values: ["Yes (the categories)", "Yes (it's a number)", "No (AI discovers groups)", "No (AI discovers strategy)"] },
+    { label: "Keyword clue", values: ["\"Is it X or Y?\"", "\"How much/many?\"", "\"What groups exist?\"", "\"What's the best sequence?\""] },
+    { label: "Classic example", values: ["Spam filter", "House prices", "Customer segments", "Game AI"] }
+  ]}
+/>
+
+<Callout type="pitfall" title="One thing people mix up">
+**Classification vs. Clustering:** Classification sorts into boxes *you define*. Clustering *discovers* boxes you didn't know existed.
+
+A spam filter is classification (you told it what spam is). Customer segmentation is often clustering (you let it find the segments).
+</Callout>
+
+<Callout type="pitfall" title="Another common confusion">
+**Regression vs. Classification:** If the output is a category (even if it's numbered, like "risk level 1, 2, or 3"), it's classification. If it's a continuous number (like $247,500), it's regression.
+</Callout>
+
+---
+
+## Test Yourself
+
+<Callout type="checklist" title="Mini-check">
+**Question:** A hospital wants to predict how many days a patient will stay. Is this classification, regression, clustering, or reinforcement learning?
+
+**Answer:** Regression—because "how many days" is a number, not a category.
+</Callout>
+
+---
+
+## Key Takeaways
+
+<KeyTakeaways items={[
+  "Classification = sorting into categories you define (spam/not spam)",
+  "Regression = predicting numbers (house prices, temperatures)",
+  "Clustering = discovering natural groups (customer segments)",
+  "Reinforcement learning = learning strategies through trial and error (game playing)",
+  "Ask 'what's the output?' to identify which recipe an AI uses"
+]} />
+
+---
+
+## Try This Next
+
+<TryThis
+  title="Algorithm Type Explorer"
+  description="Watch each algorithm in action with simple animations, then test yourself by identifying which is which."
+  href="/maker/algorithm-type-explorer"
+/>
+
+---
+
+## Keep Learning
+
+**Next:** [Data: Practice, Quiz, Final Exam](/workshop/data-practice-quiz-exam) — Why the data you use matters more than the algorithm you choose
+
+**Related:** [What is Machine Learning?](/workshop/what-is-machine-learning) | [Types of Machine Learning](/workshop/types-of-machine-learning)

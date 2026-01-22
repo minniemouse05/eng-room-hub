@@ -1,0 +1,179 @@
+---
+title: "Neural Networks: The Building Blocks"
+description: What's actually inside a neural network? Meet neurons, layers, and the team of tiny helpers that pass notes to each other.
+tags:
+  - ai
+  - deep-learning
+  - neural-networks
+  - beginner
+difficulty: beginner
+timeMinutes: 10
+relatedPlaygrounds:
+  - neural-network-builder
+  - forward-pass-simulator
+updatedAt: "2025-01-22"
+---
+
+# Neural Networks: The Building Blocks
+
+The name "neural network" sounds biological—and that's intentional. These systems were loosely inspired by how brains work: lots of simple units connected together, passing signals around.
+
+But don't let the name fool you. These aren't actual neurons. They're math operations arranged in a specific structure.
+
+---
+
+## The Team of Tiny Helpers
+
+Here's a friendlier way to think about it:
+
+> **A neural network is a team of tiny helpers arranged in rows, passing notes to each other.**
+
+- Each helper receives notes from the row behind them
+- They do a small calculation
+- They pass a new note to the row ahead
+
+No single helper is smart. But thousands of them, working together and fine-tuned over time? That's when the magic happens.
+
+---
+
+## The Three Layer Types
+
+Every neural network has these three parts:
+
+### Input Layer
+**What it does:** Receives the raw data.
+
+If you're analyzing an image, the input layer gets the pixel values. If you're analyzing text, it gets numerical representations of words.
+
+> Think of it as the "eyes" of the network—where information enters.
+
+### Hidden Layers
+**What it does:** Processes information. This is where the real work happens.
+
+"Hidden" just means they're sandwiched between input and output—you don't directly see them from outside the network. A network can have one hidden layer, or dozens, or hundreds.
+
+> Think of these as the "thinking" stages. Each layer refines and transforms what it received.
+
+### Output Layer
+**What it does:** Produces the final answer.
+
+For image classification: "92% cat, 5% dog, 3% other."
+For spam detection: "87% spam."
+For price prediction: "$347,000."
+
+> Think of it as the "mouth"—where the network announces its conclusion.
+
+---
+
+## Meet the Neuron
+
+Each circle you see in network diagrams is a **neuron** (or "node"). Here's what a single neuron does:
+
+```
+Inputs → [Weighted Sum] → [Activation] → Output
+```
+
+1. **Receives inputs** from connected neurons in the previous layer
+2. **Multiplies each input** by a weight (how much to trust that connection)
+3. **Adds them up** plus a small bias
+4. **Applies an activation function** (a gate that decides what passes through)
+5. **Sends the result** to neurons in the next layer
+
+That's it. One neuron is basically: multiply, add, squish, pass along.
+
+---
+
+## The Key Components
+
+Let's name the parts you'll hear about:
+
+| Component | What It Is | Analogy |
+|-----------|------------|---------|
+| **Neuron/Node** | A single processing unit | One helper on the team |
+| **Weight** | How much we trust a connection | "Listen to this person more" |
+| **Bias** | A default nudge to the calculation | A head start (or handicap) |
+| **Activation Function** | A gate controlling what passes through | Traffic light (go/stop/slow) |
+| **Layer** | A row of neurons at the same stage | One floor in a building |
+
+---
+
+## Weights: "How Much We Listen"
+
+Every connection between neurons has a **weight**—a number that says how important that connection is.
+
+- **High weight:** "Pay close attention to this input!"
+- **Low weight:** "This input barely matters."
+- **Negative weight:** "If this input is high, output should go down."
+
+When the network learns, it's mostly adjusting these weights. Millions of tiny dials being tuned until the outputs match what we want.
+
+---
+
+## Biases: "The Default Nudge"
+
+Each neuron also has a **bias**—a number added after the weighted sum.
+
+Think of it like a threshold adjustment:
+
+> Without bias: "Only fire if inputs add up to 0 or more."
+>
+> With positive bias: "I'm already inclined to fire—inputs just need to push me over."
+>
+> With negative bias: "I need convincing. Inputs have to overcome my skepticism."
+
+Biases give neurons flexibility to activate (or not) in different situations.
+
+---
+
+## One Thing People Mix Up
+
+**Neural networks don't work like brains.** The name comes from a loose biological inspiration, but:
+
+- Real neurons are incredibly complex; artificial ones do simple math
+- Brains learn continuously; neural networks have distinct training/use phases
+- Brains use chemistry and electrical signals; networks use numbers flowing through equations
+
+The analogy is helpful for intuition, but don't take it literally.
+
+---
+
+## How Deep Is Deep?
+
+The number of hidden layers determines the network's "depth":
+
+| Network Type | Hidden Layers | Typical Use |
+|--------------|---------------|-------------|
+| Shallow | 1-2 | Simple patterns, small data |
+| Moderately deep | 3-10 | Most practical applications |
+| Very deep | 50-150+ | State-of-the-art image/language models |
+
+More layers can capture more complex patterns—but they also need more data and computing power.
+
+---
+
+## If You Only Remember One Thing...
+
+A neural network is just layers of simple calculators (neurons) connected together. Each neuron takes inputs, does some multiplication and addition, and passes a result forward. The power comes from having thousands of these, with carefully tuned connection strengths (weights).
+
+---
+
+## Mini-Check
+
+**Q: What's the difference between a weight and a bias in a neural network?**
+
+<details>
+<summary>See answer</summary>
+
+**Weight:** Controls how much influence one neuron's output has on another neuron's input. It's like saying "listen to this connection more (or less)."
+
+**Bias:** A constant added to each neuron's calculation—a default nudge that makes the neuron more or less likely to activate regardless of inputs.
+
+</details>
+
+---
+
+## Try It Yourself
+
+Build your own network structure in the [Neural Network Builder](/maker/neural-network-builder). Add layers, connect neurons, and watch how data flows through.
+
+**Next up:** [Weights, Biases, and Activations](/workshop/weights-biases-activations) — a closer look at how neurons actually calculate.

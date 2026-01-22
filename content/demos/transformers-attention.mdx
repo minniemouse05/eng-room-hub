@@ -1,0 +1,204 @@
+---
+title: "Transformers: The Power of Attention"
+description: The architecture behind GPT and BERT. Transformers don't process sequences step-by-step—they look at everything at once and decide what to pay attention to.
+tags:
+  - ai
+  - deep-learning
+  - neural-networks
+  - transformers
+  - nlp
+  - beginner
+difficulty: intermediate
+timeMinutes: 10
+relatedPlaygrounds:
+  - attention-visualizer
+updatedAt: "2025-01-22"
+---
+
+# Transformers: The Power of Attention
+
+RNNs and LSTMs process sequences step by step. This works, but it's slow—each step must wait for the previous one.
+
+**Transformers** take a radically different approach. They look at the entire sequence at once and use "attention" to figure out which parts matter for each word.
+
+This architecture powers GPT, BERT, Claude, and most modern language AI.
+
+---
+
+## The Big Idea
+
+> **Transformers use self-attention to weigh how much each word should influence every other word—all at once.**
+
+Instead of processing "The cat sat on the mat" word by word, a Transformer sees all six words simultaneously. Then for each word, it asks: "Which other words should I pay attention to?"
+
+For "sat," it might pay high attention to "cat" (who's doing the sitting) and "mat" (where the sitting happens).
+
+---
+
+## Self-Attention: The Core Mechanism
+
+Self-attention computes three things for each word:
+
+1. **Query:** "What am I looking for?"
+2. **Key:** "What do I contain?"
+3. **Value:** "What information do I provide?"
+
+For each word, the model:
+- Compares its query to every other word's key (measuring relevance)
+- Uses those scores to weight how much of each word's value to incorporate
+
+It's like each word asking: "Given what I need to know, how much should I listen to each other word?"
+
+---
+
+## A Concrete Example
+
+Consider: "The **bank** by the **river** had beautiful flowers."
+
+When processing "bank," the model needs to figure out: bank as in financial institution, or bank as in riverbank?
+
+**Self-attention in action:**
+- "bank" sends a query: "What context helps define me?"
+- "river" has a high-matching key: "I help disambiguate nearby nouns"
+- Attention score between "bank" and "river" is high
+- The model incorporates "river" context → concludes: riverbank
+
+Without attention, the model might guess wrong. With attention, it can look at relevant context wherever it appears in the sentence.
+
+---
+
+## Why "Attention Is All You Need"
+
+The famous paper that introduced Transformers was titled "Attention Is All You Need." Here's why:
+
+### 1. Parallel Processing
+Unlike RNNs, Transformers process all positions simultaneously. This makes them much faster to train on modern hardware (GPUs love parallel work).
+
+### 2. Long-Range Dependencies
+RNNs struggle with long sequences—early information fades. Attention can directly connect any two positions, regardless of distance.
+
+"The cat, which was orange with black stripes and had been rescued from the shelter last spring, **sat** quietly."
+
+The word "sat" can directly attend to "cat" despite many words in between.
+
+### 3. Flexible Context
+Different attention heads (the model has many) can capture different relationships:
+- One head: grammatical relationships (subject-verb)
+- Another head: semantic relationships (synonyms)
+- Another head: positional patterns
+
+---
+
+## The Architecture
+
+A Transformer has two main parts:
+
+### Encoder (Understanding)
+Processes the input, building a rich representation where each word knows about all other words.
+
+Used in models like BERT: "Understand this text."
+
+### Decoder (Generating)
+Generates output one token at a time, attending to both the encoded input and previously generated output.
+
+Used in models like GPT: "Write the next word."
+
+Many models use both (translation), or just one (BERT = encoder only, GPT = decoder only).
+
+---
+
+## Multi-Head Attention
+
+Transformers don't have just one attention mechanism—they have many running in parallel, called "heads."
+
+Each head learns to focus on different relationships:
+
+| Head | Might Learn |
+|------|-------------|
+| Head 1 | Subject-verb connections |
+| Head 2 | Adjective-noun pairs |
+| Head 3 | Coreference (pronouns → nouns) |
+| Head 4 | Positional patterns |
+
+The outputs from all heads are combined, giving the model a rich understanding of each word's context.
+
+---
+
+## Position Encodings
+
+Since Transformers process all words at once, they don't inherently know word order. "Dog bites man" looks the same as "Man bites dog" without help.
+
+**Position encodings** add information about each word's position in the sequence. They're added to the word representations before processing.
+
+This lets the model know that "dog" comes first, "bites" comes second, etc.
+
+---
+
+## One Thing People Mix Up
+
+**Transformers aren't just for text.** While they started in NLP, they now power:
+
+- **Vision Transformers (ViT):** Images split into patches, treated like words
+- **Audio:** Sound spectrograms processed as sequences
+- **Protein folding:** AlphaFold uses attention on amino acid sequences
+- **Code generation:** Programs as token sequences
+
+The attention mechanism is general—it works wherever relationships matter.
+
+---
+
+## GPT vs. BERT
+
+Two famous Transformer models, different designs:
+
+| Aspect | GPT | BERT |
+|--------|-----|------|
+| Type | Decoder only | Encoder only |
+| Training | Predict next word | Fill in masked words |
+| Direction | Left-to-right | Bidirectional |
+| Best for | Generation | Understanding |
+| Example task | "Write me a story" | "What's the sentiment?" |
+
+GPT generates text. BERT understands text. Both use attention.
+
+---
+
+## Why Transformers Dominate Today
+
+Since 2017, Transformers have taken over:
+
+- **Scale well:** More data + more parameters = better results
+- **Train efficiently:** Parallel processing fits modern hardware
+- **Transfer learning:** Pre-train once, fine-tune for many tasks
+- **Flexibility:** Work for text, images, audio, code, and more
+
+ChatGPT, Claude, Gemini—all built on Transformer architectures.
+
+---
+
+## If You Only Remember One Thing...
+
+Transformers use self-attention to let each word look at every other word and decide what's relevant. This parallel, flexible approach to understanding context is why they power modern AI language models.
+
+---
+
+## Mini-Check
+
+**Q: How does self-attention differ from how RNNs process context?**
+
+<details>
+<summary>See answer</summary>
+
+**RNNs:** Process sequences step by step, passing a hidden state forward. Context from early words must survive through many steps.
+
+**Self-attention:** Every word can directly attend to every other word, regardless of position. No information needs to "travel" through intermediate steps.
+
+</details>
+
+---
+
+## Try It Yourself
+
+See attention patterns in action with the [Attention Visualizer](/maker/attention-visualizer). Type a sentence and watch which words attend to which.
+
+**Next up:** [GANs: Creative Machines](/workshop/gans-creative-machines) — networks that compete to create realistic content.

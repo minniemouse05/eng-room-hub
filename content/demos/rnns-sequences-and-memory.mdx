@@ -1,0 +1,202 @@
+---
+title: "RNNs: Sequences and Memory"
+description: When order matters—like in speech, text, or time series—you need a network with memory. Meet Recurrent Neural Networks.
+tags:
+  - ai
+  - deep-learning
+  - neural-networks
+  - rnn
+  - beginner
+difficulty: beginner
+timeMinutes: 8
+relatedPlaygrounds:
+  - sequence-predictor
+updatedAt: "2025-01-22"
+---
+
+# RNNs: Sequences and Memory
+
+CNNs are great for images where every pixel exists at once. But what about data where *order* matters?
+
+- "Dog bites man" vs "Man bites dog" — same words, totally different meanings
+- Stock prices — today's price depends on yesterday's
+- Speech — sounds flow in time, not all at once
+
+Regular neural networks don't understand sequence. They treat inputs as independent, ignoring order entirely.
+
+**Recurrent Neural Networks (RNNs)** have memory. They process one item at a time, remembering what came before.
+
+---
+
+## The Core Idea
+
+> **RNNs process sequences step by step, passing information from each step to the next.**
+
+Think of reading a sentence word by word:
+
+- You read "The"
+- Then "cat"
+- Then "sat"
+
+At each word, you remember what came before. "Sat" makes sense because you remember "The cat."
+
+RNNs work the same way. They have a **hidden state** that carries information forward through the sequence.
+
+---
+
+## How It Works
+
+At each step, the RNN:
+
+1. Takes the current input (e.g., current word)
+2. Combines it with its hidden state (memory of previous inputs)
+3. Produces an output
+4. Updates its hidden state for the next step
+
+```
+       Input 1      Input 2      Input 3
+          ↓            ↓            ↓
+       ┌──────┐    ┌──────┐    ┌──────┐
+       │ RNN  │───→│ RNN  │───→│ RNN  │
+       │ Cell │    │ Cell │    │ Cell │
+       └──────┘    └──────┘    └──────┘
+          ↓            ↓            ↓
+       Output 1    Output 2    Output 3
+
+       ───────→ Hidden state passes forward ───────→
+```
+
+The hidden state is like a baton being passed in a relay race. Each runner (step) receives it, does their part, and passes it to the next.
+
+---
+
+## A Concrete Example
+
+Let's predict the next letter in "HELL_":
+
+**Step 1:** Process "H"
+- Input: H
+- Previous state: [empty]
+- New state: remembers "H started a word"
+
+**Step 2:** Process "E"
+- Input: E
+- Previous state: "H started a word"
+- New state: "HE — could be HELLO, HELP, etc."
+
+**Step 3:** Process "L"
+- Input: L
+- Previous state: "HE"
+- New state: "HEL — probably HELLO or HELP"
+
+**Step 4:** Process "L"
+- Input: L
+- Previous state: "HEL"
+- New state: "HELL — very likely HELLO"
+
+**Prediction:** The next letter is probably "O"
+
+The RNN's memory of previous letters informed its guess.
+
+---
+
+## What RNNs Are Good At
+
+| Task | Why RNNs Help |
+|------|---------------|
+| **Language modeling** | Words depend on previous words |
+| **Speech recognition** | Sounds flow in time |
+| **Time series prediction** | Stock prices, weather, sensor data |
+| **Machine translation** | Understanding full sentences before translating |
+| **Music generation** | Notes follow patterns over time |
+
+---
+
+## The Memory Problem
+
+Here's the catch: RNNs have *short* memories.
+
+Information from early in a sequence gets diluted as it passes through many steps. It's like the telephone game—the message degrades.
+
+**Example:** In a long paragraph, by the time the RNN reaches the end, it might have "forgotten" important details from the beginning.
+
+This is called the **vanishing gradient problem**—the error signal gets weaker as it flows back through many steps during training.
+
+---
+
+## One Thing People Mix Up
+
+**RNNs aren't the same as "recurrent" in the everyday sense.** The "recurrent" refers to the loop in the architecture—the hidden state feeding back into the next step.
+
+It doesn't mean the network keeps thinking in circles. It means information flows forward through a sequence, step by step, with memory passed along.
+
+---
+
+## Sequential vs. Parallel
+
+Regular neural networks process all inputs at once (parallel). RNNs process one step at a time (sequential).
+
+| Type | Processing | Good For |
+|------|------------|----------|
+| Feedforward/CNN | All at once | Images, fixed-size data |
+| RNN | Step by step | Sequences, variable-length data |
+
+This sequential nature is both a strength (handles varying lengths) and a weakness (slower to train).
+
+---
+
+## The Architecture
+
+A simple RNN cell does this at each step:
+
+```
+new_hidden_state = activation(
+    weight_input × current_input +
+    weight_hidden × previous_hidden_state +
+    bias
+)
+
+output = another_activation(weight_output × new_hidden_state)
+```
+
+The key insight: the same weights are used at every step. The network learns a general "how to process one step and update memory" rule.
+
+---
+
+## Real Applications
+
+**Speech Recognition**
+Your voice assistant processes audio frame by frame. Each moment of sound is understood in context of what came before.
+
+**Text Generation**
+Given "Once upon a" — what comes next? The RNN generates "time" because it remembers the fairy-tale opening pattern.
+
+**Sentiment Analysis**
+"This movie was not bad at all" — the RNN remembers "not" when it reaches "bad," understanding the negation.
+
+---
+
+## If You Only Remember One Thing...
+
+RNNs process sequences one step at a time, carrying a hidden state that remembers previous inputs. This lets them understand order and context—essential for language, speech, and time-based data.
+
+---
+
+## Mini-Check
+
+**Q: What's the hidden state in an RNN?**
+
+<details>
+<summary>See answer</summary>
+
+The hidden state is the RNN's "memory"—a vector of numbers that summarizes what the network has seen so far in the sequence. At each step, it gets updated with new information and passed to the next step.
+
+</details>
+
+---
+
+## Try It Yourself
+
+Predict sequences in the [Sequence Predictor](/maker/sequence-predictor). Type a starting phrase and watch the network complete it, one step at a time.
+
+**Next up:** [LSTMs: Longer Memory](/workshop/lstms-longer-memory) — solving the short-term memory problem.

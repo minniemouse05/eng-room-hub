@@ -1,0 +1,130 @@
+---
+title: What is Deep Learning?
+description: Deep learning sounds intimidating, but it's just machine learning with extra layers. Here's what that actually means for non-engineers.
+tags:
+  - ai
+  - deep-learning
+  - neural-networks
+  - beginner
+difficulty: beginner
+timeMinutes: 8
+relatedPlaygrounds:
+  - neural-network-builder
+  - deep-learning-layers-explorer
+updatedAt: "2025-01-22"
+---
+
+# What is Deep Learning?
+
+You've probably heard "deep learning" tossed around like it's some advanced wizardry. Good news: it's not magic. It's just machine learning... with more layers.
+
+That's literally it. The "deep" part refers to *depth*—multiple layers stacked on top of each other.
+
+---
+
+## The 30-Second Version
+
+**Deep Learning** = Machine learning that uses neural networks with multiple layers to find patterns in data.
+
+| Regular Machine Learning | Deep Learning |
+|--------------------------|---------------|
+| Often needs humans to pick which features matter | Figures out which features matter on its own |
+| Works okay with smaller datasets | Hungry for lots of data |
+| Simpler to understand and debug | More powerful but harder to explain |
+| Runs on normal computers | Often needs special hardware (GPUs) |
+
+> **Quick intuition:** Think of deep learning as having a team of assistants arranged in a chain. The first assistant notices basic stuff. They pass notes to the next assistant, who notices slightly more complex stuff. By the end of the chain, the team can recognize sophisticated patterns none of them could spot alone.
+
+---
+
+## Why "Deep"?
+
+The depth comes from layers—multiple processing stages stacked like floors in a building.
+
+**Lower layers** catch simple patterns:
+- In images: edges, color blobs, basic shapes
+- In language: common word pairs, punctuation patterns
+
+**Higher layers** combine those into meaningful concepts:
+- In images: "that's a nose," "that's an eye," "that's a face"
+- In language: "this sentence sounds angry," "this paragraph is a question"
+
+Each layer builds on the one before. Raw pixels become edges become shapes become objects become "that's a photo of my cat."
+
+---
+
+## One Thing People Mix Up
+
+**"Deep learning" doesn't mean "smarter" learning.** It means more layers.
+
+A shallow network with one hidden layer can still be powerful for the right problem. Deep networks shine when:
+- You have massive amounts of data
+- The patterns are complex and hierarchical
+- You'd rather not hand-pick which features to look at
+
+---
+
+## The Five Key Characteristics
+
+Here's what makes deep learning distinct:
+
+### 1. Learns from Large Amounts of Data
+These models are data-hungry. More examples = better pattern recognition. A spam filter might need thousands of emails. An image classifier might need millions of photos.
+
+### 2. Automatic Feature Extraction
+Traditional ML: "Here's the data, and here are the 15 measurements I think matter."
+
+Deep learning: "Here's the data. Figure out what matters yourself."
+
+This is a big deal. Humans don't always know which features are important.
+
+### 3. Hierarchical Representation
+Patterns build on patterns. Simple concepts combine into complex ones. This mirrors how our own brains seem to process information—edges → shapes → objects → scenes.
+
+### 4. Requires Significant Computing Power
+All those layers doing all that math? It adds up. Training deep networks often requires GPUs (graphics processing units) originally designed for video games.
+
+### 5. State-of-the-Art Performance
+For many tasks—image recognition, language translation, speech recognition—deep learning models currently hold the records. They're not always the best choice, but when they fit, they tend to win.
+
+---
+
+## Where You've Already Seen It
+
+Deep learning powers more of your daily life than you might realize:
+
+| Application | What It's Doing |
+|-------------|-----------------|
+| Phone camera | Recognizing faces, enhancing night photos |
+| Voice assistants | Understanding your speech, generating responses |
+| Netflix/Spotify | Recommending what you'll like next |
+| Email | Detecting spam, suggesting quick replies |
+| Maps | Predicting traffic, estimating arrival times |
+| Translation apps | Converting between languages in real-time |
+
+---
+
+## If You Only Remember One Thing...
+
+Deep learning is machine learning with *layers*—stacks of simple pattern-detectors that, together, can recognize complex things. The "deep" just means there are many layers, not that it requires deep thoughts.
+
+---
+
+## Mini-Check
+
+**Q: What makes deep learning "deep"?**
+
+<details>
+<summary>See answer</summary>
+
+The multiple layers in the neural network. Each layer processes information and passes it to the next, building from simple patterns to complex ones. More layers = deeper network.
+
+</details>
+
+---
+
+## Try It Yourself
+
+Ready to see layers in action? Head to the [Neural Network Builder](/maker/neural-network-builder) to stack layers and watch data flow through them.
+
+**Next up:** [Neural Networks: The Building Blocks](/workshop/neural-networks-building-blocks) — what's actually inside those layers?

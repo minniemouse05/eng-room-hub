@@ -1,0 +1,207 @@
+---
+title: "LSTMs: Longer Memory"
+description: Regular RNNs forget too quickly. LSTMs add special gates that decide what to remember and what to forget—enabling understanding across longer sequences.
+tags:
+  - ai
+  - deep-learning
+  - neural-networks
+  - lstm
+  - rnn
+  - beginner
+difficulty: beginner
+timeMinutes: 8
+relatedPlaygrounds:
+  - sequence-predictor
+updatedAt: "2025-01-22"
+---
+
+# LSTMs: Longer Memory
+
+RNNs have memory, but it's short. Important information from the beginning of a long sequence often gets lost by the end.
+
+**Long Short-Term Memory (LSTM)** networks fix this. They add special mechanisms that decide what to remember, what to forget, and what to pass on.
+
+---
+
+## The Problem LSTMs Solve
+
+Imagine reading a novel. Chapter 1 introduces the villain's secret identity. Chapter 20 reveals the twist.
+
+A basic RNN, processing word by word, might "forget" that detail from chapter 1 by the time it reaches chapter 20. The signal has degraded through hundreds of steps.
+
+LSTMs add a "highway" for information to flow across long distances without degrading.
+
+---
+
+## The Core Idea
+
+> **LSTMs use gates to control information flow—deciding what to remember, forget, and output.**
+
+Think of it like a filing system with three decisions at each step:
+
+1. **Forget gate:** "Should I throw out any old information?"
+2. **Input gate:** "What new information should I store?"
+3. **Output gate:** "What should I report to the next step?"
+
+These gates are learned—the network figures out the best rules for each task.
+
+---
+
+## How the Gates Work
+
+### Forget Gate: "What to Throw Away"
+
+Looks at the current input and previous hidden state, then decides which old memories to discard.
+
+- Output near 1 → Keep this memory
+- Output near 0 → Forget this memory
+
+**Example in translation:** When you finish a sentence, forget the old subject and get ready for a new one.
+
+### Input Gate: "What to Store"
+
+Decides which new information to add to memory.
+
+- What's worth remembering from this step?
+- How strongly should we remember it?
+
+**Example in translation:** When you encounter the main subject of a sentence, store it strongly—you'll need it later.
+
+### Output Gate: "What to Share"
+
+Decides what to output based on current memory and input.
+
+- Not all stored information is relevant right now
+- Gate controls what gets passed to the next step
+
+**Example in translation:** When generating a verb, output information about the subject (to match tense/number) but not irrelevant stored details.
+
+---
+
+## The Cell State: The Memory Highway
+
+LSTMs have two flows of information:
+
+1. **Hidden state:** Short-term working memory (like regular RNNs)
+2. **Cell state:** Long-term memory highway
+
+The cell state runs through the entire sequence with minimal interference—like a conveyor belt. Gates control what gets added or removed, but the main flow continues unimpeded.
+
+```
+Cell state: ═══════════════════════════════════════►
+                ↑              ↑              ↑
+            Forget/Add     Forget/Add     Forget/Add
+                ↑              ↑              ↑
+Hidden:    ───→■───→      ───→■───→      ───→■───→
+                ↑              ↑              ↑
+            Input 1        Input 2        Input 3
+```
+
+---
+
+## One Thing People Mix Up
+
+**"Long short-term" isn't contradictory.** The name means:
+
+- **Long:** Can remember over long sequences
+- **Short-term:** It's still a working memory, not permanent storage
+
+It's called "long short-term memory" because it extends the short-term memory of regular RNNs to span longer sequences.
+
+---
+
+## Real Applications
+
+| Application | Why LSTMs Help |
+|-------------|----------------|
+| **Machine translation** | Need to remember the subject across a long sentence |
+| **Text generation** | Maintain coherent themes over paragraphs |
+| **Sentiment analysis** | "Not bad" = good, but "not" might be far from "bad" |
+| **Speech recognition** | Sounds at the start affect meaning at the end |
+| **Stock prediction** | Long-term trends matter, not just yesterday |
+
+---
+
+## LSTM vs. Regular RNN
+
+| Aspect | Regular RNN | LSTM |
+|--------|-------------|------|
+| Memory length | Short (degrades quickly) | Long (preserved across many steps) |
+| Gate mechanisms | None | Forget, input, output gates |
+| Complexity | Simpler | More parameters to learn |
+| Training | Faster per step | Slower but more stable |
+| Best for | Short sequences | Long sequences |
+
+---
+
+## The Architecture (Simplified)
+
+At each step, an LSTM:
+
+```
+1. Forget gate decides what to remove from cell state
+2. Input gate decides what new info to add
+3. Cell state is updated (old × forget + new × input)
+4. Output gate decides what to expose
+5. Hidden state is updated based on output gate and cell state
+```
+
+The math is more complex than regular RNNs, but the intuition is simple: controlled forgetting and remembering.
+
+---
+
+## Why Gates Matter
+
+Without gates, information either:
+- Flows through unchanged (but irrelevant stuff accumulates)
+- Gets transformed at every step (but important stuff degrades)
+
+Gates provide the best of both worlds:
+- Important information flows through protected
+- Irrelevant information gets filtered out
+- New information gets added when appropriate
+
+---
+
+## A Quick Intuition
+
+Imagine you're taking notes in a lecture:
+
+**Forget gate:** "The professor corrected that point—cross out my old note"
+
+**Input gate:** "This is a key concept—write it down carefully"
+
+**Output gate:** "The student next to me asked a question—share just the relevant part"
+
+Your notebook (cell state) accumulates knowledge. Your current thought (hidden state) focuses on what's immediately relevant.
+
+---
+
+## If You Only Remember One Thing...
+
+LSTMs solve the short-memory problem of RNNs by adding gates that control what to remember and forget. This lets them understand relationships across long sequences—essential for tasks like translation, where the beginning of a sentence affects the end.
+
+---
+
+## Mini-Check
+
+**Q: What are the three gates in an LSTM and what do they do?**
+
+<details>
+<summary>See answer</summary>
+
+1. **Forget gate:** Decides what to remove from long-term memory
+2. **Input gate:** Decides what new information to store
+3. **Output gate:** Decides what to share with the next step
+
+Together, they control the flow of information through the network.
+
+</details>
+
+---
+
+## Try It Yourself
+
+Explore sequence memory in the [Sequence Predictor](/maker/sequence-predictor). Try giving it long patterns and see how well it remembers early elements.
+
+**Next up:** [Transformers: The Power of Attention](/workshop/transformers-attention) — a different approach that's revolutionizing AI.

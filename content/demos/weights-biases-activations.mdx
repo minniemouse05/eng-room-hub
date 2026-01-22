@@ -1,0 +1,200 @@
+---
+title: Weights, Biases, and Activations
+description: The three knobs that make neural networks work. How tiny numbers control whether signals pass through—and how networks learn to set them.
+tags:
+  - ai
+  - deep-learning
+  - neural-networks
+  - beginner
+difficulty: beginner
+timeMinutes: 8
+relatedPlaygrounds:
+  - neural-network-builder
+  - forward-pass-simulator
+updatedAt: "2025-01-22"
+---
+
+# Weights, Biases, and Activations
+
+Every neural network runs on three simple concepts: weights, biases, and activation functions. Get these, and you've got the foundation.
+
+No scary math required. Just intuition.
+
+---
+
+## Weights: "How Much We Trust This Connection"
+
+Imagine you're deciding where to eat dinner. Three friends give opinions:
+
+- **Friend A** (foodie): "Try the new Thai place!"
+- **Friend B** (always picks chains): "Let's do Applebee's."
+- **Friend C** (vegetarian, you're not): "The salad bar is great."
+
+You'd probably weight these opinions differently. The foodie's recommendation carries more influence. That's exactly what neural network weights do.
+
+> **Weight = how much influence one neuron's output has on the next neuron's input.**
+
+### What the Numbers Mean
+
+- **Weight of 2.0**: "This connection matters a lot—amplify the signal."
+- **Weight of 0.5**: "This connection is minor—dampen the signal."
+- **Weight of -1.0**: "This input should *decrease* my output."
+- **Weight of 0.0**: "Ignore this connection entirely."
+
+When a network learns, it's adjusting millions of these weights until they produce the right outputs.
+
+---
+
+## Biases: "The Default Nudge"
+
+Weights control connections. **Bias** controls the neuron itself—how eager (or reluctant) it is to activate.
+
+> **Bias = a constant that shifts when a neuron "turns on."**
+
+Think of it like setting a thermostat:
+
+| Bias Value | Effect |
+|------------|--------|
+| **Positive (+3)** | Neuron is eager to fire. Even weak inputs might trigger it. |
+| **Zero (0)** | Neutral. Inputs alone determine activation. |
+| **Negative (-3)** | Neuron is reluctant. Needs strong inputs to fire. |
+
+This flexibility helps neurons represent different situations. Some should activate easily. Others should be picky.
+
+---
+
+## The Math (Simplified)
+
+Here's what happens inside one neuron:
+
+```
+output = activation( (input₁ × weight₁) + (input₂ × weight₂) + ... + bias )
+```
+
+In plain English:
+1. Take each incoming value
+2. Multiply it by how much we trust that connection
+3. Add everything together
+4. Add the bias
+5. Pass through the activation function
+
+Let's trace a concrete example:
+
+| Input | Weight | Contribution |
+|-------|--------|--------------|
+| 0.7 | 1.5 | 1.05 |
+| 0.3 | -0.5 | -0.15 |
+| **Bias** | — | +0.2 |
+| **Sum** | — | **1.1** |
+
+Now this sum (1.1) goes through an activation function.
+
+---
+
+## Activation Functions: "The Gate"
+
+After all that math, the activation function decides what actually gets passed to the next layer.
+
+> **Activation function = a gate that controls which signals pass through.**
+
+Why do we need this? Without activation functions, a neural network would just be a series of linear operations—which can only model straight lines. Activation functions introduce *curves*, letting networks represent complex, non-linear patterns.
+
+### The Main Types
+
+**ReLU (Rectified Linear Unit)**
+- Rule: If positive, pass it through. If negative, output zero.
+- Like: A gate that blocks negative values.
+- Most popular for hidden layers.
+
+```
+Input: 1.1 → Output: 1.1
+Input: -0.5 → Output: 0
+```
+
+**Sigmoid**
+- Rule: Squish any number to between 0 and 1.
+- Like: A dimmer switch that smoothly transitions.
+- Often used for outputs representing probabilities.
+
+```
+Input: 1.1 → Output: ~0.75
+Input: -2.0 → Output: ~0.12
+```
+
+**Softmax**
+- Rule: Convert a list of numbers into probabilities that sum to 1.
+- Like: "Out of these options, here's how confident I am in each."
+- Used for classification outputs.
+
+---
+
+## One Thing People Mix Up
+
+**Weights and biases aren't set by humans.** You might think engineers carefully choose these values. Nope!
+
+- Networks start with random weights and biases
+- During training, they're automatically adjusted to reduce errors
+- The final values are discovered, not designed
+
+This is the "learning" in machine learning—finding the right weights and biases through practice.
+
+---
+
+## Why This Matters
+
+Understanding these three components helps you grasp:
+
+- **Why networks need lots of data:** More examples = better weight tuning
+- **Why training takes time:** Millions of weights, adjusted thousands of times
+- **Why networks can fail:** Wrong weights = wrong outputs
+- **What "learning" actually means:** Adjusting numbers until patterns emerge
+
+---
+
+## A Visual Intuition
+
+Imagine a single neuron as a voting system:
+
+```
+┌─────────────────────────────────────────┐
+│                                         │
+│  Input 1 ──[×0.8]──┐                    │
+│                    │                    │
+│  Input 2 ──[×1.2]──┼──[Sum + Bias]──[Gate]──→ Output
+│                    │                    │
+│  Input 3 ──[×-0.3]─┘                    │
+│                                         │
+└─────────────────────────────────────────┘
+```
+
+- Each input casts a vote
+- Weights determine voting power
+- Bias shifts the threshold
+- The gate (activation) decides the final say
+
+---
+
+## If You Only Remember One Thing...
+
+Weights control how much each connection matters. Biases shift when neurons activate. Activation functions add the curves that let networks model complex patterns. Together, these three components—adjusted through training—turn simple calculators into powerful pattern recognizers.
+
+---
+
+## Mini-Check
+
+**Q: Why do neural networks need activation functions?**
+
+<details>
+<summary>See answer</summary>
+
+Without activation functions, a neural network could only model linear (straight-line) relationships—no matter how many layers it has. Activation functions introduce non-linearity, letting networks learn curves, edges, and complex patterns that exist in real data.
+
+</details>
+
+---
+
+## Try It Yourself
+
+Watch weights and activations in action with the [Forward Pass Simulator](/maker/forward-pass-simulator). Adjust weights, change inputs, and see how signals flow through a network.
+
+**Next up:** [Forward Pass: Making Guesses](/workshop/forward-pass-making-guesses) — how the network actually produces an answer.

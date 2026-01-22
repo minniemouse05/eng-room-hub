@@ -6,3 +6,4 @@ export { StepProcess } from './StepProcess';
 export { ImpactScale } from './ImpactScale';
 export { KeyTakeaways } from './KeyTakeaways';
 export { TryThis } from './TryThis';
+export { AlgorithmVisualizer } from './AlgorithmVisualizer';

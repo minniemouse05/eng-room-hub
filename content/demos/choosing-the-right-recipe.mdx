@@ -1,0 +1,223 @@
+---
+title: Choosing the Right Recipe
+description: The hardest part of AI isn't the math—it's figuring out whether you need AI at all, and if so, which kind.
+tags:
+  - ai
+  - algorithms
+  - strategy
+  - problem-solving
+  - beginner
+difficulty: beginner
+timeMinutes: 10
+relatedPlaygrounds:
+  - algorithm-matcher
+updatedAt: "2025-01-20"
+---
+
+# Choosing the Right Recipe
+
+The hardest part of AI isn't the math—it's figuring out whether you need AI at all, and if so, which kind.
+
+<QuickNav items={[
+  { label: "Before you pick an algorithm", time: "2 min" },
+  { label: "The matching game", time: "3 min" },
+  { label: "The problem-solving loop", time: "3 min" },
+  { label: "When to skip AI entirely", time: "2 min" }
+]} />
+
+---
+
+## Before You Pick an Algorithm
+
+Most AI projects fail not because the algorithm was wrong, but because the problem wasn't well-defined.
+
+Before thinking about recipes, ask three questions:
+
+<StepProcess
+  title="Pre-algorithm checklist"
+  steps={[
+    {
+      title: "What exactly am I trying to predict or decide?",
+      description: "Be specific. 'Improve outcomes' isn't a problem statement. 'Predict which patients will miss their appointments' is.",
+      action: "Write it in one sentence"
+    },
+    {
+      title: "Do I have data that's relevant to this problem?",
+      description: "Is the data representative, accurate, and ethical to use? Do you have enough of it? Is it labeled correctly?",
+      action: "Describe your available data honestly"
+    },
+    {
+      title: "Would a simpler solution work?",
+      description: "A spreadsheet formula? A decision tree a human could follow? A basic rule? Don't use AI just because it sounds impressive.",
+      action: "List 2 non-AI alternatives first"
+    }
+  ]}
+/>
+
+<Callout type="key" title="The uncomfortable question">
+If a simple rule would get you 80% of the way there, you might not need AI at all. The maintenance burden of AI systems is real.
+</Callout>
+
+---
+
+## The Matching Game
+
+Once you've got a clear problem and good data, matching to an algorithm is actually pretty intuitive. Ask: **"What's the output?"**
+
+<DecisionTree
+  title="Which algorithm type?"
+  tree={{
+    question: "What kind of answer do you need?",
+    yes: {
+      question: "Is the answer a category or label you defined?",
+      yes: "Classification — sorting into predefined buckets",
+      no: {
+        question: "Is the answer a number?",
+        yes: "Regression — predicting quantities",
+        no: {
+          question: "Are you discovering unknown groups?",
+          yes: "Clustering — finding natural patterns",
+          no: "Reinforcement Learning — learning strategies through trial"
+        }
+      }
+    },
+    no: "Start with step 1: Define what you're trying to predict"
+  }}
+/>
+
+### Quick Reference Table
+
+| If you need to... | Use... | Classic example |
+|---|---|---|
+| Sort things into categories you define | Classification | Spam filter, fraud detection |
+| Predict a number | Regression | Price prediction, demand forecasting |
+| Discover natural groups | Clustering | Customer segments, anomaly detection |
+| Learn a strategy through practice | Reinforcement Learning | Game AI, robotics |
+
+<Callout type="tip" title="Real systems often combine approaches">
+A recommendation engine might use clustering to find user groups, classification to predict what you'll click, and reinforcement learning to optimize the sequence of recommendations. Don't think of these as mutually exclusive.
+</Callout>
+
+---
+
+## The Problem-Solving Loop
+
+Good AI development isn't a straight line—it's a loop. You'll cycle through these steps multiple times.
+
+<StepProcess
+  title="The AI development cycle"
+  steps={[
+    {
+      title: "Define the problem precisely",
+      description: "What are you predicting? What does success look like? What's the cost of errors?",
+      action: "Write a one-paragraph problem statement"
+    },
+    {
+      title: "Gather and audit your data",
+      description: "Collect relevant data. Check for bias, gaps, and quality issues. This step takes longer than you expect.",
+      action: "Create a data inventory with known limitations"
+    },
+    {
+      title: "Choose an approach",
+      description: "Start simple. You can always upgrade to something fancier if the simple approach doesn't work.",
+      action: "Pick your algorithm type based on the output"
+    },
+    {
+      title: "Train and validate",
+      description: "Train on training data, tune on validation data. Watch for overfitting.",
+      action: "Track both training and validation metrics"
+    },
+    {
+      title: "Evaluate honestly on test data",
+      description: "Use fresh data the model has never seen. Be honest about the results.",
+      action: "Document performance on realistic scenarios"
+    },
+    {
+      title: "Deploy with monitoring",
+      description: "Put it in production carefully. Set up alerts. Have a rollback plan.",
+      action: "Define what 'good enough' looks like in production"
+    },
+    {
+      title: "Learn and iterate",
+      description: "Real-world performance teaches you things training couldn't. Feed those lessons back into the cycle.",
+      action: "Schedule regular performance reviews"
+    }
+  ]}
+/>
+
+<Callout type="warning" title="Where most failures happen">
+Most AI projects fail at steps 1, 2, and 7—not step 3. The algorithm choice is often the easiest part. Problem definition and data quality are where things go wrong.
+</Callout>
+
+---
+
+## When to Skip AI Entirely
+
+AI isn't always the answer. Here's when simpler solutions might be better:
+
+<ComparisonTable
+  headers={["Consider AI when...", "Skip AI when..."]}
+  rows={[
+    { label: "Data volume", values: ["You have lots of relevant examples", "You have very little data"] },
+    { label: "Pattern complexity", values: ["Patterns are too complex for humans to write as rules", "Simple rules would work (if X > Y, then Z)"] },
+    { label: "Error tolerance", values: ["Some errors are acceptable, humans can review", "Errors are catastrophic and irreversible"] },
+    { label: "Explainability", values: ["You can tolerate some 'black box' behavior", "You must explain every decision precisely"] },
+    { label: "Maintenance", values: ["You have capacity to monitor and update", "Set-it-and-forget-it is the only option"] }
+  ]}
+/>
+
+<Callout type="pitfall" title="'We need more advanced AI'">
+When an AI system isn't working, the fix is rarely a fancier algorithm. It's usually better data, a clearer problem definition, or honest acknowledgment that this problem isn't a good fit for AI.
+</Callout>
+
+---
+
+## Common Misconceptions
+
+<Callout type="pitfall" title="'AI can solve this' vs. 'AI should solve this'">
+Just because an algorithm could do something doesn't mean it's the right choice. Consider: cost, explainability, maintenance burden, and whether a simpler approach would work.
+</Callout>
+
+<Callout type="pitfall" title="Starting with the algorithm">
+"We want to use machine learning" is not a project. "We want to reduce missed appointments by predicting which patients are at risk" is a project. Start with the problem, not the technology.
+</Callout>
+
+---
+
+## Test Yourself
+
+<Callout type="checklist" title="Mini-check">
+**Question:** A nonprofit wants to identify which of their existing donors are most likely to give again. Classification, regression, clustering, or reinforcement learning?
+
+**Answer:** Classification—you're sorting donors into "likely to give again" vs. "unlikely." (Though you might also use regression if you want to predict *how much* they'll give.)
+</Callout>
+
+---
+
+## Key Takeaways
+
+<KeyTakeaways items={[
+  "Start with the problem, not the algorithm. 'We should use AI' is not a strategy.",
+  "Match the output type: categories → classification, numbers → regression, unknown groups → clustering, strategies → reinforcement learning",
+  "Most AI failures are problem-definition or data failures, not algorithm failures",
+  "Real systems often combine multiple algorithm types",
+  "Sometimes the right answer is: don't use AI"
+]} />
+
+---
+
+## Try This Next
+
+<TryThis
+  title="Algorithm Matcher"
+  description="Read real-world scenarios and match each one to the best algorithm type. Build your intuition through practice."
+  href="/maker/algorithm-matcher"
+/>
+
+---
+
+## Keep Learning
+
+**Previous:** [Data: Practice, Quiz, Final Exam](/workshop/data-practice-quiz-exam)
+
+**Related:** [Evaluating AI Solutions](/workshop/evaluating-ai-solutions) | [What Are LLMs?](/workshop/what-are-llms)

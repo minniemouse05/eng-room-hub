@@ -168,6 +168,35 @@ export const playgroundCollections: PlaygroundCollection[] = [
     ],
     isFeatured: true,
   },
+
+  // ----------------------------------------
+  // AI ALGORITHMS TOOLKIT
+  // Aligns with AI Algorithms module
+  // ----------------------------------------
+  {
+    id: 'ai-algorithms-toolkit',
+    title: 'AI Algorithms Toolkit',
+    description:
+      'Interactive visualizations and quizzes to understand the four main types of AI algorithms. See classification, regression, clustering, and reinforcement learning in action.',
+    icon: '🧪',
+    color: '#EC4899', // pink
+    audience: ['learner', 'builder', 'leader'],
+    difficulty: 'beginner',
+    stack: 'ai',
+    playgroundSlugs: [
+      'algorithm-type-explorer',
+      'data-split-simulator',
+      'bias-detector',
+      'algorithm-matcher',
+    ],
+    relatedModuleId: 'ai-algorithms',
+    relatedLessonSlugs: [
+      'four-ways-machines-learn',
+      'data-practice-quiz-exam',
+      'choosing-the-right-recipe',
+    ],
+    isFeatured: true,
+  },
 ];
 
 // ============================================
@@ -269,6 +298,23 @@ export const lessonPlaygroundLinks: LessonPlaygroundLink[] = [
     lessonSlug: 'evaluating-ai-solutions',
     playgroundSlugs: ['ai-vendor-assessment'],
     collectionId: 'responsible-ai-tools',
+  },
+
+  // AI Algorithms lessons
+  {
+    lessonSlug: 'four-ways-machines-learn',
+    playgroundSlugs: ['algorithm-type-explorer', 'algorithm-matcher'],
+    collectionId: 'ai-algorithms-toolkit',
+  },
+  {
+    lessonSlug: 'data-practice-quiz-exam',
+    playgroundSlugs: ['data-split-simulator', 'bias-detector'],
+    collectionId: 'ai-algorithms-toolkit',
+  },
+  {
+    lessonSlug: 'choosing-the-right-recipe',
+    playgroundSlugs: ['algorithm-matcher'],
+    collectionId: 'ai-algorithms-toolkit',
   },
 ];
 

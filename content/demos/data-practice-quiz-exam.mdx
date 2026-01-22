@@ -1,0 +1,206 @@
+---
+title: "Data: Practice, Quiz, Final Exam"
+description: An AI is only as good as its practice problems—and how you quiz it before the real test matters more than you'd think.
+tags:
+  - ai
+  - data
+  - training
+  - bias
+  - evaluation
+  - beginner
+difficulty: beginner
+timeMinutes: 12
+relatedPlaygrounds:
+  - data-split-simulator
+  - bias-detector
+updatedAt: "2025-01-20"
+---
+
+# Data: Practice, Quiz, Final Exam
+
+An AI is only as good as its practice problems—and how you quiz it before the real test matters more than you'd think.
+
+<QuickNav items={[
+  { label: "Why data is everything", time: "2 min" },
+  { label: "The three data splits", time: "4 min" },
+  { label: "When ingredients go bad", time: "4 min" },
+  { label: "What to watch for", time: "2 min" }
+]} />
+
+---
+
+## Why Data Is Everything
+
+Here's a truth that took the AI field decades to fully appreciate: the algorithm matters less than the data.
+
+A simple algorithm with great data usually beats a fancy algorithm with bad data.
+
+<Callout type="key" title="The ingredients metaphor">
+Data is your ingredient list. Garbage ingredients, garbage meal—no matter how talented the chef or how expensive the kitchen.
+</Callout>
+
+When someone pitches you an AI solution, your first question shouldn't be "what algorithm does it use?" It should be "what data was it trained on?"
+
+---
+
+## The Three Data Splits
+
+When training an AI, we split data into three buckets. Each serves a different purpose—and skipping any of them causes problems.
+
+### Training Data = Practice Problems
+
+This is what the AI learns from. It sees thousands of examples—emails labeled spam/not-spam, houses with their sale prices—and figures out the patterns.
+
+<Callout type="tip" title="If this feels fuzzy">
+Imagine studying for a test by doing practice problems. The more varied and realistic your practice, the better you'll do on the real thing.
+</Callout>
+
+**What happens with too little training data?** The AI doesn't see enough examples to learn reliable patterns. It's like studying from only 5 practice problems before a big exam.
+
+---
+
+### Validation Data = Pop Quizzes
+
+While training, we periodically test the AI on data it hasn't seen yet. This helps us tune the recipe—adjust settings, catch problems early.
+
+**Why it matters:** Without validation, an AI might just memorize the training data instead of learning general patterns.
+
+<Callout type="warning" title="Overfitting: when memorization beats understanding">
+"Overfitting" is when an AI memorizes specific training examples instead of learning transferable patterns. It's like a student who memorizes answers word-for-word but can't handle a rephrased question.
+
+Signs of overfitting: Training accuracy is 98%, but validation accuracy is only 65%.
+</Callout>
+
+---
+
+### Test Data = The Final Exam
+
+Once training is done, we evaluate on completely fresh data. This tells us how the AI will actually perform in the real world.
+
+**The golden rule:** Never peek at test data during training. That's cheating—and it gives you false confidence about how well your AI will perform.
+
+<ComparisonTable
+  headers={["Training", "Validation", "Test"]}
+  rows={[
+    { label: "Purpose", values: ["Learn patterns", "Tune & catch problems", "Final evaluation"] },
+    { label: "Analogy", values: ["Practice problems", "Pop quizzes", "Final exam"] },
+    { label: "When used", values: ["During learning", "During learning", "After learning is done"] },
+    { label: "Typical split", values: ["70%", "15%", "15%"] }
+  ]}
+/>
+
+---
+
+## When Ingredients Go Bad: Bias
+
+Here's the uncomfortable truth: if your training data contains biases, your AI will learn those biases. And often amplify them.
+
+<Callout type="example" title="A concrete example">
+A hiring algorithm trained on a company's historical hiring data. If that company historically hired fewer women for technical roles, the AI learns "women = less likely to be good hires."
+
+The AI isn't malicious. It's just pattern-matching on biased ingredients.
+</Callout>
+
+### Where Bias Hides
+
+Bias isn't always obvious. It can lurk in:
+
+| Hidden in... | Example |
+|---|---|
+| **Who's included** | Training data from only wealthy neighborhoods |
+| **Who's excluded** | Medical data that underrepresents certain demographics |
+| **How labels were assigned** | "Successful employee" defined by managers with their own biases |
+| **What features you chose** | Using zip code as a proxy for things correlated with race |
+| **Historical inequities** | Loan approval data from decades of discriminatory lending |
+
+<Callout type="pitfall" title="More data isn't always better">
+10,000 biased examples will produce a more confidently biased AI than 1,000 biased examples. Volume doesn't fix representativeness problems.
+</Callout>
+
+---
+
+## What to Watch For
+
+<StepProcess
+  title="Data red flags checklist"
+  steps={[
+    {
+      title: "Ask who's missing",
+      description: "What groups or scenarios might be underrepresented in the training data? If the AI was trained mostly on data from one demographic, it may perform poorly on others.",
+      action: "List 3 groups who might be underrepresented"
+    },
+    {
+      title: "Check for historical inequities",
+      description: "If training data reflects past human decisions, those decisions may have been biased. The AI will learn to replicate those patterns.",
+      action: "Ask: what historical biases might be encoded?"
+    },
+    {
+      title: "Look at validation vs. training accuracy",
+      description: "If training accuracy is much higher than validation accuracy, the AI may be memorizing rather than learning. That's a red flag.",
+      action: "Request both metrics, not just one"
+    },
+    {
+      title: "Ask about test data",
+      description: "Was the AI evaluated on truly fresh data? Is that test data representative of the real-world population it will serve?",
+      action: "Ask how test data was collected"
+    }
+  ]}
+/>
+
+---
+
+## Common Misconceptions
+
+<Callout type="pitfall" title="'The AI decided' is misleading">
+The AI learned from human-generated data, which reflects human decisions and biases. The AI is downstream of those choices. When an AI produces a biased outcome, the root cause is usually the training data.
+</Callout>
+
+<Callout type="pitfall" title="'We just need more data'">
+More data helps only if it's more *representative* data. Collecting 10x more data from the same biased source just gives you a more confident biased model.
+</Callout>
+
+---
+
+## Test Yourself
+
+<Callout type="checklist" title="Mini-check">
+**Question:** You're building an AI to recommend job candidates. Your training data comes from the past 10 years of hiring decisions at a company with known diversity problems. What's the risk?
+
+**Answer:** The AI will likely learn and replicate those diversity problems—recommending candidates who match the biased historical pattern, even if that pattern was unfair.
+</Callout>
+
+---
+
+## Key Takeaways
+
+<KeyTakeaways items={[
+  "Training data = what AI learns from (practice problems)",
+  "Validation data = how we tune and prevent memorization (pop quizzes)",
+  "Test data = final evaluation on unseen data (final exam)",
+  "Biased data → biased AI, often with amplification",
+  "Always ask: who's missing from this data? What inequities might be encoded?"
+]} />
+
+---
+
+## Try This Next
+
+<TryThis
+  title="Data Split Simulator"
+  description="Adjust how data is split between training, validation, and test sets—then watch how it affects whether the AI learns well or just memorizes."
+  href="/maker/data-split-simulator"
+/>
+
+<TryThis
+  title="Bias Detector"
+  description="Build a simple hiring AI with different datasets and see how the training data's composition directly shapes who gets recommended."
+  href="/maker/bias-detector"
+/>
+
+---
+
+## Keep Learning
+
+**Next:** [Choosing the Right Recipe](/workshop/choosing-the-right-recipe) — How to match problems to algorithms (and when to skip AI entirely)
+
+**Previous:** [Four Ways Machines Learn](/workshop/four-ways-machines-learn)

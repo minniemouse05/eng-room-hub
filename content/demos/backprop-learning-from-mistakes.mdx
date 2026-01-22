@@ -1,0 +1,215 @@
+---
+title: "Backpropagation: Learning from Mistakes"
+description: How neural networks actually learn. When a guess is wrong, the error flows backward, nudging every weight toward a better answer.
+tags:
+  - ai
+  - deep-learning
+  - neural-networks
+  - beginner
+difficulty: beginner
+timeMinutes: 9
+relatedPlaygrounds:
+  - backprop-visualizer
+  - forward-pass-simulator
+updatedAt: "2025-01-22"
+---
+
+# Backpropagation: Learning from Mistakes
+
+The forward pass makes guesses. But guesses are often wrong—especially at first.
+
+**Backpropagation** is how the network learns from those mistakes. It figures out which weights caused the error and nudges them toward better values.
+
+---
+
+## The Core Idea
+
+> **Backpropagation = sending the correction backward through the network.**
+
+Here's the basic flow:
+
+1. Make a guess (forward pass)
+2. Compare guess to the right answer (calculate error)
+3. Ask: "Which weights contributed most to this error?"
+4. Adjust those weights slightly
+5. Repeat thousands of times
+
+Each cycle, the network gets a little better.
+
+---
+
+## A Simple Analogy
+
+Imagine you're learning to throw darts blindfolded.
+
+1. You throw (make a guess)
+2. A friend tells you: "You were 3 inches too far right" (the error)
+3. You adjust your aim slightly left
+4. You throw again
+5. Repeat until you hit the target
+
+Backpropagation is the "feedback" step—figuring out which direction to adjust and by how much.
+
+---
+
+## Step by Step
+
+### Step 1: Calculate the Error
+
+After a forward pass, compare the network's output to the correct answer.
+
+```
+Network output:  [0.89 cat, 0.08 dog, 0.03 bird]
+Correct answer:  [1.00 cat, 0.00 dog, 0.00 bird]
+```
+
+The error: the network said 89% cat, but it should be 100% sure.
+
+This difference gets quantified as a single "loss" number. Lower loss = better predictions.
+
+### Step 2: Work Backward
+
+Now the clever part. The network asks:
+
+> "Which weights in the output layer contributed to this error?"
+
+It calculates how much each weight in the last layer affected the loss. Weights that pushed the output in the wrong direction get flagged.
+
+### Step 3: Keep Going Back
+
+Then it asks the same question about the layer before that:
+
+> "Which weights in this hidden layer contributed to the error that reached the output?"
+
+Layer by layer, the error signal propagates backward—hence "backpropagation."
+
+### Step 4: Adjust the Weights
+
+Once we know how much each weight contributed, we nudge them:
+
+- Weights that increased error → decrease slightly
+- Weights that decreased error → increase slightly
+
+The size of each nudge is controlled by the **learning rate**—how big the steps are.
+
+### Step 5: Repeat (A Lot)
+
+One pass through the data barely changes anything. But do this thousands or millions of times:
+
+- Each time, the weights shift slightly toward better values
+- Errors gradually decrease
+- The network "learns" to make accurate predictions
+
+---
+
+## Why It Works
+
+The magic is in how the math connects everything.
+
+Each weight's adjustment is proportional to:
+- How wrong the output was (bigger error = bigger adjustment)
+- How much that specific weight influenced the output
+
+Weights that barely affected the error get tiny adjustments. Weights that caused major problems get bigger corrections.
+
+Over time, the network finds a set of weights that minimizes errors across all your training examples.
+
+---
+
+## One Thing People Mix Up
+
+**Learning doesn't happen instantly.** A single backpropagation pass makes tiny changes.
+
+The network needs many rounds of:
+- See example → guess → check → adjust → repeat
+
+This is why training can take hours or days. Millions of weight adjustments, each one a small step toward accuracy.
+
+---
+
+## The Training Loop
+
+Backpropagation is one step in a larger process called the **training loop**:
+
+```
+┌─────────────────────────────────────────────────┐
+│                                                 │
+│   1. Forward Pass    (make a guess)             │
+│           ↓                                     │
+│   2. Calculate Loss  (how wrong was it?)        │
+│           ↓                                     │
+│   3. Backpropagation (which weights caused it?) │
+│           ↓                                     │
+│   4. Update Weights  (nudge toward better)      │
+│           ↓                                     │
+│   5. Repeat with next example                   │
+│                                                 │
+└─────────────────────────────────────────────────┘
+```
+
+Networks might run this loop millions of times before they're "trained."
+
+---
+
+## Learning Rate: How Big Are the Steps?
+
+The **learning rate** controls adjustment size:
+
+| Learning Rate | Effect |
+|---------------|--------|
+| Too high | Overcorrects, bounces around, never settles |
+| Too low | Barely changes, takes forever to learn |
+| Just right | Steady improvement toward good weights |
+
+Finding the right learning rate is part of the art of training neural networks.
+
+---
+
+## Visualizing the Error Flow
+
+Picture the error flowing like water upstream:
+
+```
+Output Layer    ← Error starts here
+      ↑
+      │  (How much did each weight contribute?)
+      ↓
+Hidden Layer 2  ← Error propagates back
+      ↑
+      │
+      ↓
+Hidden Layer 1  ← Error keeps flowing
+      ↑
+      │
+      ↓
+Input Layer     ← Error reaches all the way back
+```
+
+Every connection gets a signal about how to adjust.
+
+---
+
+## If You Only Remember One Thing...
+
+Backpropagation sends the error backward through the network, figuring out which weights caused the mistake. Then it nudges each weight slightly in the right direction. Repeat this thousands of times, and the network learns to make accurate predictions.
+
+---
+
+## Mini-Check
+
+**Q: Why is it called "backpropagation"?**
+
+<details>
+<summary>See answer</summary>
+
+Because the error signal **propagates backward** through the network—from the output layer back toward the input. At each layer, the algorithm calculates how much each weight contributed to the error, then adjusts accordingly.
+
+</details>
+
+---
+
+## Try It Yourself
+
+Watch errors flow backward in the [Backprop Visualizer](/maker/backprop-visualizer). See how wrong predictions create error signals that ripple back through every layer.
+
+**Next up:** [CNNs: Seeing with Machines](/workshop/cnns-seeing-with-machines) — neural networks designed specifically for images.
