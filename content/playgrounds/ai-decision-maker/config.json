@@ -3,6 +3,7 @@
   "title": "How AI Makes Decisions",
   "description": "See inside an AI's decision-making process! Adjust factors and weights to understand how AI recommendation systems work.",
   "tags": ["ai-fundamentals"],
+  "difficulty": "beginner",
   "stack": "ai",
   "relatedDemos": ["intro-to-ai", "types-of-ai"],
   "hideCode": true,

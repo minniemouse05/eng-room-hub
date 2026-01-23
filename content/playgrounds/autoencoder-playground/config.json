@@ -3,6 +3,7 @@
   "title": "Autoencoder Playground",
   "description": "Compress data through a bottleneck and watch it get reconstructed. See how much information survives the squeeze.",
   "tags": ["deep-learning"],
+  "difficulty": "beginner",
   "stack": "ai",
   "relatedDemos": ["autoencoders-compress-learn"],
   "hideCode": true,

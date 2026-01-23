@@ -3,6 +3,7 @@
   "title": "Neural Network Builder",
   "description": "Stack layers, connect neurons, and watch data flow through your custom network. See how adding layers changes what the network can learn.",
   "tags": ["deep-learning"],
+  "difficulty": "beginner",
   "stack": "ai",
   "relatedDemos": ["what-is-deep-learning", "neural-networks-building-blocks"],
   "hideCode": true,

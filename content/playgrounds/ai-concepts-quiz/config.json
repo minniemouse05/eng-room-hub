@@ -3,6 +3,7 @@
   "title": "AI Concepts Quiz",
   "description": "Test your understanding of artificial intelligence fundamentals with this interactive quiz. Perfect for beginners!",
   "tags": ["ai-fundamentals"],
+  "difficulty": "beginner",
   "stack": "ai",
   "relatedDemos": ["intro-to-ai", "ai-history", "types-of-ai"],
   "hideCode": true,

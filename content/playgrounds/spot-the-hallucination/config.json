@@ -3,6 +3,7 @@
   "title": "Spot the Hallucination",
   "description": "Can you tell when AI is making things up? Test your skills at identifying potential AI hallucinations in this interactive quiz!",
   "tags": ["llm"],
+  "difficulty": "beginner",
   "stack": "ai",
   "relatedDemos": ["llm-limitations", "how-llms-work"],
   "hideCode": true,

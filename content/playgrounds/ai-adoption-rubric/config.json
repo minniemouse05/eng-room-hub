@@ -3,6 +3,7 @@
   "title": "AI Adoption Readiness Rubric",
   "description": "Assess your organization's readiness for AI adoption across five dimensions: goals, data, culture, capacity, and expectations. Get a clear picture of where you stand.",
   "tags": ["applications"],
+  "difficulty": "intermediate",
   "stack": "react",
   "relatedDemos": ["ai-in-business"],
   "hideCode": true,

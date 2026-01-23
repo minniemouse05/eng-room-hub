@@ -1,141 +1,101 @@
 # Design Hub House
 
-An interactive learning hub for design systems, tools, and code. Users explore a virtual "house" with three rooms: an AI-powered Entryway guide, a Workshop with tool demos, and a Maker Studio with interactive coding playgrounds.
+An interactive learning hub for AI literacy, design systems, and code. Users explore a virtual "house" with three rooms: an AI-powered Entryway guide, a Workshop with tool demos, and a Maker Studio with interactive coding playgrounds.
 
-## Architecture Overview
-
-```
-design-hub-house/
-├── content/                    # Content files (MDX demos, playground configs)
-│   ├── demos/                  # MDX files for tool demos
-│   │   └── *.mdx              # Each file is a demo with frontmatter
-│   └── playgrounds/           # Playground configurations
-│       └── [slug]/            # Each folder is a playground
-│           ├── config.json    # Playground metadata and file contents
-│           └── *.tsx/*.css    # Optional external files
-├── src/
-│   ├── app/                   # Next.js App Router pages
-│   │   ├── page.tsx           # House Map landing page
-│   │   ├── entryway/          # AI chatbot room
-│   │   ├── workshop/          # Tool demos index + [slug]
-│   │   ├── maker/             # Playgrounds index + [slug]
-│   │   └── api/chat/          # Chat API route
-│   ├── components/
-│   │   ├── ui/                # shadcn/ui components
-│   │   ├── shared/            # Shared components (Breadcrumbs, TagBadge, etc.)
-│   │   ├── house/             # House map components
-│   │   ├── workshop/          # Workshop-specific components
-│   │   ├── maker/             # Maker studio components
-│   │   └── entryway/          # Chat interface components
-│   ├── lib/                   # Utilities
-│   │   ├── content.ts         # Content loading functions
-│   │   ├── mdx.tsx            # MDX rendering
-│   │   ├── rag.ts             # RAG indexing and search
-│   │   ├── rooms.ts           # Room configuration
-│   │   └── utils.ts           # General utilities
-│   └── types/                 # TypeScript types
-└── public/                    # Static assets
-```
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18+
-- npm or yarn
-
-### Installation
+## Quick Start
 
 ```bash
-# Clone the repository
-git clone <repo-url>
-cd design-hub-house
+# Prerequisites: Node.js 18+
 
 # Install dependencies
 npm install
 
-# Copy environment file
+# Copy environment file (optional, for AI chat)
 cp .env.example .env.local
+# Add ANTHROPIC_API_KEY=sk-ant-... to .env.local
 
-# Add your Anthropic API key to .env.local (optional, for AI chat)
-# ANTHROPIC_API_KEY=your_key_here
-
-# Run the development server
+# Start development server
 npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) to see the app.
 
-## Environment Variables
+### Available Commands
 
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `ANTHROPIC_API_KEY` | No* | Anthropic API key for the AI chatbot. Without it, the chat will show a helpful fallback message. |
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Start development server |
+| `npm run build` | Production build (includes TypeScript check) |
+| `npm run lint` | Run ESLint |
+| `npm run start` | Start production server |
+| `npm run update-rag` | Crawl external sources and update RAG content |
+| `npm run update-rag:dry` | Preview what will be crawled (dry run) |
 
-*The app works without an API key, but the AI chatbot will be limited.
+### Key Folders
 
-## Adding Content
+| Folder | Purpose |
+|--------|---------|
+| `content/demos/` | Workshop lesson MDX files |
+| `content/playgrounds/` | Maker Studio playground configs |
+| `src/app/` | Next.js App Router pages and API routes |
+| `src/lib/` | Content loading, RAG, modules, utilities |
+| `src/types/` | TypeScript interfaces |
+| `scripts/` | Build scripts and RAG crawler config |
 
-### Adding a Demo (MDX)
-
-1. Create a new file in `content/demos/` with the `.mdx` extension:
-
-```mdx
----
-title: Your Demo Title
-description: A brief description of what this demo covers.
-tags:
-  - tag1
-  - tag2
-difficulty: beginner | intermediate | advanced
-timeMinutes: 20
-relatedPlaygrounds:
-  - playground-slug
-updatedAt: "2024-01-15"
 ---
 
-# Your Content Here
+## Content Authoring Guide
 
-Write your demo content using Markdown and MDX.
+This section explains how to add new content to the hub. See also: [CONTRIBUTING.md](./docs/CONTRIBUTING.md) for detailed conventions.
 
-## Code Examples
+### 1. Add a New Maker Studio Playground
 
-\`\`\`tsx
-function Example() {
-  return <div>Hello World</div>;
-}
-\`\`\`
-```
+Playgrounds are interactive code editors powered by Sandpack. Users can edit and run code directly in the browser.
 
-2. The demo will automatically appear in the Workshop.
-
-### Adding a Playground
-
-1. Create a new folder in `content/playgrounds/` with your playground slug:
+#### File Location
 
 ```
-content/playgrounds/my-playground/
-├── config.json
+content/playgrounds/{slug}/config.json
 ```
 
-2. Create `config.json` with the following structure:
+Each playground lives in its own folder. The folder name becomes the URL slug.
+
+#### Required Fields
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `slug` | string | Yes | URL-safe identifier (must match folder name) |
+| `title` | string | Yes | Display title |
+| `description` | string | Yes | What users will learn/build |
+| `tags` | string[] | Yes | Topic tags ([see taxonomy](#tag-taxonomy)) |
+| `difficulty` | string | Yes | `beginner` \| `intermediate` \| `advanced` |
+| `stack` | string | Yes | `js` \| `ts` \| `react` \| `css` \| `ai` |
+| `relatedDemos` | string[] | Yes | Lesson slugs to link (can be empty `[]`) |
+| `files` | array | Yes | Files for the code editor |
+| `remixIdeas` | string[] | No | Suggestions for extending the playground |
+| `hideCode` | boolean | No | Hide code editor (useful for quizzes) |
+
+#### Copy-Paste Example
+
+Create `content/playgrounds/my-playground/config.json`:
 
 ```json
 {
   "slug": "my-playground",
   "title": "My Playground Title",
-  "description": "What users will build in this playground.",
-  "tags": ["react", "components"],
+  "description": "Learn how to build X by doing Y.",
+  "tags": ["ai-fundamentals"],
+  "difficulty": "beginner",
   "stack": "react",
-  "relatedDemos": ["demo-slug"],
+  "relatedDemos": ["intro-to-ai"],
   "remixIdeas": [
-    "Idea 1 for extending the playground",
-    "Idea 2"
+    "Add a dark mode toggle",
+    "Connect to a real API"
   ],
   "files": [
     {
       "path": "/App.tsx",
-      "code": "import React from 'react';\n\nexport default function App() {\n  return <div>Hello World</div>;\n}"
+      "code": "export default function App() {\n  return <h1>Hello World</h1>;\n}"
     },
     {
       "path": "/styles.css",
@@ -145,74 +105,168 @@ content/playgrounds/my-playground/
 }
 ```
 
-3. The playground will automatically appear in the Maker Studio.
+The playground will automatically appear at `/maker/my-playground`.
 
-### Content Field Reference
+#### Linking from a Workshop Lesson
 
-#### Demo Frontmatter
+In your MDX lesson, add the playground slug to `relatedPlaygrounds`:
 
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `title` | string | Yes | Demo title |
-| `description` | string | Yes | Brief description |
-| `tags` | string[] | Yes | Topic tags for filtering |
-| `difficulty` | `beginner` \| `intermediate` \| `advanced` | Yes | Skill level |
-| `timeMinutes` | number | Yes | Estimated reading time |
-| `relatedPlaygrounds` | string[] | No | Playground slugs to link |
-| `updatedAt` | string | Yes | Last update date (YYYY-MM-DD) |
-
-#### Playground Config
-
-| Field | Type | Required | Description |
-|-------|------|----------|-------------|
-| `slug` | string | Yes | URL-safe identifier |
-| `title` | string | Yes | Playground title |
-| `description` | string | Yes | What users will build |
-| `tags` | string[] | Yes | Topic tags for filtering |
-| `stack` | `js` \| `ts` \| `react` | Yes | Technology stack |
-| `relatedDemos` | string[] | No | Demo slugs to link |
-| `remixIdeas` | string[] | No | Suggestions for extending |
-| `files` | array | Yes | Files for the sandbox |
-
-## How RAG Indexing Works
-
-The AI chatbot uses Retrieval-Augmented Generation (RAG) to answer questions about the hub's content:
-
-1. **Indexing**: When the chat API is first called, all demos and playgrounds are indexed:
-   - Demo content is chunked into ~500 character segments
-   - Playground metadata and code are similarly processed
-   - Each chunk includes source metadata (type, slug, title)
-
-2. **Search**: When a user asks a question:
-   - The query is tokenized and matched against indexed chunks
-   - Simple TF-IDF-like scoring ranks relevance
-   - Top 5 most relevant chunks are retrieved
-
-3. **Context Building**: Retrieved chunks are formatted into context:
-   - Grouped by source (demo or playground)
-   - Links to source pages are included
-   - Context is injected into the system prompt
-
-4. **Response**: The AI model generates a response:
-   - Uses the context to provide accurate information
-   - Includes links to relevant pages
-   - Cites sources when appropriate
-
-### Updating External RAG Content
-
-The RAG system includes pre-indexed content from external sources (e.g., The Engine Room website, OrgSec Wiki). Use the update script to refresh this content:
-
-```bash
-# Preview what will be crawled (dry run)
-npm run update-rag:dry
-
-# Crawl all sources and update the content file
-npm run update-rag
+```yaml
+---
+title: My Lesson
+relatedPlaygrounds:
+  - my-playground
+---
 ```
 
-#### Configuration
+---
 
-Edit `scripts/rag-config.json` to configure sources:
+### 2. Add a New Workshop Lesson (and Module Wiring)
+
+Workshop lessons are MDX files with interactive components. Lessons are organized into **Modules** (ordered learning paths).
+
+#### File Location
+
+```
+content/demos/{slug}.mdx
+```
+
+The filename (without `.mdx`) becomes the URL slug.
+
+#### Required Frontmatter Fields
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `title` | string | Yes | Lesson title |
+| `description` | string | Yes | 1-2 sentence summary |
+| `tags` | string[] | Yes | Topic tags ([see taxonomy](#tag-taxonomy)) |
+| `difficulty` | string | Yes | `beginner` \| `intermediate` \| `advanced` |
+| `timeMinutes` | number | Yes | Estimated reading time |
+| `relatedPlaygrounds` | string[] | Yes | Playground slugs (can be empty `[]`) |
+| `updatedAt` | string | Yes | ISO date `"YYYY-MM-DD"` |
+
+#### Copy-Paste Example
+
+Create `content/demos/my-lesson.mdx`:
+
+```mdx
+---
+title: My Lesson Title
+description: A clear, one-sentence description of what readers will learn.
+tags:
+  - ai-fundamentals
+  - responsible-ai
+difficulty: beginner
+timeMinutes: 10
+relatedPlaygrounds:
+  - my-playground
+updatedAt: "2025-01-23"
+---
+
+# My Lesson Title
+
+Introduction paragraph that hooks the reader.
+
+## First Section
+
+Your content here. Use these MDX components:
+
+<Callout type="key" title="Key Concept">
+Important information the reader must understand.
+</Callout>
+
+<Callout type="warning" title="Watch Out">
+Common mistakes or pitfalls.
+</Callout>
+
+## Key Takeaways
+
+<KeyTakeaways items={[
+  "First key point",
+  "Second key point",
+  "Third key point"
+]} />
+```
+
+#### Attaching a Lesson to a Module
+
+Modules are defined in `src/lib/modules.ts`. To add your lesson to a module:
+
+1. Open `src/lib/modules.ts`
+2. Find the relevant module (or create a new one)
+3. Add your lesson slug to the `lessonSlugs` array:
+
+```typescript
+{
+  id: "ai-fundamentals",
+  title: "AI Fundamentals",
+  // ... other fields
+  lessonSlugs: [
+    "intro-to-ai",
+    "types-of-ai",
+    "my-lesson"  // ← Add here
+  ],
+}
+```
+
+**Lesson ordering**: Lessons appear in the order listed in `lessonSlugs`. First = earliest in the learning path.
+
+#### Creating a New Module
+
+Add a new object to the `modules` array in `src/lib/modules.ts`:
+
+```typescript
+{
+  id: "my-module",  // kebab-case, unique
+  title: "My Module Title",
+  description: "What learners will achieve in this module.",
+  icon: "🎯",  // Emoji
+  color: "#6A2CFF",  // Hex color
+  audience: ["learner", "builder"],  // Who it's for
+  difficultyRange: ["beginner", "intermediate"],  // [min, max]
+  estimatedMinutes: 45,  // Total time for all lessons
+  prerequisites: ["ai-fundamentals"],  // Module IDs (optional)
+  lessonSlugs: [
+    "my-first-lesson",
+    "my-second-lesson"
+  ],
+  isStartHere: false,  // Recommended starting point?
+  isFeatured: true,  // Show on landing page?
+}
+```
+
+---
+
+### 3. Add New Sources to the AI Chatbot
+
+The AI chatbot uses RAG (Retrieval-Augmented Generation) to answer questions. It indexes three types of content:
+
+| Source Type | Location | Indexed Automatically? |
+|-------------|----------|------------------------|
+| Workshop lessons | `content/demos/*.mdx` | Yes, at runtime |
+| Playgrounds | `content/playgrounds/*/config.json` | Yes, at runtime |
+| External websites | `src/lib/engine-room-content.ts` | No, requires crawl |
+
+#### How Indexing Works
+
+1. **Internal content** (demos/playgrounds): Indexed automatically when the chat API is called. Content is chunked into ~500 character segments with metadata.
+
+2. **External content**: Pre-crawled and stored in `src/lib/engine-room-content.ts`. This file is generated by the RAG crawler script.
+
+#### Adding Internal Content (Lessons/Playgrounds)
+
+Simply create the content file. It will be automatically indexed:
+- Lesson metadata (title, description, tags) is indexed
+- Lesson body content is chunked and indexed
+- Playground descriptions and code are indexed
+
+**No additional configuration needed** for internal content.
+
+#### Adding a New External Source
+
+External sources are configured in `scripts/rag-config.json`.
+
+1. Add a new entry to the `sources` array:
 
 ```json
 {
@@ -236,6 +290,20 @@ Edit `scripts/rag-config.json` to configure sources:
 }
 ```
 
+2. Test the configuration:
+
+```bash
+npm run update-rag:dry
+```
+
+3. Run the crawler:
+
+```bash
+npm run update-rag
+```
+
+This updates `src/lib/engine-room-content.ts` with the crawled content.
+
 #### Configuration Options
 
 | Option | Type | Description |
@@ -246,88 +314,150 @@ Edit `scripts/rag-config.json` to configure sources:
 | `depth` | number | How many links deep to crawl (0 = start URLs only) |
 | `category` | string | Category tag for the content |
 | `useBrowser` | boolean | Use Puppeteer for JavaScript-rendered SPAs |
-| `waitForSelector` | string | CSS selector to wait for before extraction (when `useBrowser: true`) |
-| `includePatterns` | string[] | Only crawl URLs containing these strings (empty = all) |
+| `waitForSelector` | string | CSS selector to wait for (when `useBrowser: true`) |
+| `includePatterns` | string[] | Only crawl URLs containing these strings |
 | `excludePatterns` | string[] | Skip URLs containing these strings |
-| `selectors.title` | string | CSS selectors for page title (comma-separated) |
-| `selectors.content` | string | CSS selectors for main content (comma-separated) |
+| `selectors.title` | string | CSS selectors for page title |
+| `selectors.content` | string | CSS selectors for main content |
 | `selectors.removeSelectors` | string[] | Elements to remove before extraction |
 
-#### Adding a New Source
+#### Testing the Chatbot
 
-1. Add a new entry to the `sources` array in `scripts/rag-config.json`
-2. Set `useBrowser: true` if the site is a JavaScript SPA (React, Vue, etc.)
-3. Run `npm run update-rag:dry` to test the configuration
-4. Run `npm run update-rag` to generate the updated content file
+1. Start the dev server: `npm run dev`
+2. Go to `/entryway`
+3. Ask a question related to your new content
+4. Verify the bot cites the new source in its response
 
-#### Global Crawl Options
+---
 
-```json
-{
-  "crawlOptions": {
-    "delayMs": 1500,
-    "maxPagesPerSource": 50,
-    "timeout": 60000,
-    "userAgent": "RAG-Content-Crawler/1.0"
-  }
-}
+## Conventions
+
+### ID Naming
+
+- Use **kebab-case** for all IDs: `my-lesson-slug`, `ai-fundamentals`
+- IDs must be **unique** within their type (lesson slugs, module IDs, playground slugs)
+- Slug must match the folder/filename
+
+### Tag Taxonomy
+
+Use only these 12 high-signal tags. **Do not add new tags** without discussion.
+
+| Tag | Use For |
+|-----|---------|
+| `ai-fundamentals` | Core AI concepts, intro content |
+| `machine-learning` | ML algorithms, training, data |
+| `deep-learning` | Neural networks, architectures |
+| `llm` | Large language models, prompting |
+| `applications` | Real-world AI use cases |
+| `responsible-ai` | Ethics, bias, governance, safety |
+| `civil-society` | CSO-specific content, advocacy |
+| `sustainability` | Environmental impact, green tech |
+| `data` | Data practices, responsible data |
+| `chatbots` | Conversational AI, bot design |
+| `global-perspectives` | Non-Western viewpoints, pluriverse |
+| `frontend` | UI development, React, CSS |
+
+**Do not** put difficulty levels in tags. Use the `difficulty` field instead.
+
+### Difficulty Rubric
+
+| Level | Criteria |
+|-------|----------|
+| **beginner** | No prerequisites. Guided, scaffolded. Introduces concepts. |
+| **intermediate** | Assumes familiarity with basics. Decision frameworks, evaluation tools. |
+| **advanced** | Requires strong foundation. Complex scenarios, synthesis required. |
+
+### Content Tone Guidelines
+
+- **Non-technical**: Avoid jargon. Define terms on first use.
+- **Scannable**: Use headers, bullets, callouts. Short paragraphs.
+- **Active voice**: "The model learns" not "Learning is performed by the model"
+- **Second person**: "You can configure..." not "Users can configure..."
+
+### Citations and References
+
+At the end of lessons, include a **Resources** section:
+
+```mdx
+## Resources
+
+This lesson draws on:
+
+- **[Title](https://url)** — Brief description of the resource
+- **[Another Title](https://url)** — Brief description
 ```
 
-| Option | Description |
-|--------|-------------|
-| `delayMs` | Delay between requests (rate limiting) |
-| `maxPagesPerSource` | Maximum pages to crawl per source |
-| `timeout` | Request timeout in milliseconds |
-| `userAgent` | User-Agent header for requests |
+**Do not**:
+- Use footnotes
+- Link to paywalled content without noting it
+- Include affiliate links
 
-### Upgrading to Vector Search
+---
 
-For production with larger content, consider:
+## Checklist Before Opening a PR
 
-1. **pgvector (Recommended for Vercel)**:
-   - Add Vercel Postgres with pgvector extension
-   - Generate embeddings using OpenAI or Anthropic
-   - Replace `searchContent` with vector similarity search
+Before submitting content changes:
 
-2. **Pinecone/Weaviate**:
-   - Use a dedicated vector database
-   - Better scalability for large content libraries
+- [ ] **Build passes**: Run `npm run build` with no errors
+- [ ] **Lint passes**: Run `npm run lint` with no errors
+- [ ] **IDs are unique**: No duplicate slugs for lessons/playgrounds
+- [ ] **Tags are valid**: Only use tags from the [taxonomy](#tag-taxonomy)
+- [ ] **Difficulty is set**: Every lesson and playground has a valid difficulty
+- [ ] **Module wiring**: If adding a lesson, it's added to a module in `src/lib/modules.ts`
+- [ ] **Filters work**: Test the Workshop and Maker filters in the browser
+- [ ] **Chatbot cites source**: For new external sources, test that the bot can answer questions from it
 
-## Deploying on Vercel
+### Quick Validation Commands
 
-1. Push your code to GitHub
+```bash
+# Build (includes TypeScript check)
+npm run build
 
-2. Import the project on [Vercel](https://vercel.com/new)
+# Lint
+npm run lint
 
-3. Add environment variables:
-   - `ANTHROPIC_API_KEY` (optional)
-
-4. Deploy!
-
-The app is fully compatible with Vercel's Edge Runtime and serverless functions.
-
-### Build Configuration
-
-The default settings work out of the box:
-
-```json
-{
-  "buildCommand": "npm run build",
-  "outputDirectory": ".next"
-}
+# Test external source indexing
+npm run update-rag:dry
 ```
 
-## Tech Stack
+---
 
-- **Framework**: Next.js 14+ (App Router)
-- **Styling**: Tailwind CSS
-- **Components**: shadcn/ui
-- **Animations**: Framer Motion
-- **Code Playground**: Sandpack (CodeSandbox)
-- **AI**: Anthropic Claude (via Vercel AI SDK)
-- **Content**: MDX with gray-matter
+## Architecture Overview
 
-## Project Structure
+```
+design-hub-house/
+├── content/                    # Content files
+│   ├── demos/                  # Workshop lesson MDX files
+│   │   └── *.mdx
+│   └── playgrounds/            # Maker Studio playgrounds
+│       └── {slug}/config.json
+├── src/
+│   ├── app/                    # Next.js App Router
+│   │   ├── page.tsx            # Landing page (House Map)
+│   │   ├── entryway/           # AI chatbot room
+│   │   ├── workshop/           # Lesson index + [slug] pages
+│   │   ├── maker/              # Playground index + [slug] pages
+│   │   └── api/chat/           # Chat API route
+│   ├── components/
+│   │   ├── ui/                 # shadcn/ui primitives
+│   │   ├── shared/             # Breadcrumbs, TagBadge, etc.
+│   │   ├── house/              # House map SVG
+│   │   ├── workshop/           # Workshop-specific components
+│   │   ├── maker/              # Playground runner (Sandpack)
+│   │   └── entryway/           # Chat interface
+│   ├── lib/
+│   │   ├── content.ts          # Content loading from filesystem
+│   │   ├── modules.ts          # Module/Track/Collection definitions
+│   │   ├── rag.ts              # RAG indexing and search
+│   │   ├── engine-room-content.ts  # Pre-indexed external content
+│   │   ├── mdx.tsx             # MDX compilation
+│   │   └── rooms.ts            # Room configuration
+│   └── types/
+│       └── index.ts            # TypeScript interfaces
+├── scripts/
+│   └── rag-config.json         # External source crawl config
+└── public/                     # Static assets
+```
 
 ### Routes
 
@@ -335,41 +465,45 @@ The default settings work out of the box:
 |-------|-------------|
 | `/` | House Map landing page |
 | `/entryway` | AI chatbot guide |
-| `/workshop` | Tool demos index |
-| `/workshop/[slug]` | Individual demo page |
-| `/maker` | Playgrounds index |
+| `/workshop` | Workshop lessons index |
+| `/workshop/[slug]` | Individual lesson page |
+| `/maker` | Maker Studio index |
 | `/maker/[slug]` | Individual playground |
-| `/api/chat` | Chat API endpoint |
+| `/api/chat` | Streaming chat API |
 
-### Key Components
+---
 
-- `HouseMap`: Interactive SVG house with clickable rooms
-- `ChatInterface`: AI chat with streaming responses
-- `PlaygroundRunner`: Sandpack-powered code editor
-- `Breadcrumbs`: Navigation with house metaphor
-- `FilterBar`: Tag, difficulty, and sort controls
+## Environment Variables
 
-## Development
+| Variable | Required | Description |
+|----------|----------|-------------|
+| `ANTHROPIC_API_KEY` | No* | API key for Claude AI chatbot |
 
-```bash
-# Run development server
-npm run dev
+*The app works without an API key, but the AI chatbot will show a fallback message.
 
-# Build for production
-npm run build
+---
 
-# Start production server
-npm start
+## Tech Stack
 
-# Lint code
-npm run lint
+- **Framework**: Next.js 16 (App Router, React 19, TypeScript)
+- **Styling**: Tailwind CSS 4, shadcn/ui (Radix primitives)
+- **AI**: Anthropic Claude via Vercel AI SDK
+- **Code Playground**: Sandpack (CodeSandbox)
+- **Content**: MDX with gray-matter for frontmatter
+- **Animation**: Framer Motion
 
-# Update RAG content from external sources
-npm run update-rag
+---
 
-# Preview RAG crawl without writing files
-npm run update-rag:dry
-```
+## Deploying on Vercel
+
+1. Push your code to GitHub
+2. Import the project on [Vercel](https://vercel.com/new)
+3. Add environment variables: `ANTHROPIC_API_KEY` (optional)
+4. Deploy
+
+Default build settings work out of the box.
+
+---
 
 ## License
 

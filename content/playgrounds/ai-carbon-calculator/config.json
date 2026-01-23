@@ -3,6 +3,7 @@
   "title": "AI Carbon Calculator",
   "description": "Explore and compare the environmental impact of different AI choices. See how model size, usage patterns, and provider choices affect carbon footprint.",
   "tags": ["sustainability", "responsible-ai"],
+  "difficulty": "intermediate",
   "stack": "ai",
   "relatedDemos": ["ai-environmental-impact", "llm-ethics"],
   "hideCode": true,

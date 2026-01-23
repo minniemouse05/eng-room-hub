@@ -3,6 +3,7 @@
   "title": "CSS Grid Layout Playground",
   "description": "Practice responsive layouts with CSS Grid. Experiment with grid templates, areas, and responsive breakpoints.",
   "tags": ["frontend"],
+  "difficulty": "intermediate",
   "stack": "css",
   "relatedDemos": ["responsive-layout"],
   "remixIdeas": [

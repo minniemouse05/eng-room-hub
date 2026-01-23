@@ -20,6 +20,7 @@ export interface PlaygroundConfig {
   title: string;
   description: string;
   tags: string[];
+  difficulty?: DemoFrontmatter['difficulty']; // Optional, defaults to 'beginner'
   stack: 'js' | 'ts' | 'react' | 'css' | 'ai';
   relatedDemos: string[];
   files: PlaygroundFile[];

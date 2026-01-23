@@ -3,6 +3,7 @@
   "title": "Chatbot Adoption Checklist",
   "description": "Work through key considerations before designing or adopting a chatbot for humanitarian or civil society work. This interactive checklist helps surface risks and readiness gaps.",
   "tags": ["chatbots", "civil-society", "responsible-ai"],
+  "difficulty": "intermediate",
   "stack": "ai",
   "relatedDemos": ["chatbots-humanitarian-contexts", "llm-ethics"],
   "hideCode": true,

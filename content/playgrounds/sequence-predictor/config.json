@@ -3,6 +3,7 @@
   "title": "Sequence Predictor",
   "description": "Type a starting sequence and watch an RNN-style predictor complete it. See how context from earlier characters influences later predictions.",
   "tags": ["deep-learning"],
+  "difficulty": "beginner",
   "stack": "ai",
   "relatedDemos": ["rnns-sequences-and-memory", "lstms-longer-memory"],
   "hideCode": true,

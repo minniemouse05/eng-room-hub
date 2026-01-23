@@ -3,6 +3,7 @@
   "title": "AI Vendor Assessment Tool",
   "description": "Systematically evaluate AI vendors and solutions across key dimensions: technical capability, data practices, security, ethics, and support. Generate a comparison to guide your decision.",
   "tags": ["applications", "responsible-ai"],
+  "difficulty": "intermediate",
   "stack": "ai",
   "relatedDemos": ["evaluating-ai-solutions", "llm-ethics"],
   "hideCode": true,

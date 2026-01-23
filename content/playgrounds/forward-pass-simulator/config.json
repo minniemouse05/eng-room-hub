@@ -3,6 +3,7 @@
   "title": "Forward Pass Simulator",
   "description": "Step through a forward pass one calculation at a time. See the math happen as data flows from input to output.",
   "tags": ["deep-learning"],
+  "difficulty": "beginner",
   "stack": "ai",
   "relatedDemos": ["forward-pass-making-guesses", "weights-biases-activations"],
   "hideCode": true,

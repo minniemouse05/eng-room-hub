@@ -3,6 +3,7 @@
   "title": "GAN Playground",
   "description": "Watch a Generator and Discriminator compete. The Generator tries to create fakes; the Discriminator tries to catch them. Who wins?",
   "tags": ["deep-learning"],
+  "difficulty": "beginner",
   "stack": "ai",
   "relatedDemos": ["gans-creative-machines"],
   "hideCode": true,

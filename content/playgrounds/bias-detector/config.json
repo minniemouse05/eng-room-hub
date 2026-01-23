@@ -3,7 +3,7 @@
   "title": "Bias Detector",
   "description": "Build a simple hiring AI with different datasets and see how the training data's composition directly shapes who gets recommended.",
   "tags": ["data", "responsible-ai"],
-  "difficulty": "beginner",
+  "difficulty": "intermediate",
   "timeMinutes": 10,
   "stack": "react",
   "relatedDemos": ["data-practice-quiz-exam"],

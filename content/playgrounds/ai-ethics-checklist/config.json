@@ -3,6 +3,7 @@
   "title": "AI Ethics Checklist",
   "description": "Evaluate whether an AI application is right for your organization. Walk through key ethical questions before adopting AI tools.",
   "tags": ["llm", "responsible-ai"],
+  "difficulty": "intermediate",
   "stack": "ai",
   "relatedDemos": ["llm-ethics", "llm-limitations"],
   "hideCode": true,
