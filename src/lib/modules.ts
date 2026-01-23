@@ -179,6 +179,29 @@ export const modules: Module[] = [
     ],
     isFeatured: true,
   },
+
+  // ----------------------------------------
+  // AI APPLICATIONS
+  // Everyday → Civil Society → Business
+  // ----------------------------------------
+  {
+    id: "ai-applications",
+    title: "AI Applications",
+    description:
+      "From your morning alarm to business automation, AI is everywhere. Explore how it shows up in daily life, powers civil society work, and transforms business operations—no tech background needed.",
+    icon: "🌐",
+    color: "#0EA5E9", // sky blue
+    audience: ["learner", "leader"],
+    difficultyRange: ["beginner", "beginner"],
+    estimatedMinutes: 28,
+    prerequisites: ["ai-fundamentals"],
+    lessonSlugs: [
+      "ai-in-everyday-life",
+      "ai-for-civil-society",
+      "ai-in-business",
+    ],
+    isFeatured: true,
+  },
 ];
 
 // ============================================
@@ -197,6 +220,7 @@ export const tracks: Track[] = [
     audience: "learner",
     moduleIds: [
       "ai-fundamentals",
+      "ai-applications",
       "ml-foundations",
       "deep-learning-foundations",
       "ai-algorithms",
@@ -223,7 +247,7 @@ export const tracks: Track[] = [
     icon: "🎯",
     color: "#FF9A3D",
     audience: "leader",
-    moduleIds: ["ai-fundamentals", "llm-essentials", "responsible-ai-cso"],
+    moduleIds: ["ai-fundamentals", "ai-applications", "llm-essentials", "responsible-ai-cso"],
     goal: "Make informed decisions about AI adoption and strategy",
   },
 ];
