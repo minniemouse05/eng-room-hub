@@ -2,7 +2,7 @@
   "slug": "llm-word-predictor",
   "title": "LLM Word Predictor",
   "description": "See how AI predicts the next word! Type a phrase and watch how an LLM would calculate probabilities for what comes next.",
-  "tags": ["ai", "llm", "beginner"],
+  "tags": ["llm"],
   "stack": "ai",
   "relatedDemos": ["what-are-llms", "how-llms-work"],
   "hideCode": true,

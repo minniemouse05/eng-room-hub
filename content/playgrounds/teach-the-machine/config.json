@@ -2,7 +2,7 @@
   "slug": "teach-the-machine",
   "title": "Teach the Machine",
   "description": "Experience supervised learning firsthand! Label fruits as 'sweet' or 'sour' and watch the machine learn to predict new ones.",
-  "tags": ["ai", "machine-learning", "beginner"],
+  "tags": ["machine-learning"],
   "stack": "ai",
   "relatedDemos": ["what-is-machine-learning", "types-of-machine-learning"],
   "hideCode": true,

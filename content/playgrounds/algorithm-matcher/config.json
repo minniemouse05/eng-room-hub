@@ -2,7 +2,7 @@
   "slug": "algorithm-matcher",
   "title": "Algorithm Matcher",
   "description": "Read real-world scenarios and match each one to the best algorithm type. Build your intuition through practice with instant feedback.",
-  "tags": ["AI", "beginner", "classification", "regression", "clustering", "reinforcement-learning"],
+  "tags": ["machine-learning"],
   "difficulty": "beginner",
   "timeMinutes": 8,
   "stack": "react",

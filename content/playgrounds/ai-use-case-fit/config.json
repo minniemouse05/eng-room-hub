@@ -2,7 +2,7 @@
   "slug": "ai-use-case-fit",
   "title": "AI Use Case Fit Assessment",
   "description": "Evaluate whether AI is the right tool for your civil society project. Walk through key questions about data, capacity, ethics, and impact before committing resources.",
-  "tags": ["ai-applications", "civil-society", "decision-making", "ethics", "beginner"],
+  "tags": ["applications", "civil-society", "responsible-ai"],
   "stack": "react",
   "relatedDemos": ["ai-for-civil-society"],
   "hideCode": true,

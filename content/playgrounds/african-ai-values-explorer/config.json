@@ -2,7 +2,7 @@
   "slug": "african-ai-values-explorer",
   "title": "African AI Values Explorer",
   "description": "Reflect on how pluriversal AI values—socially just, community-centered, transformative, and rooted in local knowledge—apply to your context. An interactive reflection tool.",
-  "tags": ["ai", "africa", "ethics", "justice", "beginner"],
+  "tags": ["global-perspectives", "responsible-ai"],
   "stack": "ai",
   "relatedDemos": ["african-ai-pluriverse", "llm-ethics"],
   "hideCode": true,

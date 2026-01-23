@@ -2,7 +2,7 @@
   "slug": "llm-timeline",
   "title": "LLM Timeline Explorer",
   "description": "Journey through the history of language AI! Explore key milestones from early experiments to modern chatbots like ChatGPT and Claude.",
-  "tags": ["ai", "llm", "beginner"],
+  "tags": ["llm"],
   "stack": "ai",
   "relatedDemos": ["what-are-llms", "how-llms-work"],
   "hideCode": true,

@@ -2,7 +2,7 @@
   "slug": "button-playground",
   "title": "Button Component Playground",
   "description": "Experiment with different button variants, sizes, and states. Build your own button component with Tailwind CSS.",
-  "tags": ["components", "css"],
+  "tags": ["frontend"],
   "stack": "css",
   "relatedDemos": ["button-variants", "animation-basics"],
   "remixIdeas": [

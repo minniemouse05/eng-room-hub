@@ -2,7 +2,7 @@
   "slug": "data-split-simulator",
   "title": "Data Split Simulator",
   "description": "Adjust how much data goes into training, validation, and test sets—then watch how it affects whether the AI learns well or just memorizes.",
-  "tags": ["AI", "beginner", "data", "evaluation"],
+  "tags": ["data"],
   "difficulty": "beginner",
   "timeMinutes": 6,
   "stack": "react",

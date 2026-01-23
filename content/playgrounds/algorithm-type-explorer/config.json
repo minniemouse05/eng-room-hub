@@ -2,7 +2,7 @@
   "slug": "algorithm-type-explorer",
   "title": "Algorithm Type Explorer",
   "description": "Watch each of the four algorithm types in action with animated visualizations, then test yourself by identifying which is which.",
-  "tags": ["AI", "beginner", "classification", "regression", "clustering", "reinforcement-learning"],
+  "tags": ["machine-learning"],
   "difficulty": "beginner",
   "timeMinutes": 8,
   "stack": "react",

@@ -2,7 +2,7 @@
   "slug": "ai-touchpoints-map",
   "title": "AI Touchpoints Map",
   "description": "Map all the AI you encounter in a typical day. Click through different times of day to discover where AI is quietly helping—or watching.",
-  "tags": ["ai-applications", "everyday-ai", "recommendations", "virtual-assistants", "beginner"],
+  "tags": ["applications"],
   "stack": "react",
   "relatedDemos": ["ai-in-everyday-life"],
   "hideCode": true,

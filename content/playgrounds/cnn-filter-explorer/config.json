@@ -2,7 +2,7 @@
   "slug": "cnn-filter-explorer",
   "title": "CNN Filter Explorer",
   "description": "See how convolutional filters detect edges, corners, and patterns. Drag filters across an image and watch what they find.",
-  "tags": ["deep-learning", "neural-networks", "cnn", "computer-vision", "beginner"],
+  "tags": ["deep-learning"],
   "stack": "ai",
   "relatedDemos": ["cnns-seeing-with-machines"],
   "hideCode": true,

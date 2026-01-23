@@ -2,7 +2,7 @@
   "slug": "attention-visualizer",
   "title": "Attention Visualizer",
   "description": "Type a sentence and see which words 'pay attention' to which. Discover how Transformers understand context by looking everywhere at once.",
-  "tags": ["deep-learning", "neural-networks", "transformers", "attention", "nlp", "intermediate"],
+  "tags": ["deep-learning", "llm"],
   "stack": "ai",
   "relatedDemos": ["transformers-attention"],
   "hideCode": true,

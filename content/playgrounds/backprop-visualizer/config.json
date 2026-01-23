@@ -2,7 +2,7 @@
   "slug": "backprop-visualizer",
   "title": "Backprop Visualizer",
   "description": "Watch errors flow backward through a network. See how each weight gets adjusted based on its contribution to the mistake.",
-  "tags": ["deep-learning", "neural-networks", "backpropagation", "beginner"],
+  "tags": ["deep-learning"],
   "stack": "ai",
   "relatedDemos": ["backprop-learning-from-mistakes", "forward-pass-making-guesses"],
   "hideCode": true,

@@ -2,7 +2,7 @@
   "slug": "counter-app",
   "title": "State Management Counter",
   "description": "Explore different state management patterns with a counter app. Compare useState, useReducer, and context approaches.",
-  "tags": ["react"],
+  "tags": ["frontend"],
   "stack": "react",
   "relatedDemos": ["state-management"],
   "remixIdeas": [

@@ -2,7 +2,7 @@
   "slug": "pattern-recognition-demo",
   "title": "How AI Sees Patterns",
   "description": "Discover how AI learns to recognize patterns! Train a simple classifier by showing it examples, then watch it make predictions.",
-  "tags": ["ai", "beginner"],
+  "tags": ["ai-fundamentals"],
   "stack": "ai",
   "relatedDemos": ["intro-to-ai", "types-of-ai"],
   "hideCode": true,

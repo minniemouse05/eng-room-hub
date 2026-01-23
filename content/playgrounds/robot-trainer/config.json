@@ -2,7 +2,7 @@
   "slug": "robot-trainer",
   "title": "Robot Trainer",
   "description": "Train an AI agent through reinforcement learning! Watch it learn to navigate a maze by trial and error, getting rewards for good moves.",
-  "tags": ["ai", "machine-learning", "beginner"],
+  "tags": ["machine-learning"],
   "stack": "ai",
   "relatedDemos": ["what-is-machine-learning", "types-of-machine-learning"],
   "hideCode": true,
