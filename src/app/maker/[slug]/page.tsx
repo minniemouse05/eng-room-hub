@@ -2,8 +2,10 @@ import { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getPlaygroundBySlug, getAllPlaygroundSlugs, getDemoBySlug } from '@/lib/content';
+import { getCollectionsForPlayground } from '@/lib/makerCollections';
 import { BackToHouse, Breadcrumbs, TagBadge, StackBadge } from '@/components/shared';
-import { PlaygroundRunner } from '@/components/maker';
+import { PlaygroundRunner, PlaygroundProgress } from '@/components/maker';
+import { LessonStatusIndicator } from '@/components/workshop';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Lightbulb, BookOpen, ArrowRight } from 'lucide-react';
@@ -41,6 +43,10 @@ export default async function PlaygroundPage({ params }: PageProps) {
     .map((demoSlug) => getDemoBySlug(demoSlug))
     .filter(Boolean);
 
+  // Find which collection(s) this playground belongs to
+  const parentCollections = getCollectionsForPlayground(slug);
+  const parentCollection = parentCollections[0]; // Use first collection if in multiple
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-background to-muted/20">
       <div className="container mx-auto px-4 py-8">
@@ -66,9 +72,14 @@ export default async function PlaygroundPage({ params }: PageProps) {
             ))}
           </div>
           <h1 className="text-3xl font-bold mb-3">{playground.title}</h1>
-          <p className="text-lg text-muted-foreground max-w-2xl">
+          <p className="text-lg text-muted-foreground max-w-2xl mb-4">
             {playground.description}
           </p>
+          {/* Completion Toggle */}
+          <PlaygroundProgress
+            playgroundSlug={slug}
+            collectionId={parentCollection?.id}
+          />
         </header>
 
         {/* Info Cards */}
@@ -123,21 +134,24 @@ export default async function PlaygroundPage({ params }: PageProps) {
               Learn More in Workshop
             </h2>
             <p className="text-muted-foreground mb-6">
-              Explore these demos to understand the concepts behind this playground.
+              Explore these lessons to understand the concepts behind this playground.
             </p>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {relatedDemos.map((demo) => demo && (
                 <Link key={demo.slug} href={`/workshop/${demo.slug}`}>
                   <Card className="h-full transition-all hover:shadow-md hover:-translate-y-0.5">
                     <CardHeader className="pb-2">
-                      <CardTitle className="text-base line-clamp-1">{demo.title}</CardTitle>
+                      <div className="flex items-start justify-between gap-2">
+                        <CardTitle className="text-base line-clamp-1">{demo.title}</CardTitle>
+                        <LessonStatusIndicator lessonSlug={demo.slug} showLabel={false} />
+                      </div>
                     </CardHeader>
                     <CardContent>
                       <CardDescription className="line-clamp-2 mb-4">
                         {demo.description}
                       </CardDescription>
                       <Button variant="ghost" className="gap-2 p-0 h-auto">
-                        Read Demo
+                        Read Lesson
                         <ArrowRight className="h-4 w-4" />
                       </Button>
                     </CardContent>

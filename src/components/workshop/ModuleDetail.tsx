@@ -3,15 +3,16 @@
 import Link from 'next/link';
 import { Module, Demo } from '@/types';
 import { Button } from '@/components/ui/button';
-import { DifficultyBadge } from '@/components/shared';
+import { DifficultyBadge, StatusChip, CompletionBanner } from '@/components/shared';
+import { getNextModules } from '@/lib/modules';
 import {
   ArrowLeft,
   Clock,
   BookOpen,
   CheckCircle2,
-  Circle,
   ChevronRight,
   PlayCircle,
+  RotateCcw,
 } from 'lucide-react';
 
 interface ModuleDetailProps {
@@ -45,11 +46,23 @@ export function ModuleDetail({
     (completedCount / module.lessonSlugs.length) * 100
   );
   const isComplete = completedCount === module.lessonSlugs.length;
+  const isStarted = completedCount > 0;
 
   // Get lessons in module order
   const orderedLessons = module.lessonSlugs
     .map((slug) => lessons.find((l) => l.slug === slug))
-    .filter((l): l is Demo => l !== null);
+    .filter((l): l is Demo => l !== undefined);
+
+  // Get next recommended modules
+  const nextModules = getNextModules(module.id);
+  const firstLesson = orderedLessons[0];
+
+  // Determine module status
+  const status: 'not-started' | 'in-progress' | 'completed' = isComplete
+    ? 'completed'
+    : isStarted
+    ? 'in-progress'
+    : 'not-started';
 
   return (
     <div className="module-detail">
@@ -87,6 +100,7 @@ export function ModuleDetail({
 
         {/* Meta row */}
         <div className="flex flex-wrap items-center gap-4 text-sm text-text-muted">
+          <StatusChip status={status} size="md" />
           <span className="flex items-center gap-1.5">
             <BookOpen className="h-4 w-4" />
             {module.lessonSlugs.length} lessons
@@ -123,9 +137,9 @@ export function ModuleDetail({
           </div>
         </div>
 
-        {/* Continue CTA */}
-        {firstIncompleteLesson && (
-          <div className="mt-6">
+        {/* CTA Section */}
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          {firstIncompleteLesson ? (
             <Link href={`/workshop/${firstIncompleteLesson.slug}`}>
               <Button
                 className="module-detail-cta gap-2"
@@ -137,9 +151,30 @@ export function ModuleDetail({
                 {completedCount === 0 ? 'Start module' : 'Continue learning'}
               </Button>
             </Link>
-          </div>
-        )}
+          ) : firstLesson ? (
+            <Link href={`/workshop/${firstLesson.slug}`}>
+              <Button variant="outline" className="gap-2">
+                <RotateCcw className="h-4 w-4" />
+                Review module
+              </Button>
+            </Link>
+          ) : null}
+        </div>
       </div>
+
+      {/* Completion Banner */}
+      {isComplete && (
+        <CompletionBanner
+          title="Module Complete!"
+          message={`Congratulations! You've completed all ${module.lessonSlugs.length} lessons in ${module.title}.`}
+          reviewHref={firstLesson ? `/workshop/${firstLesson.slug}` : undefined}
+          reviewLabel="Review lessons"
+          nextHref={nextModules[0] ? '/workshop' : undefined}
+          nextLabel={nextModules[0] ? `Explore ${nextModules[0].title}` : undefined}
+          color={module.color}
+          className="mb-8"
+        />
+      )}
 
       {/* Lesson list */}
       <div className="module-detail-lessons">

@@ -1,8 +1,9 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
-import { Demo, DemoFrontmatter, Module } from '@/types';
+import { useState, useMemo } from 'react';
+import { Demo, DemoFrontmatter } from '@/types';
 import { modules, getFeaturedModules, getModuleById } from '@/lib/modules';
+import { useProgressStore } from '@/hooks';
 import { SearchBar, FilterBar } from '@/components/shared';
 import { DemoCard } from './DemoCard';
 import { ModuleCard } from './ModuleCard';
@@ -20,14 +21,14 @@ interface WorkshopContentProps {
   allTags: string[];
 }
 
-// Storage key for user progress
-const PROGRESS_STORAGE_KEY = 'design-hub-lesson-progress';
-
 // ============================================
 // Component
 // ============================================
 
 export function WorkshopContent({ demos, allTags }: WorkshopContentProps) {
+  // Progress store
+  const { completedLessons } = useProgressStore();
+
   // View state
   const [activeTab, setActiveTab] = useState<ViewTab>('modules');
   const [selectedModuleId, setSelectedModuleId] = useState<string | null>(null);
@@ -38,39 +39,6 @@ export function WorkshopContent({ demos, allTags }: WorkshopContentProps) {
   const [difficulty, setDifficulty] = useState<DemoFrontmatter['difficulty'] | undefined>();
   const [sortBy, setSortBy] = useState('updatedAt');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
-
-  // Progress state (lightweight, localStorage-based)
-  const [completedLessons, setCompletedLessons] = useState<string[]>([]);
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  // ============================================
-  // Load/Save Progress
-  // ============================================
-
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(PROGRESS_STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) {
-          setCompletedLessons(parsed);
-        }
-      }
-    } catch {
-      // Ignore storage errors
-    }
-    setIsHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (isHydrated) {
-      try {
-        localStorage.setItem(PROGRESS_STORAGE_KEY, JSON.stringify(completedLessons));
-      } catch {
-        // Ignore storage errors
-      }
-    }
-  }, [completedLessons, isHydrated]);
 
   // ============================================
   // Filter handlers

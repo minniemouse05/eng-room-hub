@@ -7,8 +7,11 @@ import {
   getRelatedDemos,
   getRelatedPlaygrounds,
 } from '@/lib/content';
+import { getModulesForLesson, getNextLessonInModule } from '@/lib/modules';
 import { renderMDX } from '@/lib/mdx';
 import { BackToHouse, Breadcrumbs, TagBadge, DifficultyBadge } from '@/components/shared';
+import { LessonProgress } from '@/components/workshop';
+import { PlaygroundStatusIndicator } from '@/components/maker';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
@@ -45,6 +48,12 @@ export default async function DemoPage({ params }: PageProps) {
   const content = await renderMDX(demo.content);
   const relatedDemos = getRelatedDemos(demo.slug, demo.tags);
   const relatedPlaygrounds = getRelatedPlaygrounds(demo.relatedPlaygrounds);
+
+  // Find which module this lesson belongs to (for progress tracking)
+  const parentModules = getModulesForLesson(slug);
+  const parentModule = parentModules[0]; // Use first module if in multiple
+  const nextLessonSlug = parentModule ? getNextLessonInModule(parentModule.id, slug) : null;
+  const nextLesson = nextLessonSlug ? getDemoBySlug(nextLessonSlug) : null;
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-background to-muted/20">
@@ -97,7 +106,13 @@ export default async function DemoPage({ params }: PageProps) {
                     <Link key={playground.slug} href={`/maker/${playground.slug}`}>
                       <Card className="h-full transition-all hover:shadow-md hover:-translate-y-0.5">
                         <CardHeader className="pb-2">
-                          <CardTitle className="text-lg">{playground.title}</CardTitle>
+                          <div className="flex items-start justify-between gap-2">
+                            <CardTitle className="text-lg">{playground.title}</CardTitle>
+                            <PlaygroundStatusIndicator
+                              playgroundSlug={playground.slug}
+                              showLabel={false}
+                            />
+                          </div>
                         </CardHeader>
                         <CardContent>
                           <CardDescription className="line-clamp-2">
@@ -149,9 +164,20 @@ export default async function DemoPage({ params }: PageProps) {
             {/* Metadata Card */}
             <Card className="sticky top-8">
               <CardHeader>
-                <CardTitle className="text-lg">About this demo</CardTitle>
+                <CardTitle className="text-lg">About this lesson</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
+                {/* Completion Toggle */}
+                <div>
+                  <p className="text-sm font-medium mb-2">Your progress</p>
+                  <LessonProgress
+                    lessonSlug={slug}
+                    moduleId={parentModule?.id}
+                  />
+                </div>
+
+                <Separator />
+
                 <div className="flex items-center gap-2 text-sm">
                   <Clock className="h-4 w-4 text-muted-foreground" />
                   <span>{demo.timeMinutes} minutes</span>
@@ -186,6 +212,21 @@ export default async function DemoPage({ params }: PageProps) {
                         Try Playground
                       </Button>
                     </Link>
+                  </>
+                )}
+
+                {nextLesson && (
+                  <>
+                    <Separator />
+                    <div>
+                      <p className="text-sm font-medium mb-2">Next in module</p>
+                      <Link href={`/workshop/${nextLesson.slug}`}>
+                        <Button variant="outline" className="w-full gap-2 justify-between">
+                          <span className="truncate">{nextLesson.title}</span>
+                          <ArrowRight className="h-4 w-4 flex-shrink-0" />
+                        </Button>
+                      </Link>
+                    </div>
                   </>
                 )}
               </CardContent>

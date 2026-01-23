@@ -5,3 +5,7 @@ export { SearchBar } from './SearchBar';
 export { FilterBar } from './FilterBar';
 export { RoomCard } from './RoomCard';
 export { ErrorBoundary } from './ErrorBoundary';
+export { ProgressBar } from './ProgressBar';
+export { CompletionToggle } from './CompletionToggle';
+export { StatusChip } from './StatusChip';
+export { CompletionBanner } from './CompletionBanner';

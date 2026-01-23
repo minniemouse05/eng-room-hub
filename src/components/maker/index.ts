@@ -4,3 +4,4 @@ export { PlaygroundRunner } from './PlaygroundRunner';
 export { MakerContent } from './MakerContent';
 export { CollectionCard } from './CollectionCard';
 export { CollectionDetail } from './CollectionDetail';
+export { PlaygroundProgress, PlaygroundStatusIndicator } from './PlaygroundProgress';

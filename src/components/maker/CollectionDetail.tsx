@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { PlaygroundCollection, PlaygroundConfig } from '@/types';
 import { Button } from '@/components/ui/button';
-import { StackBadge } from '@/components/shared';
+import { StackBadge, StatusChip, CompletionBanner } from '@/components/shared';
 import {
   ArrowLeft,
   Play,
@@ -11,6 +11,7 @@ import {
   ChevronRight,
   PlayCircle,
   BookOpen,
+  RotateCcw,
 } from 'lucide-react';
 
 interface CollectionDetailProps {
@@ -42,11 +43,21 @@ export function CollectionDetail({
     (completedCount / collection.playgroundSlugs.length) * 100
   );
   const isComplete = completedCount === collection.playgroundSlugs.length;
+  const isStarted = completedCount > 0;
 
   // Get playgrounds in collection order
   const orderedPlaygrounds = collection.playgroundSlugs
     .map((slug) => playgrounds.find((p) => p.slug === slug))
     .filter((p): p is PlaygroundConfig => p !== undefined);
+
+  const firstPlayground = orderedPlaygrounds[0];
+
+  // Determine status
+  const status: 'not-started' | 'in-progress' | 'completed' = isComplete
+    ? 'completed'
+    : isStarted
+    ? 'in-progress'
+    : 'not-started';
 
   return (
     <div className="collection-detail">
@@ -84,6 +95,7 @@ export function CollectionDetail({
 
         {/* Meta row */}
         <div className="flex flex-wrap items-center gap-4 text-sm text-text-muted">
+          <StatusChip status={status} size="md" />
           <span className="flex items-center gap-1.5">
             <Play className="h-4 w-4" />
             {collection.playgroundSlugs.length} activities
@@ -130,9 +142,9 @@ export function CollectionDetail({
           </div>
         </div>
 
-        {/* Continue CTA */}
-        {firstIncompletePlayground && (
-          <div className="mt-6">
+        {/* CTA Section */}
+        <div className="mt-6 flex flex-wrap items-center gap-3">
+          {firstIncompletePlayground ? (
             <Link href={`/maker/${firstIncompletePlayground.slug}`}>
               <Button
                 className="collection-detail-cta gap-2"
@@ -144,9 +156,30 @@ export function CollectionDetail({
                 {completedCount === 0 ? 'Start collection' : 'Continue'}
               </Button>
             </Link>
-          </div>
-        )}
+          ) : firstPlayground ? (
+            <Link href={`/maker/${firstPlayground.slug}`}>
+              <Button variant="outline" className="gap-2">
+                <RotateCcw className="h-4 w-4" />
+                Review activities
+              </Button>
+            </Link>
+          ) : null}
+        </div>
       </div>
+
+      {/* Completion Banner */}
+      {isComplete && (
+        <CompletionBanner
+          title="Collection Complete!"
+          message={`Well done! You've completed all ${collection.playgroundSlugs.length} activities in ${collection.title}.`}
+          reviewHref={firstPlayground ? `/maker/${firstPlayground.slug}` : undefined}
+          reviewLabel="Review activities"
+          nextHref={collection.relatedModuleId ? '/workshop' : '/maker'}
+          nextLabel={collection.relatedModuleId ? 'Continue learning' : 'Explore more'}
+          color={collection.color}
+          className="mb-8"
+        />
+      )}
 
       {/* Playground list */}
       <div className="collection-detail-playgrounds">

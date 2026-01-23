@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { PlaygroundConfig } from '@/types';
 import {
@@ -9,6 +9,7 @@ import {
   getCollectionById,
   getPlaygroundsForLesson,
 } from '@/lib/makerCollections';
+import { useProgressStore } from '@/hooks';
 import { SearchBar, FilterBar } from '@/components/shared';
 import { PlaygroundCard } from './PlaygroundCard';
 import { CollectionCard } from './CollectionCard';
@@ -27,9 +28,6 @@ interface MakerContentProps {
   allTags: string[];
 }
 
-// Storage key for progress
-const PROGRESS_STORAGE_KEY = 'design-hub-playground-progress';
-
 // ============================================
 // Component
 // ============================================
@@ -37,6 +35,9 @@ const PROGRESS_STORAGE_KEY = 'design-hub-playground-progress';
 export function MakerContent({ playgrounds, allTags }: MakerContentProps) {
   const searchParams = useSearchParams();
   const fromLesson = searchParams.get('fromLesson');
+
+  // Progress store
+  const { completedPlaygrounds } = useProgressStore();
 
   // View state
   const [activeTab, setActiveTab] = useState<ViewTab>('collections');
@@ -48,42 +49,6 @@ export function MakerContent({ playgrounds, allTags }: MakerContentProps) {
   const [stack, setStack] = useState<PlaygroundConfig['stack'] | undefined>();
   const [sortBy, setSortBy] = useState('title');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
-
-  // Progress state
-  const [completedPlaygrounds, setCompletedPlaygrounds] = useState<string[]>([]);
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  // ============================================
-  // Load/Save Progress
-  // ============================================
-
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem(PROGRESS_STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        if (Array.isArray(parsed)) {
-          setCompletedPlaygrounds(parsed);
-        }
-      }
-    } catch {
-      // Ignore storage errors
-    }
-    setIsHydrated(true);
-  }, []);
-
-  useEffect(() => {
-    if (isHydrated) {
-      try {
-        localStorage.setItem(
-          PROGRESS_STORAGE_KEY,
-          JSON.stringify(completedPlaygrounds)
-        );
-      } catch {
-        // Ignore storage errors
-      }
-    }
-  }, [completedPlaygrounds, isHydrated]);
 
   // ============================================
   // "Recommended for you" based on fromLesson param
