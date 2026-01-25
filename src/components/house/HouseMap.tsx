@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { rooms } from "@/lib/rooms";
 import { RoomId, Room } from "@/types";
+import { SvgRoomIcon } from "@/components/icons";
 
 interface HouseMapProps {
   onRoomHover: (room: Room | null) => void;
@@ -371,20 +372,18 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
           rx="4"
         />
         {/* Icon */}
-        <text
-          x="200"
-          y="290"
-          textAnchor="middle"
-          fontSize="24"
-          fill="#FFFFFF"
+        <SvgRoomIcon
+          icon="entryway"
+          x={200}
+          y={282}
+          size={22}
+          strokeWidth={2}
           style={{
             filter: isRoomActive("entryway")
               ? "drop-shadow(0 0 8px rgba(255, 255, 255, 0.9))"
               : "none",
           }}
-        >
-          💬
-        </text>
+        />
         {/* Label with text shadow for readability */}
         <text
           x="200"
@@ -459,20 +458,18 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
           opacity="0.5"
         />
         {/* Icon */}
-        <text
-          x="95"
-          y="170"
-          textAnchor="middle"
-          fontSize="24"
-          fill="#FFFFFF"
+        <SvgRoomIcon
+          icon="workshop"
+          x={95}
+          y={162}
+          size={22}
+          strokeWidth={2}
           style={{
             filter: isRoomActive("workshop")
               ? "drop-shadow(0 0 8px rgba(255, 255, 255, 0.9))"
               : "none",
           }}
-        >
-          🔧
-        </text>
+        />
         {/* Label with text shadow */}
         <text
           x="95"
@@ -545,20 +542,18 @@ export function HouseMap({ onRoomHover, hoveredRoom }: HouseMapProps) {
           opacity="0.5"
         />
         {/* Icon */}
-        <text
-          x="305"
-          y="170"
-          textAnchor="middle"
-          fontSize="24"
-          fill="#FFFFFF"
+        <SvgRoomIcon
+          icon="maker"
+          x={305}
+          y={162}
+          size={22}
+          strokeWidth={2}
           style={{
             filter: isRoomActive("maker")
               ? "drop-shadow(0 0 8px rgba(255, 255, 255, 0.9))"
               : "none",
           }}
-        >
-          💻
-        </text>
+        />
         {/* Label with text shadow */}
         <text
           x="305"

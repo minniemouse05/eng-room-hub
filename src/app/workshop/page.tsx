@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import { Wrench } from 'lucide-react';
 import { getAllDemos, getAllDemoTags } from '@/lib/content';
 import { BackToHouse, Breadcrumbs } from '@/components/shared';
 import { WorkshopContent } from '@/components/workshop';
@@ -35,7 +36,7 @@ export default function WorkshopPage() {
                 border: '1px solid rgba(255, 154, 61, 0.25)',
               }}
             >
-              <span className="text-3xl">🔧</span>
+              <Wrench className="w-7 h-7 text-orange-400" strokeWidth={1.75} aria-hidden="true" />
             </div>
             <div>
               <h1 className="text-3xl font-bold text-text-primary">Workshop</h1>

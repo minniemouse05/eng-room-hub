@@ -3,8 +3,9 @@
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Home } from 'lucide-react';
 import { Room } from '@/types';
+import { RoomIcon, getRoomIconType } from '@/components/icons';
 
 interface RoomPreviewProps {
   room: Room | null;
@@ -54,11 +55,12 @@ export function RoomPreview({ room }: RoomPreviewProps) {
                   border: `1px solid ${room.color}40`,
                 }}
               >
-                <span className="text-3xl" style={{ filter: `drop-shadow(0 0 10px ${room.color})` }}>
-                  {room.icon === 'MessageCircle' && '💬'}
-                  {room.icon === 'Wrench' && '🔧'}
-                  {room.icon === 'Code2' && '💻'}
-                </span>
+                <RoomIcon
+                  icon={getRoomIconType(room.icon)}
+                  className="w-7 h-7 text-white"
+                  strokeWidth={1.75}
+                  style={{ filter: `drop-shadow(0 0 10px ${room.color})` }}
+                />
               </div>
 
               {/* Title */}
@@ -102,9 +104,12 @@ export function RoomPreview({ room }: RoomPreviewProps) {
                 border: '1px solid rgba(246, 248, 255, 0.2)',
               }}
             >
-              <span className="text-3xl" style={{ filter: 'drop-shadow(0 0 12px rgba(255, 255, 255, 0.6))' }}>
-                🏠
-              </span>
+              <Home
+                className="w-8 h-8 text-white"
+                strokeWidth={1.75}
+                style={{ filter: 'drop-shadow(0 0 12px rgba(255, 255, 255, 0.6))' }}
+                aria-hidden="true"
+              />
             </div>
             <p className="text-lg font-semibold mb-2 text-white text-glow">
               Welcome to Design Hub House

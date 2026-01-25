@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
 import { Metadata } from 'next';
+import { Code2 } from 'lucide-react';
 import { getAllPlaygrounds, getAllPlaygroundTags } from '@/lib/content';
 import { BackToHouse, Breadcrumbs } from '@/components/shared';
 import { MakerContent } from '@/components/maker';
@@ -37,7 +38,7 @@ export default function MakerPage() {
                 border: '1px solid rgba(57, 230, 255, 0.25)',
               }}
             >
-              <span className="text-3xl">💻</span>
+              <Code2 className="w-7 h-7 text-cyan-400" strokeWidth={1.75} aria-hidden="true" />
             </div>
             <div>
               <h1 className="text-3xl font-bold text-text-primary">Maker Studio</h1>

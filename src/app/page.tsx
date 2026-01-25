@@ -1,8 +1,9 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { HouseMap, RoomPreview, MobileRoomButtons } from '@/components/house';
-import { Room } from '@/types';
+import { useState } from "react";
+import { Heart } from "lucide-react";
+import { HouseMap, RoomPreview, MobileRoomButtons } from "@/components/house";
+import { Room } from "@/types";
 
 export default function HomePage() {
   const [hoveredRoom, setHoveredRoom] = useState<Room | null>(null);
@@ -27,7 +28,8 @@ export default function HomePage() {
           </h1>
           <p className="text-lg lg:text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
             An interactive learning hub for design systems, tools, and code.
-            Explore the house to discover demos, playgrounds, and AI-powered guidance.
+            Explore the house to discover demos, playgrounds, and AI-powered
+            guidance.
           </p>
         </header>
 
@@ -36,7 +38,10 @@ export default function HomePage() {
           {/* House Map */}
           <div className="relative">
             <div className="glass-panel p-8">
-              <HouseMap onRoomHover={setHoveredRoom} hoveredRoom={hoveredRoom} />
+              <HouseMap
+                onRoomHover={setHoveredRoom}
+                hoveredRoom={hoveredRoom}
+              />
               <p className="text-center text-sm text-text-muted mt-6">
                 Click on a room to navigate
               </p>
@@ -53,7 +58,10 @@ export default function HomePage() {
         <div className="lg:hidden">
           <div className="relative max-w-sm mx-auto">
             <div className="glass-panel p-6">
-              <HouseMap onRoomHover={setHoveredRoom} hoveredRoom={hoveredRoom} />
+              <HouseMap
+                onRoomHover={setHoveredRoom}
+                hoveredRoom={hoveredRoom}
+              />
             </div>
           </div>
           <MobileRoomButtons />
@@ -61,8 +69,9 @@ export default function HomePage() {
 
         {/* Footer hint */}
         <footer className="text-center mt-16 text-sm text-text-muted">
-          <p>
-          ❤️ The Engine Room
+          <p className="inline-flex items-center gap-1.5">
+            <Heart className="h-4 w-4 text-white-400" aria-hidden="true" />
+            <span>The Engine Room</span>
           </p>
         </footer>
       </div>

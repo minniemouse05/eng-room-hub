@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { rooms } from '@/lib/rooms';
+import { RoomIcon, getRoomIconType } from '@/components/icons';
 
 // Map room IDs to their glow classes
 const roomGlowClass: Record<string, string> = {
@@ -36,14 +37,12 @@ export function MobileRoomButtons() {
                     border: `1px solid ${room.color}30`,
                   }}
                 >
-                  <span
-                    className="text-2xl"
+                  <RoomIcon
+                    icon={getRoomIconType(room.icon)}
+                    className="w-6 h-6 text-white"
+                    strokeWidth={1.75}
                     style={{ filter: `drop-shadow(0 0 8px ${room.color}80)` }}
-                  >
-                    {room.icon === 'MessageCircle' && '💬'}
-                    {room.icon === 'Wrench' && '🔧'}
-                    {room.icon === 'Code2' && '💻'}
-                  </span>
+                  />
                 </div>
 
                 {/* Room info */}
