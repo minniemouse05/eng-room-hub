@@ -100,12 +100,29 @@ export interface FilterState {
 // Target audience for content
 export type Audience = 'learner' | 'builder' | 'leader';
 
+// Semantic icon keys for modules and collections
+export type ModuleIconKey =
+  | 'brain'           // AI Fundamentals
+  | 'bar-chart'       // ML Foundations
+  | 'message-circle'  // LLM Essentials
+  | 'palette'         // UI Development
+  | 'globe'           // Responsible AI / CSO
+  | 'flask'           // AI Algorithms
+  | 'dna'             // Deep Learning
+  | 'network'         // AI Applications
+  | 'book-open'       // Learner Track
+  | 'hammer'          // Builder Track
+  | 'target'          // Leader Track
+  | 'scale'           // Ethics & Safety
+  | 'zap'             // Quick Reads
+  | 'atom';           // React Fundamentals
+
 // A Module is an ordered collection of lessons around a topic
 export interface Module {
   id: string;
   title: string;
   description: string;
-  icon: string; // Emoji or icon name
+  iconKey: ModuleIconKey; // Semantic icon key
   color: string; // Accent color (hex)
   audience?: Audience[]; // Who this module is for (optional, empty = everyone)
   difficultyRange: [DemoFrontmatter['difficulty'], DemoFrontmatter['difficulty']]; // [min, max]
@@ -121,7 +138,7 @@ export interface Track {
   id: string;
   title: string;
   description: string;
-  icon: string;
+  iconKey: ModuleIconKey;
   color: string;
   audience: Audience; // Primary audience for this track
   moduleIds: string[]; // Ordered list of module IDs
@@ -134,7 +151,7 @@ export interface Collection {
   id: string;
   title: string;
   description: string;
-  icon: string;
+  iconKey: ModuleIconKey;
   lessonSlugs: string[]; // Can span multiple modules
   tags?: string[]; // Auto-include lessons with these tags
 }
@@ -161,7 +178,7 @@ export interface PlaygroundCollection {
   id: string;
   title: string;
   description: string;
-  icon: string;
+  iconKey: ModuleIconKey; // Semantic icon key
   color: string;
   audience?: Audience[];
   difficulty?: DemoFrontmatter['difficulty']; // Primary difficulty level

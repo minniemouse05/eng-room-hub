@@ -2,7 +2,8 @@
 
 import { PlaygroundCollection } from '@/types';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Play, ChevronRight, Star, Sparkles } from 'lucide-react';
+import { Play, ChevronRight, Sparkles } from 'lucide-react';
+import { ModuleIcon } from '@/components/icons';
 
 interface CollectionCardProps {
   collection: PlaygroundCollection;
@@ -46,7 +47,12 @@ export function CollectionCard({
                 border: `1px solid ${collection.color}25`,
               }}
             >
-              <span className="text-2xl">{collection.icon}</span>
+              <ModuleIcon
+                iconKey={collection.iconKey}
+                className="w-6 h-6"
+                strokeWidth={1.75}
+                style={{ color: collection.color }}
+              />
             </div>
 
             {/* Badges */}

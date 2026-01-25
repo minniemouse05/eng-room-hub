@@ -28,7 +28,7 @@ export const playgroundCollections: PlaygroundCollection[] = [
     title: 'Start Here: AI Basics',
     description:
       'Interactive activities to build your foundational understanding of artificial intelligence. Perfect for beginners!',
-    icon: '🧠',
+    iconKey: 'brain',
     color: '#6A2CFF', // electric-violet (matches AI Fundamentals module)
     audience: ['learner', 'builder', 'leader'],
     difficulty: 'beginner',
@@ -49,7 +49,7 @@ export const playgroundCollections: PlaygroundCollection[] = [
     title: 'Machine Learning in Action',
     description:
       'See machine learning concepts come alive. Train models, explore clustering, and understand how AI makes decisions.',
-    icon: '📊',
+    iconKey: 'bar-chart',
     color: '#39E6FF', // cyan (matches ML Foundations module)
     audience: ['learner', 'builder'],
     difficulty: 'beginner',
@@ -69,7 +69,7 @@ export const playgroundCollections: PlaygroundCollection[] = [
     title: 'LLM Playground',
     description:
       'Explore how large language models work, their history, and their limitations through hands-on activities.',
-    icon: '💬',
+    iconKey: 'message-circle',
     color: '#FF9A3D', // orange (matches LLM Essentials module)
     audience: ['learner', 'builder', 'leader'],
     difficulty: 'beginner',
@@ -89,7 +89,7 @@ export const playgroundCollections: PlaygroundCollection[] = [
     title: 'Ethics & Responsible AI',
     description:
       'Practice identifying AI limitations, biases, and ethical considerations. Essential for responsible AI use.',
-    icon: '⚖️',
+    iconKey: 'scale',
     color: '#B9A7FF', // lavender
     audience: ['learner', 'builder', 'leader'],
     difficulty: 'beginner',
@@ -108,7 +108,7 @@ export const playgroundCollections: PlaygroundCollection[] = [
     title: 'UI Components',
     description:
       'Practice building and styling UI components. Explore buttons, layouts, and CSS techniques.',
-    icon: '🎨',
+    iconKey: 'palette',
     color: '#FF5C6C', // coral
     audience: ['builder'],
     difficulty: 'beginner',
@@ -128,7 +128,7 @@ export const playgroundCollections: PlaygroundCollection[] = [
     title: 'React Fundamentals',
     description:
       'Build interactive React components. Practice state management, forms, and component patterns.',
-    icon: '⚛️',
+    iconKey: 'atom',
     color: '#61DAFB', // React blue
     audience: ['builder'],
     difficulty: 'intermediate',
@@ -148,7 +148,7 @@ export const playgroundCollections: PlaygroundCollection[] = [
     title: 'Responsible AI Tools',
     description:
       'Practical tools for civil society organizations evaluating and adopting AI responsibly. Checklists, calculators, and assessment frameworks.',
-    icon: '🌍',
+    iconKey: 'globe',
     color: '#22C55E', // green
     audience: ['learner', 'leader'],
     difficulty: 'beginner',
@@ -178,7 +178,7 @@ export const playgroundCollections: PlaygroundCollection[] = [
     title: 'AI Algorithms Toolkit',
     description:
       'Interactive visualizations and quizzes to understand the four main types of AI algorithms. See classification, regression, clustering, and reinforcement learning in action.',
-    icon: '🧪',
+    iconKey: 'flask',
     color: '#EC4899', // pink
     audience: ['learner', 'builder', 'leader'],
     difficulty: 'beginner',

@@ -3,6 +3,7 @@
 import { Module } from '@/types';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Clock, BookOpen, ChevronRight, Star } from 'lucide-react';
+import { ModuleIcon } from '@/components/icons';
 
 interface ModuleCardProps {
   module: Module;
@@ -46,7 +47,12 @@ export function ModuleCard({ module, onClick, completedLessons = [] }: ModuleCar
                 border: `1px solid ${module.color}25`,
               }}
             >
-              <span className="text-2xl">{module.icon}</span>
+              <ModuleIcon
+                iconKey={module.iconKey}
+                className="w-6 h-6"
+                strokeWidth={1.75}
+                style={{ color: module.color }}
+              />
             </div>
 
             {/* Badges */}

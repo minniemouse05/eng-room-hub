@@ -14,6 +14,7 @@ import {
   PlayCircle,
   RotateCcw,
 } from 'lucide-react';
+import { ModuleIcon } from '@/components/icons';
 
 interface ModuleDetailProps {
   module: Module;
@@ -87,7 +88,12 @@ export function ModuleDetail({
               border: `1px solid ${module.color}30`,
             }}
           >
-            <span className="text-3xl">{module.icon}</span>
+            <ModuleIcon
+              iconKey={module.iconKey}
+              className="w-8 h-8"
+              strokeWidth={1.75}
+              style={{ color: module.color }}
+            />
           </div>
 
           <div className="flex-1">

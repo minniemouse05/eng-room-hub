@@ -13,6 +13,7 @@ import {
   BookOpen,
   RotateCcw,
 } from 'lucide-react';
+import { ModuleIcon } from '@/components/icons';
 
 interface CollectionDetailProps {
   collection: PlaygroundCollection;
@@ -82,7 +83,12 @@ export function CollectionDetail({
               border: `1px solid ${collection.color}30`,
             }}
           >
-            <span className="text-3xl">{collection.icon}</span>
+            <ModuleIcon
+              iconKey={collection.iconKey}
+              className="w-8 h-8"
+              strokeWidth={1.75}
+              style={{ color: collection.color }}
+            />
           </div>
 
           <div className="flex-1">

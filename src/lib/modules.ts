@@ -27,7 +27,7 @@ export const modules: Module[] = [
     title: "AI Fundamentals",
     description:
       "Start your AI journey here. Learn what AI is, how it evolved, and the different types of AI systems that exist today.",
-    icon: "🧠",
+    iconKey: "brain",
     color: "#6A2CFF", // electric-violet
     audience: ["learner", "builder", "leader"],
     difficultyRange: ["beginner", "beginner"],
@@ -45,7 +45,7 @@ export const modules: Module[] = [
     title: "Machine Learning Foundations",
     description:
       "Discover how machines learn from data. Understand supervised, unsupervised, and reinforcement learning without the math.",
-    icon: "📊",
+    iconKey: "bar-chart",
     color: "#39E6FF", // cyan
     audience: ["learner", "builder"],
     difficultyRange: ["beginner", "beginner"],
@@ -63,7 +63,7 @@ export const modules: Module[] = [
     title: "LLM Essentials",
     description:
       "Understand the technology behind ChatGPT and Claude. Learn how large language models work, their capabilities, and their limitations.",
-    icon: "💬",
+    iconKey: "message-circle",
     color: "#FF9A3D", // orange
     audience: ["learner", "builder", "leader"],
     difficultyRange: ["beginner", "beginner"],
@@ -86,7 +86,7 @@ export const modules: Module[] = [
     title: "UI Development",
     description:
       "Master modern frontend development patterns. From component design to responsive layouts and state management.",
-    icon: "🎨",
+    iconKey: "palette",
     color: "#FF5C6C", // coral
     audience: ["builder"],
     difficultyRange: ["beginner", "advanced"],
@@ -111,7 +111,7 @@ export const modules: Module[] = [
     title: "Responsible AI for Civil Society",
     description:
       "Cut through the AI hype. Practical frameworks for evaluating vendors, understanding environmental costs, and making decisions that align with your values—built for CSOs, not tech companies.",
-    icon: "🌍",
+    iconKey: "globe",
     color: "#22C55E", // green
     audience: ["learner", "leader"],
     difficultyRange: ["beginner", "beginner"],
@@ -135,7 +135,7 @@ export const modules: Module[] = [
     title: "AI Algorithms",
     description:
       'Demystify the four main "recipes" AI uses to learn. No math required—just clear explanations, real examples, and interactive visualizations to build your intuition.',
-    icon: "🧪",
+    iconKey: "flask",
     color: "#EC4899", // pink
     audience: ["learner", "builder", "leader"],
     difficultyRange: ["beginner", "beginner"],
@@ -158,7 +158,7 @@ export const modules: Module[] = [
     title: "Deep Learning",
     description:
       'Go beyond basic ML into the world of neural networks. Learn how layers of "tiny helpers" work together to recognize images, understand language, and even create art—no math required.',
-    icon: "🧬",
+    iconKey: "dna",
     color: "#8B5CF6", // violet
     audience: ["learner", "builder", "leader"],
     difficultyRange: ["beginner", "intermediate"],
@@ -189,7 +189,7 @@ export const modules: Module[] = [
     title: "AI Applications",
     description:
       "From your morning alarm to business automation, AI is everywhere. Explore how it shows up in daily life, powers civil society work, and transforms business operations—no tech background needed.",
-    icon: "🌐",
+    iconKey: "network",
     color: "#0EA5E9", // sky blue
     audience: ["learner", "leader"],
     difficultyRange: ["beginner", "beginner"],
@@ -215,7 +215,7 @@ export const tracks: Track[] = [
     title: "Learner Track",
     description:
       "Perfect for beginners. Build a solid foundation in AI concepts before diving deeper.",
-    icon: "📚",
+    iconKey: "book-open",
     color: "#6A2CFF",
     audience: "learner",
     moduleIds: [
@@ -233,7 +233,7 @@ export const tracks: Track[] = [
     title: "Builder Track",
     description:
       "For developers who want to build with AI. Focus on practical applications and implementation.",
-    icon: "🛠️",
+    iconKey: "hammer",
     color: "#39E6FF",
     audience: "builder",
     moduleIds: ["llm-essentials", "ui-development"],
@@ -244,7 +244,7 @@ export const tracks: Track[] = [
     title: "Leader Track",
     description:
       "For executives and decision-makers. Understand AI strategy, governance, and organizational impact.",
-    icon: "🎯",
+    iconKey: "target",
     color: "#FF9A3D",
     audience: "leader",
     moduleIds: ["ai-fundamentals", "ai-applications", "llm-essentials", "responsible-ai-cso"],
@@ -263,7 +263,7 @@ export const collections: Collection[] = [
     title: "Ethics & Safety",
     description:
       "Responsible AI practices, limitations awareness, and ethical considerations.",
-    icon: "⚖️",
+    iconKey: "scale",
     lessonSlugs: [
       "llm-ethics",
       "llm-limitations",
@@ -278,7 +278,7 @@ export const collections: Collection[] = [
     id: "quick-reads",
     title: "Quick Reads",
     description: "Lessons you can complete in under 15 minutes.",
-    icon: "⚡",
+    iconKey: "zap",
     lessonSlugs: ["intro-to-ai", "what-are-llms", "button-variants"],
   },
 ];
