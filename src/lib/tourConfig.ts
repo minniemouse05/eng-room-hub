@@ -80,6 +80,16 @@ export const tourSteps: TourStep[] = [
     position: "bottom",
     spotlightPadding: 12,
   },
+  {
+    id: "lesson-complete",
+    route: "/workshop/ai-history",
+    selector: "button[aria-pressed]",
+    title: "Mark Lessons Complete",
+    content:
+      "When you finish a lesson, click this button to mark it complete. Your progress is saved and counts toward your module completion percentage — aim for 100%!",
+    position: "left",
+    spotlightPadding: 8,
+  },
 
   // Maker Studio page steps
   {
@@ -102,6 +112,16 @@ export const tourSteps: TourStep[] = [
     position: "bottom",
     spotlightPadding: 12,
   },
+  {
+    id: "playground-complete",
+    route: "/maker/ai-concepts-quiz",
+    selector: "button[aria-pressed]",
+    title: "Mark Playgrounds Complete",
+    content:
+      "Just like lessons, mark playgrounds complete when you're done. This tracks your progress across collections too!",
+    position: "right",
+    spotlightPadding: 8,
+  },
 
   // Entryway page steps
   {
@@ -113,6 +133,16 @@ export const tourSteps: TourStep[] = [
       "Ask questions about any topic! The AI knows about all demos and playgrounds and can recommend what to learn next.",
     position: "bottom",
     spotlightPadding: 12,
+  },
+  {
+    id: "entryway-history",
+    route: "/entryway",
+    selector: ".chat-thread-selector",
+    title: "Your Chat History",
+    content:
+      "Click here to see all your prior conversations. You can switch between chats or pick up where you left off.",
+    position: "bottom",
+    spotlightPadding: 8,
   },
   {
     id: "entryway-new-chat",
