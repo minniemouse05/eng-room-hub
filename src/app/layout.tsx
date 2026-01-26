@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
+import { TourProvider } from '@/components/tour';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -40,7 +41,9 @@ export default function RootLayout({
         {/* Noise/grain texture overlay */}
         <div className="noise-overlay" aria-hidden="true" />
 
-        {children}
+        <TourProvider>
+          {children}
+        </TourProvider>
       </body>
     </html>
   );

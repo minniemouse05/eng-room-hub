@@ -192,6 +192,9 @@
   --color-lavender: var(--lavender);
   --color-off-white: var(--off-white);
   --color-ink: var(--ink);
+  --color-mint: var(--mint);
+  --color-peach: var(--peach);
+  --color-salmon: var(--salmon);
 
   /* Existing shadcn mappings */
   --color-sidebar-ring: var(--sidebar-ring);
@@ -1559,5 +1562,42 @@ a[aria-disabled="true"] {
 }
 
 .collection-playground-item--complete:hover {
+  opacity: 1;
+}
+
+/* ============================================
+   GUIDED TOUR STYLES
+   Spotlight overlay, tooltips, and welcome modal
+   ============================================ */
+
+/* Tour tooltip card */
+.tour-tooltip {
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.5),
+    0 0 0 1px var(--border-soft),
+    0 0 40px rgba(57, 230, 255, 0.15);
+}
+
+/* Take tour button enhancements */
+.take-tour-btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.take-tour-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(57, 230, 255, 0.1) 0%,
+    transparent 50%,
+    rgba(57, 230, 255, 0.1) 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.take-tour-btn:hover::before {
   opacity: 1;
 }

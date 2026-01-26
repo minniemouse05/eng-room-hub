@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Heart } from "lucide-react";
 import { HouseMap, RoomPreview, MobileRoomButtons } from "@/components/house";
+import { TakeTourButton } from "@/components/tour";
 import { Room } from "@/types";
 
 export default function HomePage() {
@@ -26,11 +27,16 @@ export default function HomePage() {
           <h1 className="text-4xl lg:text-5xl font-bold tracking-tight mb-4 text-white text-glow-strong">
             Design Hub House
           </h1>
-          <p className="text-lg lg:text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg lg:text-xl text-text-secondary max-w-2xl mx-auto leading-relaxed mb-6">
             An interactive learning hub for design systems, tools, and code.
             Explore the house to discover demos, playgrounds, and AI-powered
             guidance.
           </p>
+          <TakeTourButton
+            variant="outline"
+            size="default"
+            className="border-cyan/40 hover:border-cyan/70 hover:bg-cyan/10"
+          />
         </header>
 
         {/* Desktop Layout: House Map + Preview Panel */}
